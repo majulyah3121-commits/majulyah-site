@@ -9,7 +9,7 @@ const products = [
         name: "Carnet d'Organisation Douceur",
         category: "Organisation",
         price: 18.50,
-        image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80",
+        image:"images/produit1.jpg",
         description: "Un magnifique carnet couverture rigide en lin couleur sauge. 160 pages de papier crémeux haut de gamme idéal pour organiser vos semaines et déposer vos pensées.",
         variants: ["Lin Sauge", "Terracotta Charnelle", "Beige Sablé"]
     },
