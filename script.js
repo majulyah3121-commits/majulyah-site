@@ -316,11 +316,15 @@ function setupEventListeners() {
     closeCartBg.addEventListener('click', () => cartDrawer.classList.remove('active'));
 
     goToCheckoutBtn.addEventListener('click', () => {
-        if (cart.length === 0) return;
-        prepareOrderSummary();
-        cartStep1.classList.remove('active');
-        cartStep2.classList.add('active');
-    });
+    if (cart.length === 0) return;
+
+    prepareOrderSummary();
+
+    cartStep1.classList.remove('active');
+    cartStep2.classList.add('active');
+
+    cartStep2.style.display = 'block';
+});
 
     backToCartBtn.addEventListener('click', () => {
         cartStep2.classList.remove('active');
