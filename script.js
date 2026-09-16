@@ -5,21 +5,44 @@
 // 1. BASE DE DONNÉES DES PRODUITS (Facile à modifier et enrichir)
 const products = [
     {
-        id: 1,
-        name:"Stickers 6 ème",
-        category: "Organisation",
-        price: 12.00
-      ,{
-    id: 2,
-    name: "Stickers enfants",
-    category: "Organisation",
-    price: 10.00,
-    image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260913_154315.jpg",
-    description: "Des stickers personnalisés pour que chaque jouet trouve sa place.",
-    variants: ["Poupée", "Bébé", "Barbie", "Dînette", "Princesse", "Déguisement", "Coiffure", "Peluche", "Super-héros", "Dinosaure", "Bricolage", "Figurine", "Voiture", "Dessin", "Peinture", "Coloriage"],
-    colors: ["Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé", "Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé", "Gris clair", "Gris foncé", "Noir", "Blanc", "Rose", "Violet clair", "Violet foncé", "Marron"]
+  id: 1,
+  name: "Stickers 6ème",
+  category: "Organisation",
+  price: 12.00,
+  colors: [
+    "Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair",
+    "Vert foncé", "Orange", "Rouge clair", "Rouge foncé",
+    "Jaune clair", "Jaune foncé", "Gris clair", "Gris foncé",
+    "Noir", "Blanc", "Rose", "Violet clair", "Violet foncé", "Marron"
+  ]
 },
-    },
+{
+  id: 2,
+  name: "Stickers enfants",
+  category: "Organisation",
+  price: 10.00,
+  image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260913_154315.jpg",
+  description: "Des stickers personnalisés pour que chaque jouet trouve sa place ! 🧸✨",
+  variants: [
+    "Poupée", "Bébé", "Barbie", "Dînette", "Princesse", "Déguisement",
+    "Coiffure", "Peluche", "Super-héros", "Dinosaure", "Bricolage",
+    "Figurine", "Voiture", "Dessin", "Peinture", "Coloriage",
+    "Jeux de société", "Puzzle", "Lego", "Blocs de construction",
+    "Kapla", "Playmobil", "Petites voitures", "Circuit de voitures",
+    "Train", "Avion", "Robot", "Marionnettes", "Instruments de musique",
+    "Pâte à modeler", "Perles", "Autocollants", "Gommettes", "Origami",
+    "Découpage", "Loisirs créatifs", "Matériel scolaire", "Licorne",
+    "Cheval", "Animaux", "Espace", "Pirates", "Chevaliers", "Livres",
+    "Doudou", "Accessoires", "Jeux de plage", "Jeux d’extérieur",
+    "Mes jouets", "Mes jeux", "Mes créations", "Mes trésors"
+  ],
+  colors: [
+    "Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair",
+    "Vert foncé", "Orange", "Rouge clair", "Rouge foncé",
+    "Jaune clair", "Jaune foncé", "Gris clair", "Gris foncé",
+    "Noir", "Blanc", "Rose", "Violet clair", "Violet foncé", "Marron"
+  ]
+},
     {
         id: 3,
         name: "Bloc-notes To-Do List Automnale",
