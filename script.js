@@ -21,7 +21,7 @@ const products = [
         image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260913_154315.jpg",
         description: "Des stickers personnalisés pour que chaque jouet trouve sa place.",
         variants: ["Poupée", "Bébé", "Barbie", "Dînette", "Princesse", "Déguisement", "Coiffure", "Peluche", "Super-héros", "Dinosaure", "Bricolage", "Figurine", "Voiture", "Dessin", "Peinture", "Coloriage"]
-       variants: [""Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé", "Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé", "Gris clair", "Gris foncé", "Noir", "Blanc", "Rose", "Violet claire", "Violet foncé", "Marron"]
+       variants: ["Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé", "Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé", "Gris clair", "Gris foncé", "Noir", "Blanc", "Rose", "Violet claire", "Violet foncé", "Marron"]
     },
     {
         id: 3,
