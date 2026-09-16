@@ -18,7 +18,7 @@ const products = [
         name: "Stickers enfants",
         category: "Organisation",
         price: 10.00,
-        image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=600&q=80",
+        image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260913_154315.jpg",
         description: "Des stickers personnalisés pour que chaque jouet trouve sa place.",
         variants: ["Poupée", "Bébé", "Barbie", "Dînette", "Princesse", "Déguisement", "Coiffure", "Peluche", "Super-héros", "Dinosaure", "Bricolage", "Figurine", "Voiture", "Dessin", "Peinture", "Coloriage"]
        variants: [""Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé", "Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé", "Gris clair", "Gris foncé", "Noir", "Blanc", "Rose", "Violet claire", "Violet foncé", "Marron"]
