@@ -9,6 +9,7 @@ const products = [
   name: "Stickers 6ème",
   category: "Organisation",
   price: 12.00,
+  image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260821_164820.jpg",   
   colors: [
     "Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair",
     "Vert foncé", "Orange", "Rouge clair", "Rouge foncé",
