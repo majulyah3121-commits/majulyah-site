@@ -8,7 +8,7 @@ const products = [
         id: 1,
         name: "Stickers organisation 6 ème",
         category: "Organisation",
-        price: 18.50,
+        price: 12,00,
         image:"https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260821_164820.jpg",
         description: "Un magnifique carnet couverture rigide en lin couleur sauge. 160 pages de papier crémeux haut de gamme idéal pour organiser vos semaines et déposer vos pensées.",
         variants: ["Lin Sauge", "Terracotta Charnelle", "Beige Sablé"]
