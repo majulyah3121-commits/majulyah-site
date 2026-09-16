@@ -6,21 +6,22 @@
 const products = [
     {
         id: 1,
-        name:"Stickers organisation 6 ème",
+        name:"Stickers 6 ème",
         category: "Organisation",
         price: 12.00,
         image:"https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260821_164820.jpg",
-        description: "Des stickers personnalisés pour organiser tes affaires scolaires et apporter une jolie touche à ta rentrée. Lors de ta commande, pense à préciser dans la partie message La liste des matières souhaitées, la couleur des stickers et ton choix d'écriture.",
+        description: "Planche de stickers personnalisés pour organiser tes affaires scolaires et apporter une jolie touche à ta rentrée. N'oublie pas de me noter la liste des matières sur ton bon de commande.",
         variants: ["Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé", "Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé", "Gris clair", "Gris foncé", "Noir", "Blanc", "Rose", "Violet claire", "Violet foncé", "Marron"]
     },
     {
         id: 2,
-        name: "Planche de Stickers Botanique",
-        category: "Stickers",
-        price: 4.90,
+        name: "Stickers enfants",
+        category: "Organisation",
+        price: 10.00,
         image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=600&q=80",
-        description: "Planche de stickers artisanaux aux illustrations végétales et touches dorées. Parfait pour décorer votre planner ou vos carnets.",
-        variants: ["Feuillage Automne", "Fleurs Séchées"]
+        description: "Des stickers personnalisés pour que chaque jouet trouve sa place.",
+        variants: ["Poupée", "Bébé", "Barbie", "Dînette", "Princesse", "Déguisement", "Coiffure", "Peluche", "Super-héros", "Dinosaure", "Bricolage", "Figurine", "Voiture", "Dessin", "Peinture", "Coloriage"]
+       variants: [""Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé", "Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé", "Gris clair", "Gris foncé", "Noir", "Blanc", "Rose", "Violet claire", "Violet foncé", "Marron"]
     },
     {
         id: 3,
