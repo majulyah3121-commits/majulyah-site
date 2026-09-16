@@ -1,76 +1,8 @@
+
 /* ==========================================================================
-   MAJU'LYAH - BASE DE DONNÉES PRODUITS & LOGIQUE INTERACTIVE
+   MAJU'LYAH - BASE DE DONNÉES DES PRODUITS
    ========================================================================== */
 
-// 1. BASE DE DONNÉES DES PRODUITS (Facile à modifier et enrichir)
-const products = [
-    {
-  id: 1,
-  name: "Stickers 6ème",
-  category: "Organisation",
-  price: 12.00,
-  image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260821_164820.jpg",
-  description: "Des stickers personnalisés pour la rentrée en 6ème", 
-  colors: [
-    "Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair",
-    "Vert foncé", "Orange", "Rouge clair", "Rouge foncé",
-    "Jaune clair", "Jaune foncé", "Gris clair", "Gris foncé",
-    "Noir", "Blanc", "Rose", "Violet clair", "Violet foncé", "Marron"
-  ]
-},
-{
-  id: 2,
-  name: "Stickers enfants",
-  category: "Organisation",
-  price: 10.00,
-  image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260913_154315.jpg",
-  description: "Des stickers personnalisés pour que chaque jouet trouve sa place",
-  variants: [
-    "Poupée", "Bébé", "Barbie", "Dînette", "Princesse", "Déguisement",
-    "Coiffure", "Peluche", "Super-héros", "Dinosaure", "Bricolage",
-    "Figurine", "Voiture", "Dessin", "Peinture", "Coloriage",
-    "Jeux de société", "Puzzle", "Lego", "Blocs de construction",
-    "Kapla", "Playmobil", "Petites voitures", "Circuit de voitures",
-    "Train", "Avion", "Robot", "Marionnettes", "Instruments de musique",
-    "Pâte à modeler", "Perles", "Autocollants", "Gommettes", "Origami",
-    "Découpage", "Loisirs créatifs", "Matériel scolaire", "Licorne",
-    "Cheval", "Animaux", "Espace", "Pirates", "Chevaliers", "Livres",
-    "Doudou", "Accessoires", "Jeux de plage", "Jeux d’extérieur",
-    "Mes jouets", "Mes jeux", "Mes créations", "Mes trésors"
-  ],
-  colors: [
-    "Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair",
-    "Vert foncé", "Orange", "Rouge clair", "Rouge foncé",
-    "Jaune clair", "Jaune foncé", "Gris clair", "Gris foncé",
-    "Noir", "Blanc", "Rose", "Violet clair", "Violet foncé", "Marron"
-  ]
-},
-    {
-        id: 3,
-        name: "Bloc-notes To-Do List Automnale",
-        category: "Papeterie",
-        price: 8.00,
-        image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&q=80",
-        description: "Bloc-notes de 50 pages détachables au papier doux. Idéal pour noter vos priorités quotidiennes en toute sérénité.",
-        variants: ["Standard (50 pages)", "Grand Format (100 pages)"]
-    },
-    {
-        id: 4,
-        name: "Set de Cartes Poétiques & Enveloppes",
-        category: "Mailow Club",
-        price: 12.00,
-        image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80",
-        description: "Coffret de 5 cartes d'art au fini mat accompagnées de leurs enveloppes couleur rose poudré et sceaux dorés.",
-        variants: ["Lot de 5 cartes", "Lot de 10 cartes"]
-    },
-    {
-        id: 5,
-        name: "Planner Non Daté 'Sérénité'",
-        category: "Nouveautés",
-        price: 24.00,
-        image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80",
-        description: "Le compagnon ultime pour planifier votre année à votre rythme. Sans dates pré-remplies, commencez quand vous le souhaitez.",
-        variants: ["Reliure Dorée", "Reliure Rose Poudré"]
 const products = [
     {
         id: 1,
@@ -203,7 +135,7 @@ const products = [
         category: "Mailow Club",
         price: 12.00,
         image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80",
-        description: "Coffret de 5 cartes d'art au fini mat accompagnées de leurs enveloppes.",
+        description: "Coffret de cartes d'art au fini mat accompagnées de leurs enveloppes.",
         variants: [
             "Lot de 5 cartes",
             "Lot de 10 cartes"
@@ -216,7 +148,7 @@ const products = [
         category: "Nouveautés",
         price: 24.00,
         image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80",
-        description: "Le compagnon ultime pour planifier votre année à votre rythme.",
+        description: "Le compagnon idéal pour planifier votre année à votre rythme, sans dates pré-remplies.",
         variants: [
             "Reliure Dorée",
             "Reliure Rose Poudré"
