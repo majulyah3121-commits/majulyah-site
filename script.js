@@ -1,93 +1,257 @@
 /* ==========================================================================
-   MAJU'LYAH - PRODUITS
-   Produits chargés automatiquement depuis Google Sheets
+   MAJU'LYAH - BASE DE DONNÉES DES PRODUITS
    ========================================================================== */
 
-const PRODUCTS_API_URL =
-    "https://script.google.com/macros/s/AKfycbx1-1iM9zdrZRtq-A47-WxpzX3YVLbHW6fRzmtXEOEmhcc-TRZTTWB24yGPrjY78k0D/exec";
+const products = [
+
+    /* ======================================================================
+       PRODUIT 1 - STICKERS RENTRÉE SCOLAIRE
+       ====================================================================== */
+
+    {
+        id: 1,
+        name: "Stickers 6ème",
+        category: "Organisation",
+        price: 12.00,
+
+      image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/file_000000000fd081f5b6a7065f6ad5254a.png",
+
+        description: "Des stickers personnalisés pour organiser tes affaires scolaires.",
+
+        variants: [
+            "Français",
+            "Anglais",
+            "Espagnol",
+            "Allemand",
+            "Latin",
+            "Mathématiques",
+            "Physique-Chimie",
+            "Sciences physiques",
+            "Physique",
+            "SVT",
+            "Arts plastiques",
+            "Musique",
+            "Sport",
+            "EMC",
+            "Histoire-Géographie",
+            "Technologie",
+            "Vie de classe",
+            "CDI",
+            "Fournitures scolaires",
+            "Divers"
+        ],
+
+        colors: [
+            "Bleu foncé",
+            "Bleu clair",
+            "Bleu canard",
+            "Vert clair",
+            "Vert foncé",
+            "Orange",
+            "Rouge clair",
+            "Rouge foncé",
+            "Jaune clair",
+            "Jaune foncé",
+            "Gris clair",
+            "Gris foncé",
+            "Noir",
+            "Blanc",
+            "Rose",
+            "Violet clair",
+            "Violet foncé",
+            "Marron"
+        ]
+    },
 
 
-/* ==========================================================================
-   OPTIONS SPÉCIALES DES STICKERS
-   ========================================================================== */
+    /* ======================================================================
+       PRODUIT 2 - STICKERS ENFANTS
+       ====================================================================== */
 
-const stickers6emeVariants = [
-    "Français",
-    "Anglais",
-    "Espagnol",
-    "Allemand",
-    "Latin",
-    "Mathématiques",
-    "Physique-Chimie",
-    "Sciences physiques",
-    "Physique",
-    "SVT",
-    "Arts plastiques",
-    "Musique",
-    "Sport",
-    "EMC",
-    "Histoire-Géographie",
-    "Technologie",
-    "Vie de classe",
-    "CDI",
-    "Fournitures scolaires",
-    "Divers"
+    {
+        id: 2,
+        name: "Stickers enfants",
+        category: "Organisation",
+        price: 10.00,
+
+        image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260913_154315.jpg",
+
+        description: "Des stickers personnalisés pour que chaque jouet trouve sa place !",
+
+        variants: [
+            "Poupée",
+            "Bébé",
+            "Barbie",
+            "Dînette",
+            "Princesse",
+            "Déguisement",
+            "Coiffure",
+            "Peluche",
+            "Super-héros",
+            "Dinosaure",
+            "Bricolage",
+            "Figurine",
+            "Voiture",
+            "Jeux de société",
+            "Puzzle",
+            "Lego",
+            "Playmobil",
+            "Train",
+            "Avion",
+            "Robot",
+            "Marionnettes",
+            "Instruments de musique",
+            "Licorne",
+            "Animaux"
+        ],
+
+        colors: [
+            "Bleu foncé",
+            "Bleu clair",
+            "Bleu canard",
+            "Vert clair",
+            "Vert foncé",
+            "Orange",
+            "Rouge clair",
+            "Rouge foncé",
+            "Jaune clair",
+            "Jaune foncé",
+            "Gris clair",
+            "Gris foncé",
+            "Noir",
+            "Blanc",
+            "Rose",
+            "Violet clair",
+            "Violet foncé",
+            "Marron"
+        ]
+    },
+
+
+    /* ======================================================================
+       PRODUIT 3
+       ====================================================================== */
+
+    {
+        id: 3,
+        name: "Bloc-notes To-Do List Automnale",
+        category: "Papeterie",
+        price: 8.00,
+
+        image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&q=80",
+
+        description: "Bloc-notes de 50 pages détachables au papier doux. Idéal pour noter vos priorités quotidiennes en toute sérénité.",
+
+        variants: [
+            "Standard (50 pages)",
+            "Grand Format (100 pages)"
+        ]
+    },
+
+
+    /* ======================================================================
+       PRODUIT 4
+       ====================================================================== */
+
+    {
+        id: 4,
+        name: "Set de Cartes Poétiques & Enveloppes",
+        category: "Mailow Club",
+        price: 12.00,
+
+        image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80",
+
+        description: "Coffret de cartes d'art au fini mat accompagnées de leurs enveloppes.",
+
+        variants: [
+            "Lot de 5 cartes",
+            "Lot de 10 cartes"
+        ]
+    },
+
+
+    /* ======================================================================
+       PRODUIT 5
+       ====================================================================== */
+
+    {
+        id: 5,
+        name: "Planner Non Daté 'Sérénité'",
+        category: "Nouveautés",
+        price: 24.00,
+
+        image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80",
+
+        description: "Le compagnon idéal pour planifier votre année à votre rythme, sans dates pré-remplies.",
+
+        variants: [
+            "Reliure Dorée",
+            "Reliure Rose Poudré"
+        ]
+    },
+
+
+    /* ======================================================================
+       PRODUIT 6
+       ====================================================================== */
+
+    {
+        id: 6,
+        name: "Marque-page en Laiton & Ruban",
+        category: "Nouveautés",
+        price: 6.50,
+
+        image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80",
+
+        description: "Élégant marque-page en métal finition dorée avec son ruban terracotta.",
+
+        variants: [
+            "Ruban Terracotta",
+            "Ruban Sauge"
+        ]
+    },
+
+
+    /* ======================================================================
+       PRODUIT 7
+       ====================================================================== */
+
+    {
+        id: 7,
+        name: "Stickers Citations & Pensées",
+        category: "Stickers",
+        price: 5.20,
+
+        image: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&w=600&q=80",
+
+        description: "Mots doux, citations motivantes et calligraphie fine.",
+
+        variants: [
+            "Finition Matte",
+            "Finition Glossy"
+        ]
+    },
+
+
+    /* ======================================================================
+       PRODUIT 8
+       ====================================================================== */
+
+    {
+        id: 8,
+        name: "Kit Papeterie 'Mailow Routine'",
+        category: "Mailow Club",
+        price: 29.90,
+
+        image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80",
+
+        description: "Un kit complet comprenant un bloc-notes, une planche de stickers, deux marque-pages et un carnet exclusif Mailow Club.",
+
+        variants: [
+            "Box Complète"
+        ]
+    }
 ];
-
-const stickersEnfantsVariants = [
-    "Poupée",
-    "Bébé",
-    "Barbie",
-    "Dînette",
-    "Princesse",
-    "Déguisement",
-    "Coiffure",
-    "Peluche",
-    "Super-héros",
-    "Dinosaure",
-    "Bricolage",
-    "Figurine",
-    "Voiture",
-    "Jeux de société",
-    "Puzzle",
-    "Lego",
-    "Playmobil",
-    "Train",
-    "Avion",
-    "Robot",
-    "Marionnettes",
-    "Instruments de musique",
-    "Licorne",
-    "Animaux"
-];
-
-const stickerColors = [
-    "Bleu foncé",
-    "Bleu clair",
-    "Bleu canard",
-    "Vert clair",
-    "Vert foncé",
-    "Orange",
-    "Rouge clair",
-    "Rouge foncé",
-    "Jaune clair",
-    "Jaune foncé",
-    "Gris clair",
-    "Gris foncé",
-    "Noir",
-    "Blanc",
-    "Rose",
-    "Violet clair",
-    "Violet foncé",
-    "Marron"
-];
-
-
-/* ==========================================================================
-   PRODUITS
-   ========================================================================== */
-
-let products = [];
 
 
 /* ==========================================================================
@@ -102,52 +266,32 @@ let selectedProductForModal = null;
    ÉLÉMENTS DU DOM
    ========================================================================== */
 
-const productsGrid =
-    document.getElementById('productsGrid');
+const productsGrid = document.getElementById('productsGrid');
+const categoryFilters = document.getElementById('categoryFilters');
 
-const categoryFilters =
-    document.getElementById('categoryFilters');
+const cartCount = document.getElementById('cartCount');
+const cartDrawer = document.getElementById('cartDrawer');
 
-const cartCount =
-    document.getElementById('cartCount');
+const openCartBtn = document.getElementById('openCartBtn');
+const closeCartBtn = document.getElementById('closeCartBtn');
+const closeCartBg = document.getElementById('closeCartBg');
 
-const cartDrawer =
-    document.getElementById('cartDrawer');
+const cartItemsList = document.getElementById('cartItemsList');
+const cartTotalPrice = document.getElementById('cartTotalPrice');
 
-const openCartBtn =
-    document.getElementById('openCartBtn');
+const goToCheckoutBtn = document.getElementById('goToCheckoutBtn');
 
-const closeCartBtn =
-    document.getElementById('closeCartBtn');
+const cartStep1 = document.getElementById('cartStep1');
+const cartStep2 = document.getElementById('cartStep2');
 
-const closeCartBg =
-    document.getElementById('closeCartBg');
-
-const cartItemsList =
-    document.getElementById('cartItemsList');
-
-const cartTotalPrice =
-    document.getElementById('cartTotalPrice');
-
-const goToCheckoutBtn =
-    document.getElementById('goToCheckoutBtn');
-
-const cartStep1 =
-    document.getElementById('cartStep1');
-
-const cartStep2 =
-    document.getElementById('cartStep2');
-
-const backToCartBtn =
-    document.getElementById('backToCartBtn');
+const backToCartBtn = document.getElementById('backToCartBtn');
 
 
 /* ==========================================================================
    MODALE PRODUIT
    ========================================================================== */
 
-const productModal =
-    document.getElementById('productModal');
+const productModal = document.getElementById('productModal');
 
 const closeProductModalBtn =
     document.getElementById('closeProductModalBtn');
@@ -215,14 +359,7 @@ const navLinks =
    INITIALISATION
    ========================================================================== */
 
-document.addEventListener('DOMContentLoaded', async () => {
-
-    /*
-     * On attend que Google Sheets nous donne les produits
-     * avant de construire la boutique.
-     */
-
-    await loadProductsFromGoogle();
+document.addEventListener('DOMContentLoaded', () => {
 
     renderProducts('all');
 
@@ -232,247 +369,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('year');
 
     if (yearElement) {
-
         yearElement.textContent =
             new Date().getFullYear();
-
     }
-
 });
-
-
-/* ==========================================================================
-   CHARGEMENT DES PRODUITS DEPUIS GOOGLE SHEETS
-   ========================================================================== */
-
-async function loadProductsFromGoogle() {
-
-    try {
-
-        const response =
-            await fetch(
-                PRODUCTS_API_URL + "?t=" + Date.now()
-            );
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Erreur lors du chargement des produits."
-            );
-
-        }
-
-        const data =
-            await response.json();
-
-
-        if (!Array.isArray(data)) {
-
-            throw new Error(
-                "Les données reçues sont invalides."
-            );
-
-        }
-
-
-        products =
-            data
-                .filter(product => {
-
-                    const visible =
-                        String(
-                            product.Visible || ""
-                        )
-                            .trim()
-                            .toLowerCase();
-
-                    return (
-                        visible === "oui" ||
-                        visible === "true" ||
-                        visible === "1"
-                    );
-
-                })
-                .map((product, index) => {
-
-                    const name =
-                        String(
-                            product.Nom || ""
-                        ).trim();
-
-
-                    const nameLower =
-                        name.toLowerCase();
-
-
-                    /*
-                     * Prix : accepte 10, 10.00 ou 10 €
-                     */
-
-                    let price =
-                        String(
-                            product.Prix || "0"
-                        )
-                            .replace("€", "")
-                            .replace(",", ".")
-                            .trim();
-
-
-                    price =
-                        parseFloat(price) || 0;
-
-
-                    /*
-                     * Options enregistrées dans la colonne
-                     * "Options".
-                     */
-
-                    let variants = [];
-
-
-                    if (product.Options) {
-
-                        variants =
-                            String(
-                                product.Options
-                            )
-                                .split(
-                                    /[,;\n|]+/
-                                )
-                                .map(
-                                    option =>
-                                        option.trim()
-                                )
-                                .filter(
-                                    option =>
-                                        option !== ""
-                                );
-
-                    }
-
-
-                    /*
-                     * Les stickers gardent leurs options
-                     * spéciales comme dans l'ancien site.
-                     */
-
-                    let colors = [];
-
-
-                    if (
-                        nameLower.includes(
-                            "stickers 6ème"
-                        ) ||
-                        nameLower.includes(
-                            "stickers 6eme"
-                        )
-                    ) {
-
-                        variants =
-                            stickers6emeVariants.slice();
-
-                        colors =
-                            stickerColors.slice();
-
-                    }
-
-
-                    if (
-                        nameLower.includes(
-                            "stickers enfants"
-                        )
-                    ) {
-
-                        variants =
-                            stickersEnfantsVariants.slice();
-
-                        colors =
-                            stickerColors.slice();
-
-                    }
-
-
-                    return {
-
-                        /*
-                         * On crée un identifiant numérique
-                         * pour conserver le fonctionnement
-                         * du panier et des modales.
-                         */
-
-                        id:
-                            index + 1,
-
-                        name:
-                            name,
-
-                        category:
-                            product.Catégorie ||
-                            "Autres",
-
-                        price:
-                            price,
-
-                        image:
-                            product.Photo ||
-                            "",
-
-                        description:
-                            product.Description ||
-                            "",
-
-                        variants:
-                            variants,
-
-                        colors:
-                            colors
-
-                    };
-
-                });
-
-
-        /*
-         * Si la feuille ne contient aucun produit visible,
-         * on affiche un message plutôt que de remettre les
-         * anciens produits automatiquement.
-         */
-
-        if (products.length === 0) {
-
-            productsGrid.innerHTML = `
-                <p style="text-align:center;">
-                    Aucun produit disponible pour le moment.
-                </p>
-            `;
-
-        }
-
-    } catch (error) {
-
-        console.error(
-            "Erreur produits Google Sheets :",
-            error
-        );
-
-
-        /*
-         * En cas de problème temporaire avec Google,
-         * on ne détruit pas la boutique.
-         */
-
-        products = [];
-
-        productsGrid.innerHTML = `
-            <p style="text-align:center;">
-                Les produits sont momentanément indisponibles.
-                Merci de réessayer dans quelques instants.
-            </p>
-        `;
-
-    }
-
-}
 
 
 /* ==========================================================================
@@ -502,14 +402,6 @@ function renderProducts(filterCategory) {
             'product-card';
 
 
-        /*
-         * IMPORTANT :
-         * Cette structure est exactement celle
-         * de ton ancien script.
-         *
-         * On ne touche donc pas à la taille des photos.
-         */
-
         card.innerHTML = `
 
             <div
@@ -525,11 +417,13 @@ function renderProducts(filterCategory) {
 
             </div>
 
+
             <div class="product-info">
 
                 <span class="product-category">
                     ${product.category}
                 </span>
+
 
                 <h3
                     class="product-name"
@@ -538,9 +432,11 @@ function renderProducts(filterCategory) {
                     ${product.name}
                 </h3>
 
+
                 <p class="product-desc-short">
                     ${product.description.substring(0, 65)}...
                 </p>
+
 
                 <div class="product-bottom">
 
@@ -550,9 +446,9 @@ function renderProducts(filterCategory) {
                             .replace('.', ',')} €
                     </span>
 
+
                     <button
                         class="btn-order-card"
-                        type="button"
                         onclick="openProductModal(${product.id})"
                     >
                         Voir / Commander
@@ -563,10 +459,9 @@ function renderProducts(filterCategory) {
             </div>
         `;
 
+
         productsGrid.appendChild(card);
-
     });
-
 }
 
 
@@ -581,7 +476,9 @@ function openProductModal(productId) {
             p => p.id === productId
         );
 
+
     if (!product) return;
+
 
     selectedProductForModal =
         product;
@@ -604,21 +501,22 @@ function openProductModal(productId) {
     modalDescription.textContent =
         product.description;
 
-    modalQty.value =
-        1;
-
-    variantGroup.innerHTML =
-        '';
+    modalQty.value = 1;
 
 
-    if (
-        product.name.toLowerCase().includes(
-            "stickers 6ème"
-        ) ||
-        product.name.toLowerCase().includes(
-            "stickers 6eme"
-        )
-    ) {
+    /*
+       On supprime les anciens choix
+    */
+
+    variantGroup.innerHTML = '';
+
+
+    /* ======================================================================
+       PRODUIT 1 : STICKERS 6ÈME
+       PLUSIEURS MATIÈRES + UNE COULEUR
+       ====================================================================== */
+
+    if (product.id === 1) {
 
         const title =
             document.createElement('label');
@@ -635,58 +533,64 @@ function openProductModal(productId) {
         title.style.fontWeight =
             '600';
 
-        variantGroup.appendChild(
-            title
-        );
+
+        variantGroup.appendChild(title);
 
 
-        product.variants.forEach(
-            variant => {
+        /*
+           Création des cases à cocher
+           pour les matières
+        */
 
-                const label =
-                    document.createElement('label');
+        product.variants.forEach(variant => {
 
-                label.style.display =
-                    'block';
+            const label =
+                document.createElement('label');
 
-                label.style.marginBottom =
-                    '7px';
+            label.style.display =
+                'block';
 
-                label.style.cursor =
-                    'pointer';
+            label.style.marginBottom =
+                '7px';
 
-
-                const checkbox =
-                    document.createElement('input');
-
-                checkbox.type =
-                    'checkbox';
-
-                checkbox.value =
-                    variant;
-
-                checkbox.className =
-                    'school-subject-checkbox';
+            label.style.cursor =
+                'pointer';
 
 
-                label.appendChild(
-                    checkbox
-                );
+            const checkbox =
+                document.createElement('input');
 
-                label.appendChild(
-                    document.createTextNode(
-                        ` ${variant}`
-                    )
-                );
+            checkbox.type =
+                'checkbox';
+
+            checkbox.value =
+                variant;
+
+            checkbox.className =
+                'school-subject-checkbox';
 
 
-                variantGroup.appendChild(
-                    label
-                );
+            label.appendChild(
+                checkbox
+            );
 
-            }
-        );
 
+            label.appendChild(
+                document.createTextNode(
+                    ` ${variant}`
+                )
+            );
+
+
+            variantGroup.appendChild(
+                label
+            );
+        });
+
+
+        /*
+           Espace avant la couleur
+        */
 
         const spacer =
             document.createElement('div');
@@ -698,6 +602,10 @@ function openProductModal(productId) {
             spacer
         );
 
+
+        /*
+           Choix de couleur
+        */
 
         const colorTitle =
             document.createElement('label');
@@ -734,31 +642,28 @@ function openProductModal(productId) {
         defaultColor.textContent =
             '-- Choisir une couleur --';
 
+
         colorSelect.appendChild(
             defaultColor
         );
 
 
-        product.colors.forEach(
-            color => {
+        product.colors.forEach(color => {
 
-                const option =
-                    document.createElement(
-                        'option'
-                    );
+            const option =
+                document.createElement('option');
 
-                option.value =
-                    color;
+            option.value =
+                color;
 
-                option.textContent =
-                    color;
+            option.textContent =
+                color;
 
-                colorSelect.appendChild(
-                    option
-                );
 
-            }
-        );
+            colorSelect.appendChild(
+                option
+            );
+        });
 
 
         variantGroup.appendChild(
@@ -769,15 +674,18 @@ function openProductModal(productId) {
             colorSelect
         );
 
+
         variantGroup.style.display =
             'block';
+    }
 
 
-    } else if (
-        product.name.toLowerCase().includes(
-            "stickers enfants"
-        )
-    ) {
+    /* ======================================================================
+       PRODUIT 2 : STICKERS ENFANTS
+       PLUSIEURS MODÈLES + UNE COULEUR
+       ====================================================================== */
+
+    else if (product.id === 2) {
 
         const title =
             document.createElement('label');
@@ -794,57 +702,56 @@ function openProductModal(productId) {
         title.style.fontWeight =
             '600';
 
+
         variantGroup.appendChild(
             title
         );
 
 
-        product.variants.forEach(
-            variant => {
+        product.variants.forEach(variant => {
 
-                const label =
-                    document.createElement('label');
+            const label =
+                document.createElement('label');
 
-                label.style.display =
-                    'block';
+            label.style.display =
+                'block';
 
-                label.style.marginBottom =
-                    '7px';
+            label.style.marginBottom =
+                '7px';
 
-                label.style.cursor =
-                    'pointer';
-
-
-                const checkbox =
-                    document.createElement('input');
-
-                checkbox.type =
-                    'checkbox';
-
-                checkbox.value =
-                    variant;
-
-                checkbox.className =
-                    'model-checkbox';
+            label.style.cursor =
+                'pointer';
 
 
-                label.appendChild(
-                    checkbox
-                );
+            const checkbox =
+                document.createElement('input');
 
-                label.appendChild(
-                    document.createTextNode(
-                        ` ${variant}`
-                    )
-                );
+            checkbox.type =
+                'checkbox';
+
+            checkbox.value =
+                variant;
+
+            checkbox.className =
+                'model-checkbox';
 
 
-                variantGroup.appendChild(
-                    label
-                );
+            label.appendChild(
+                checkbox
+            );
 
-            }
-        );
+
+            label.appendChild(
+                document.createTextNode(
+                    ` ${variant}`
+                )
+            );
+
+
+            variantGroup.appendChild(
+                label
+            );
+        });
 
 
         const spacer =
@@ -893,31 +800,28 @@ function openProductModal(productId) {
         defaultColor.textContent =
             '-- Choisir une couleur --';
 
+
         colorSelect.appendChild(
             defaultColor
         );
 
 
-        product.colors.forEach(
-            color => {
+        product.colors.forEach(color => {
 
-                const option =
-                    document.createElement(
-                        'option'
-                    );
+            const option =
+                document.createElement('option');
 
-                option.value =
-                    color;
+            option.value =
+                color;
 
-                option.textContent =
-                    color;
+            option.textContent =
+                color;
 
-                colorSelect.appendChild(
-                    option
-                );
 
-            }
-        );
+            colorSelect.appendChild(
+                option
+            );
+        });
 
 
         variantGroup.appendChild(
@@ -928,11 +832,17 @@ function openProductModal(productId) {
             colorSelect
         );
 
+
         variantGroup.style.display =
             'block';
+    }
 
 
-    } else if (
+    /* ======================================================================
+       AUTRES PRODUITS
+       ====================================================================== */
+
+    else if (
         product.variants &&
         product.variants.length > 0
     ) {
@@ -957,26 +867,22 @@ function openProductModal(productId) {
             '';
 
 
-        product.variants.forEach(
-            variant => {
+        product.variants.forEach(variant => {
 
-                const option =
-                    document.createElement(
-                        'option'
-                    );
+            const option =
+                document.createElement('option');
 
-                option.value =
-                    variant;
+            option.value =
+                variant;
 
-                option.textContent =
-                    variant;
+            option.textContent =
+                variant;
 
-                modalVariantSelect.appendChild(
-                    option
-                );
 
-            }
-        );
+            modalVariantSelect.appendChild(
+                option
+            );
+        });
 
 
         variantGroup.appendChild(
@@ -987,22 +893,20 @@ function openProductModal(productId) {
             modalVariantSelect
         );
 
+
         variantGroup.style.display =
             'block';
-
 
     } else {
 
         variantGroup.style.display =
             'none';
-
     }
 
 
     productModal.classList.add(
         'active'
     );
-
 }
 
 
@@ -1015,7 +919,6 @@ function closeProductModal() {
     productModal.classList.remove(
         'active'
     );
-
 }
 
 
@@ -1088,9 +991,7 @@ function addToCart(
 
             quantity:
                 quantity
-
         });
-
     }
 
 
@@ -1100,7 +1001,6 @@ function addToCart(
     showToast(
         `${product.name} ajouté à votre panier !`
     );
-
 }
 
 
@@ -1121,6 +1021,7 @@ function updateCartUI() {
     cartCount.textContent =
         totalQty;
 
+
     cartItemsList.innerHTML =
         '';
 
@@ -1128,6 +1029,7 @@ function updateCartUI() {
     if (cart.length === 0) {
 
         cartItemsList.innerHTML = `
+
             <p
                 style="
                     text-align:center;
@@ -1137,11 +1039,12 @@ function updateCartUI() {
             >
                 Votre panier est vide pour le moment.
             </p>
+
         `;
+
 
         goToCheckoutBtn.disabled =
             true;
-
 
     } else {
 
@@ -1157,6 +1060,7 @@ function updateCartUI() {
                         'div'
                     );
 
+
                 itemElement.className =
                     'cart-item';
 
@@ -1164,6 +1068,10 @@ function updateCartUI() {
                 let optionsHTML =
                     '';
 
+
+                /*
+                   Matières / modèles
+                */
 
                 if (item.variant) {
 
@@ -1178,26 +1086,32 @@ function updateCartUI() {
 
 
                     optionsHTML += `
+
                         <div class="cart-item-variant">
                             ${item.id === 1
                                 ? 'Matières'
                                 : 'Modèles'} :
                             ${choices}
                         </div>
-                    `;
 
+                    `;
                 }
 
+
+                /*
+                   Couleur
+                */
 
                 if (item.color) {
 
                     optionsHTML += `
+
                         <div class="cart-item-variant">
                             Couleur :
                             ${item.color}
                         </div>
-                    `;
 
+                    `;
                 }
 
 
@@ -1209,6 +1123,7 @@ function updateCartUI() {
                         class="cart-item-img"
                     >
 
+
                     <div
                         class="cart-item-details"
                     >
@@ -1219,7 +1134,9 @@ function updateCartUI() {
                             ${item.name}
                         </div>
 
+
                         ${optionsHTML}
+
 
                         <div
                             class="cart-item-price"
@@ -1233,24 +1150,25 @@ function updateCartUI() {
                                 )} €
                         </div>
 
+
                         <div
                             class="cart-item-qty"
                         >
 
                             <button
-                                type="button"
                                 class="qty-btn"
                                 onclick="changeQty(${index}, -1)"
                             >
                                 -
                             </button>
 
+
                             <span>
                                 ${item.quantity}
                             </span>
 
+
                             <button
-                                type="button"
                                 class="qty-btn"
                                 onclick="changeQty(${index}, 1)"
                             >
@@ -1261,8 +1179,8 @@ function updateCartUI() {
 
                     </div>
 
+
                     <button
-                        type="button"
                         class="cart-item-remove"
                         onclick="removeCartItem(${index})"
                         title="Supprimer"
@@ -1276,10 +1194,8 @@ function updateCartUI() {
                 cartItemsList.appendChild(
                     itemElement
                 );
-
             }
         );
-
     }
 
 
@@ -1299,7 +1215,6 @@ function updateCartUI() {
         `${total
             .toFixed(2)
             .replace('.', ',')} €`;
-
 }
 
 
@@ -1324,12 +1239,10 @@ function changeQty(
             index,
             1
         );
-
     }
 
 
     updateCartUI();
-
 }
 
 
@@ -1344,8 +1257,8 @@ function removeCartItem(index) {
         1
     );
 
-    updateCartUI();
 
+    updateCartUI();
 }
 
 
@@ -1358,8 +1271,8 @@ function prepareOrderSummary() {
     let summary =
         "DÉTAIL DE LA COMMANDE MAJU'LYAH :\n\n";
 
-    let total =
-        0;
+
+    let total = 0;
 
 
     cart.forEach(item => {
@@ -1391,7 +1304,6 @@ function prepareOrderSummary() {
 
             summary +=
                 `  ${item.id === 1 ? 'Matières' : 'Modèles'} : ${choices}\n`;
-
         }
 
 
@@ -1399,13 +1311,11 @@ function prepareOrderSummary() {
 
             summary +=
                 `  Couleur : ${item.color}\n`;
-
         }
 
 
         summary +=
             `  Quantité : ${item.quantity} x ${item.price.toFixed(2)}€ = ${itemTotal.toFixed(2)}€\n\n`;
-
     });
 
 
@@ -1416,9 +1326,9 @@ function prepareOrderSummary() {
     hiddenOrderSummary.value =
         summary;
 
+
     hiddenOrderTotal.value =
         `${total.toFixed(2)} €`;
-
 }
 
 
@@ -1427,6 +1337,11 @@ function prepareOrderSummary() {
    ========================================================================== */
 
 function setupEventListeners() {
+
+
+    /* ----------------------------------------------------------------------
+       FILTRES
+       ---------------------------------------------------------------------- */
 
     categoryFilters.addEventListener(
         'click',
@@ -1458,12 +1373,14 @@ function setupEventListeners() {
                 renderProducts(
                     e.target.dataset.category
                 );
-
             }
-
         }
     );
 
+
+    /* ----------------------------------------------------------------------
+       MENU MOBILE
+       ---------------------------------------------------------------------- */
 
     mobileMenuBtn.addEventListener(
         'click',
@@ -1472,7 +1389,6 @@ function setupEventListeners() {
             navLinks.classList.toggle(
                 'mobile-open'
             );
-
         }
     );
 
@@ -1490,12 +1406,14 @@ function setupEventListeners() {
                     navLinks.classList.remove(
                         'mobile-open'
                     );
-
                 }
             );
-
         });
 
+
+    /* ----------------------------------------------------------------------
+       FERMETURE MODALE
+       ---------------------------------------------------------------------- */
 
     closeProductModalBtn.addEventListener(
         'click',
@@ -1508,6 +1426,10 @@ function setupEventListeners() {
         closeProductModal
     );
 
+
+    /* ----------------------------------------------------------------------
+       AJOUT AU PANIER
+       ---------------------------------------------------------------------- */
 
     modalAddToCartBtn.addEventListener(
         'click',
@@ -1531,23 +1453,16 @@ function setupEventListeners() {
                 null;
 
 
-            const productName =
-                selectedProductForModal
-                    .name
-                    .toLowerCase();
-
+            /* ==============================================================
+               PRODUIT 1
+               STICKERS 6ÈME
+               ============================================================== */
 
             if (
-                productName.includes(
-                    "stickers 6ème"
-                ) ||
-                productName.includes(
-                    "stickers 6eme"
-                )
+                selectedProductForModal.id === 1
             ) {
 
-                selectedVariant =
-                    [];
+                selectedVariant = [];
 
 
                 document
@@ -1560,7 +1475,6 @@ function setupEventListeners() {
                             selectedVariant.push(
                                 checkbox.value
                             );
-
                         }
                     );
 
@@ -1586,7 +1500,6 @@ function setupEventListeners() {
                     );
 
                     return;
-
                 }
 
 
@@ -1599,18 +1512,20 @@ function setupEventListeners() {
                     );
 
                     return;
-
                 }
+            }
 
 
-            } else if (
-                productName.includes(
-                    "stickers enfants"
-                )
+            /* ==============================================================
+               PRODUIT 2
+               STICKERS ENFANTS
+               ============================================================== */
+
+            else if (
+                selectedProductForModal.id === 2
             ) {
 
-                selectedVariant =
-                    [];
+                selectedVariant = [];
 
 
                 document
@@ -1623,7 +1538,6 @@ function setupEventListeners() {
                             selectedVariant.push(
                                 checkbox.value
                             );
-
                         }
                     );
 
@@ -1649,7 +1563,6 @@ function setupEventListeners() {
                     );
 
                     return;
-
                 }
 
 
@@ -1662,18 +1575,21 @@ function setupEventListeners() {
                     );
 
                     return;
-
                 }
+            }
 
 
-            } else if (
+            /* ==============================================================
+               AUTRES PRODUITS
+               ============================================================== */
+
+            else if (
                 selectedProductForModal.variants &&
                 selectedProductForModal.variants.length > 0
             ) {
 
                 selectedVariant =
                     modalVariantSelect.value;
-
             }
 
 
@@ -1686,10 +1602,13 @@ function setupEventListeners() {
 
 
             closeProductModal();
-
         }
     );
 
+
+    /* ----------------------------------------------------------------------
+       OUVRIR LE PANIER
+       ---------------------------------------------------------------------- */
 
     openCartBtn.addEventListener(
         'click',
@@ -1699,6 +1618,10 @@ function setupEventListeners() {
             )
     );
 
+
+    /* ----------------------------------------------------------------------
+       FERMER LE PANIER
+       ---------------------------------------------------------------------- */
 
     closeCartBtn.addEventListener(
         'click',
@@ -1717,6 +1640,10 @@ function setupEventListeners() {
             )
     );
 
+
+    /* ----------------------------------------------------------------------
+       PASSER À LA COMMANDE
+       ---------------------------------------------------------------------- */
 
     goToCheckoutBtn.addEventListener(
         'click',
@@ -1742,10 +1669,13 @@ function setupEventListeners() {
 
             cartStep2.style.display =
                 'block';
-
         }
     );
 
+
+    /* ----------------------------------------------------------------------
+       RETOUR AU PANIER
+       ---------------------------------------------------------------------- */
 
     backToCartBtn.addEventListener(
         'click',
@@ -1759,52 +1689,43 @@ function setupEventListeners() {
             cartStep1.classList.add(
                 'active'
             );
-
         }
     );
 
 
-    /* ======================================================================
-       ENVOI FORMSPREE
-       ====================================================================== */
+    /* ----------------------------------------------------------------------
+       FORMULAIRE FORMSPREE
+       ---------------------------------------------------------------------- */
 
     orderForm.addEventListener(
         'submit',
-        (e) => {
+        async (e) => {
 
             e.preventDefault();
 
 
-            const requiredFields =
-                orderForm.querySelectorAll(
-                    '[required]'
-                );
-
-
-            for (
-                const field of requiredFields
+            if (
+                orderForm.action.includes(
+                    'VOTRE_ID_FORMSPREE_ICI'
+                )
             ) {
 
-                if (
-                    !field.checkValidity()
-                ) {
+                formStatusMessage.className =
+                    'form-status-msg error';
 
-                    formStatusMessage.className =
-                        'form-status-msg error';
 
-                    formStatusMessage.textContent =
-                        "Merci de remplir tous les champs obligatoires et d'accepter les conditions.";
+                formStatusMessage.textContent =
+                    "Attention : Vous devez d'abord remplacer VOTRE_ID_FORMSPREE_ICI par votre vrai identifiant Formspree dans le fichier index.html.";
 
-                    field.focus();
 
-                    return;
-
-                }
-
+                return;
             }
 
 
-            prepareOrderSummary();
+            const formData =
+                new FormData(
+                    orderForm
+                );
 
 
             const submitBtn =
@@ -1821,13 +1742,99 @@ function setupEventListeners() {
                 "Envoi de la commande en cours...";
 
 
-            HTMLFormElement.prototype.submit.call(
-                orderForm
-            );
+            try {
 
+                const response =
+                    await fetch(
+                        orderForm.action,
+                        {
+                            method: 'POST',
+
+                            body:
+                                formData,
+
+                            headers: {
+                                'Accept':
+                                    'application/json'
+                            }
+                        }
+                    );
+
+
+                if (
+                    response.ok
+                ) {
+
+                    formStatusMessage.className =
+                        'form-status-msg success';
+
+
+                    formStatusMessage.textContent =
+                        "Merci ! Votre bon de commande a été envoyé avec succès à Maju’Lyah. Vous allez recevoir un accusé de réception.";
+
+
+                    orderForm.reset();
+
+
+                    cart = [];
+
+
+                    updateCartUI();
+
+
+                    setTimeout(
+                        () => {
+
+                            cartDrawer.classList.remove(
+                                'active'
+                            );
+
+
+                            cartStep2.classList.remove(
+                                'active'
+                            );
+
+
+                            cartStep1.classList.add(
+                                'active'
+                            );
+
+
+                            formStatusMessage.style.display =
+                                'none';
+
+                        },
+                        4000
+                    );
+
+                } else {
+
+                    throw new Error(
+                        "Erreur lors de l'envoi"
+                    );
+                }
+
+
+            } catch (error) {
+
+                formStatusMessage.className =
+                    'form-status-msg error';
+
+
+                formStatusMessage.textContent =
+                    "Une erreur est survenue lors de l'envoi. Vérifiez votre connexion ou réessayez.";
+
+            } finally {
+
+                submitBtn.disabled =
+                    false;
+
+
+                submitBtn.textContent =
+                    "Valider et envoyer la commande";
+            }
         }
     );
-
 }
 
 
@@ -1862,5 +1869,4 @@ function showToast(message) {
         },
         2500
     );
-
-                       }
+   }
