@@ -6,10 +6,13 @@
 
     <title>Maju’Lyah | Papeterie & Organisation Artisanale</title>
 
-    <!-- Fonts Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -111,7 +114,7 @@
 
 
     <!-- =========================================================
-         BANNIÈRE D'ACCUEIL
+         BANNIÈRE
          ========================================================= -->
 
     <section
@@ -192,9 +195,6 @@
 
             <div class="title-underline"></div>
 
-
-            <!-- FILTRES -->
-
             <div
                 class="category-filters"
                 id="categoryFilters"
@@ -250,14 +250,10 @@
 
             </div>
 
-
-            <!-- PRODUITS -->
-
             <div
                 class="products-grid"
                 id="productsGrid"
-            >
-            </div>
+            ></div>
 
         </div>
 
@@ -285,7 +281,6 @@
                 >
 
             </div>
-
 
             <div class="about-text-content">
 
@@ -397,24 +392,12 @@
 
             </div>
 
-
             <div class="footer-links">
 
-                <a href="#accueil">
-                    Accueil
-                </a>
-
-                <a href="#boutique">
-                    Boutique
-                </a>
-
-                <a href="#apropos">
-                    À propos
-                </a>
-
-                <a href="#contact">
-                    Contact
-                </a>
+                <a href="#accueil">Accueil</a>
+                <a href="#boutique">Boutique</a>
+                <a href="#apropos">À propos</a>
+                <a href="#contact">Contact</a>
 
                 <a
                     href="#mentions"
@@ -426,7 +409,6 @@
             </div>
 
         </div>
-
 
         <div class="footer-bottom">
 
@@ -456,7 +438,6 @@
             id="closeProductModalBg"
         ></div>
 
-
         <div class="modal-card">
 
             <button
@@ -467,7 +448,6 @@
             >
                 &times;
             </button>
-
 
             <div class="product-detail-grid">
 
@@ -480,7 +460,6 @@
                     >
 
                 </div>
-
 
                 <div class="product-detail-info">
 
@@ -504,9 +483,6 @@
                         id="modalDescription"
                     ></p>
 
-
-                    <!-- VARIANTES -->
-
                     <div
                         class="form-group"
                         id="variantGroup"
@@ -524,9 +500,6 @@
 
                     </div>
 
-
-                    <!-- QUANTITÉ -->
-
                     <div class="form-group">
 
                         <label for="modalQty">
@@ -543,7 +516,6 @@
                         >
 
                     </div>
-
 
                     <button
                         class="btn btn-primary btn-block"
@@ -577,11 +549,7 @@
             id="closeCartBg"
         ></div>
 
-
         <div class="cart-drawer-content">
-
-
-            <!-- EN-TÊTE DU PANIER -->
 
             <div class="cart-header">
 
@@ -601,9 +569,7 @@
             </div>
 
 
-            <!-- =================================================
-                 ÉTAPE 1 : PANIER
-                 ================================================= -->
+            <!-- ÉTAPE 1 -->
 
             <div
                 id="cartStep1"
@@ -613,9 +579,7 @@
                 <div
                     class="cart-items-list"
                     id="cartItemsList"
-                >
-                </div>
-
+                ></div>
 
                 <div class="cart-footer">
 
@@ -634,7 +598,6 @@
 
                     </div>
 
-
                     <button
                         class="btn btn-primary btn-block"
                         id="goToCheckoutBtn"
@@ -649,9 +612,7 @@
             </div>
 
 
-            <!-- =================================================
-                 ÉTAPE 2 : FORMULAIRE
-                 ================================================= -->
+            <!-- ÉTAPE 2 -->
 
             <div
                 id="cartStep2"
@@ -666,7 +627,6 @@
                     &larr; Retour à la commande
                 </button>
 
-
                 <h4 class="checkout-subtitle">
                     Coordonnées de livraison
                 </h4>
@@ -678,10 +638,24 @@
                     id="orderForm"
                     action="https://formspree.io/f/xeaojpzq"
                     method="POST"
+                    novalidate
                 >
 
+                    <!-- REDIRECTION APRÈS ENVOI -->
 
-                    <!-- RÉCAPITULATIF AUTOMATIQUE -->
+                    <input
+                        type="hidden"
+                        name="_next"
+                        value="https://majulyah3121-commits.github.io/majulyah-site/?commande=envoyee"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="_subject"
+                        value="Nouvelle commande Maju’Lyah"
+                    >
+
+                    <!-- RÉCAPITULATIF -->
 
                     <input
                         type="hidden"
@@ -717,7 +691,6 @@
                             >
 
                         </div>
-
 
                         <div class="form-group">
 
@@ -845,7 +818,6 @@
 
                         </div>
 
-
                         <div class="form-group">
 
                             <label for="ville">
@@ -906,7 +878,7 @@
                     </div>
 
 
-                    <!-- MESSAGE DE STATUT -->
+                    <!-- MESSAGE -->
 
                     <div
                         id="formStatusMessage"
@@ -914,7 +886,7 @@
                     ></div>
 
 
-                    <!-- BOUTON FINAL -->
+                    <!-- BOUTON -->
 
                     <button
                         type="submit"
@@ -933,9 +905,7 @@
     </div>
 
 
-    <!-- =========================================================
-         NOTIFICATION
-         ========================================================= -->
+    <!-- NOTIFICATION -->
 
     <div
         id="toastNotification"
@@ -944,8 +914,6 @@
         Produit ajouté au panier !
     </div>
 
-
-    <!-- JAVASCRIPT -->
 
     <script src="script.js"></script>
 
