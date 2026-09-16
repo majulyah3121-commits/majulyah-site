@@ -10,7 +10,7 @@ const products = [
         category: "Organisation",
         price: 12.00,
         image:"https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260821_164820.jpg",
-        description: "Un magnifique carnet couverture rigide en lin couleur sauge. 160 pages de papier crémeux haut de gamme idéal pour organiser vos semaines et déposer vos pensées.",
+        description: "Des stickers personnalisés pour organiser tes affaires scolaires et apporter une jolie touche à ta rentrée. Lors de ta commande, pense à préciser dans la partie "message" La liste des matières souhaitées, la couleur des stickers et ton choix d'écriture.",
         variants: ["Lin Sauge", "Terracotta Charnelle", "Beige Sablé"]
     },
     {
