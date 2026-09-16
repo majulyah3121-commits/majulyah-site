@@ -201,32 +201,52 @@ let selectedProductForModal = null;
    ÉLÉMENTS DU DOM
    ========================================================================== */
 
-const productsGrid = document.getElementById('productsGrid');
-const categoryFilters = document.getElementById('categoryFilters');
+const productsGrid =
+    document.getElementById('productsGrid');
 
-const cartCount = document.getElementById('cartCount');
-const cartDrawer = document.getElementById('cartDrawer');
+const categoryFilters =
+    document.getElementById('categoryFilters');
 
-const openCartBtn = document.getElementById('openCartBtn');
-const closeCartBtn = document.getElementById('closeCartBtn');
-const closeCartBg = document.getElementById('closeCartBg');
+const cartCount =
+    document.getElementById('cartCount');
 
-const cartItemsList = document.getElementById('cartItemsList');
-const cartTotalPrice = document.getElementById('cartTotalPrice');
+const cartDrawer =
+    document.getElementById('cartDrawer');
 
-const goToCheckoutBtn = document.getElementById('goToCheckoutBtn');
+const openCartBtn =
+    document.getElementById('openCartBtn');
 
-const cartStep1 = document.getElementById('cartStep1');
-const cartStep2 = document.getElementById('cartStep2');
+const closeCartBtn =
+    document.getElementById('closeCartBtn');
 
-const backToCartBtn = document.getElementById('backToCartBtn');
+const closeCartBg =
+    document.getElementById('closeCartBg');
+
+const cartItemsList =
+    document.getElementById('cartItemsList');
+
+const cartTotalPrice =
+    document.getElementById('cartTotalPrice');
+
+const goToCheckoutBtn =
+    document.getElementById('goToCheckoutBtn');
+
+const cartStep1 =
+    document.getElementById('cartStep1');
+
+const cartStep2 =
+    document.getElementById('cartStep2');
+
+const backToCartBtn =
+    document.getElementById('backToCartBtn');
 
 
 /* ==========================================================================
    MODALE PRODUIT
    ========================================================================== */
 
-const productModal = document.getElementById('productModal');
+const productModal =
+    document.getElementById('productModal');
 
 const closeProductModalBtn =
     document.getElementById('closeProductModalBtn');
@@ -304,9 +324,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('year');
 
     if (yearElement) {
+
         yearElement.textContent =
             new Date().getFullYear();
+
     }
+
 });
 
 
@@ -389,7 +412,9 @@ function renderProducts(filterCategory) {
         `;
 
         productsGrid.appendChild(card);
+
     });
+
 }
 
 
@@ -426,9 +451,11 @@ function openProductModal(productId) {
     modalDescription.textContent =
         product.description;
 
-    modalQty.value = 1;
+    modalQty.value =
+        1;
 
-    variantGroup.innerHTML = '';
+    variantGroup.innerHTML =
+        '';
 
 
     if (product.id === 1) {
@@ -448,7 +475,10 @@ function openProductModal(productId) {
         title.style.fontWeight =
             '600';
 
-        variantGroup.appendChild(title);
+        variantGroup.appendChild(
+            title
+        );
+
 
         product.variants.forEach(variant => {
 
@@ -489,7 +519,9 @@ function openProductModal(productId) {
             variantGroup.appendChild(
                 label
             );
+
         });
+
 
         const spacer =
             document.createElement('div');
@@ -500,6 +532,7 @@ function openProductModal(productId) {
         variantGroup.appendChild(
             spacer
         );
+
 
         const colorTitle =
             document.createElement('label');
@@ -516,6 +549,7 @@ function openProductModal(productId) {
         colorTitle.style.fontWeight =
             '600';
 
+
         const colorSelect =
             document.createElement('select');
 
@@ -524,6 +558,7 @@ function openProductModal(productId) {
 
         colorSelect.style.width =
             '100%';
+
 
         const defaultColor =
             document.createElement('option');
@@ -537,6 +572,7 @@ function openProductModal(productId) {
         colorSelect.appendChild(
             defaultColor
         );
+
 
         product.colors.forEach(color => {
 
@@ -552,7 +588,9 @@ function openProductModal(productId) {
             colorSelect.appendChild(
                 option
             );
+
         });
+
 
         variantGroup.appendChild(
             colorTitle
@@ -564,6 +602,7 @@ function openProductModal(productId) {
 
         variantGroup.style.display =
             'block';
+
 
     } else if (product.id === 2) {
 
@@ -582,7 +621,10 @@ function openProductModal(productId) {
         title.style.fontWeight =
             '600';
 
-        variantGroup.appendChild(title);
+        variantGroup.appendChild(
+            title
+        );
+
 
         product.variants.forEach(variant => {
 
@@ -623,7 +665,9 @@ function openProductModal(productId) {
             variantGroup.appendChild(
                 label
             );
+
         });
+
 
         const spacer =
             document.createElement('div');
@@ -634,6 +678,7 @@ function openProductModal(productId) {
         variantGroup.appendChild(
             spacer
         );
+
 
         const colorTitle =
             document.createElement('label');
@@ -650,6 +695,7 @@ function openProductModal(productId) {
         colorTitle.style.fontWeight =
             '600';
 
+
         const colorSelect =
             document.createElement('select');
 
@@ -658,6 +704,7 @@ function openProductModal(productId) {
 
         colorSelect.style.width =
             '100%';
+
 
         const defaultColor =
             document.createElement('option');
@@ -671,6 +718,7 @@ function openProductModal(productId) {
         colorSelect.appendChild(
             defaultColor
         );
+
 
         product.colors.forEach(color => {
 
@@ -686,7 +734,9 @@ function openProductModal(productId) {
             colorSelect.appendChild(
                 option
             );
+
         });
+
 
         variantGroup.appendChild(
             colorTitle
@@ -698,6 +748,7 @@ function openProductModal(productId) {
 
         variantGroup.style.display =
             'block';
+
 
     } else if (
         product.variants &&
@@ -722,6 +773,7 @@ function openProductModal(productId) {
         modalVariantSelect.innerHTML =
             '';
 
+
         product.variants.forEach(variant => {
 
             const option =
@@ -736,7 +788,9 @@ function openProductModal(productId) {
             modalVariantSelect.appendChild(
                 option
             );
+
         });
+
 
         variantGroup.appendChild(
             title
@@ -749,15 +803,19 @@ function openProductModal(productId) {
         variantGroup.style.display =
             'block';
 
+
     } else {
 
         variantGroup.style.display =
             'none';
+
     }
+
 
     productModal.classList.add(
         'active'
     );
+
 }
 
 
@@ -770,6 +828,7 @@ function closeProductModal() {
     productModal.classList.remove(
         'active'
     );
+
 }
 
 
@@ -806,6 +865,7 @@ function addToCart(
                 cartItemId
         );
 
+
     if (existingIndex > -1) {
 
         cart[existingIndex].quantity +=
@@ -838,14 +898,18 @@ function addToCart(
 
             quantity:
                 quantity
+
         });
+
     }
+
 
     updateCartUI();
 
     showToast(
         `${product.name} ajouté à votre panier !`
     );
+
 }
 
 
@@ -862,11 +926,13 @@ function updateCartUI() {
             0
         );
 
+
     cartCount.textContent =
         totalQty;
 
     cartItemsList.innerHTML =
         '';
+
 
     if (cart.length === 0) {
 
@@ -885,10 +951,12 @@ function updateCartUI() {
         goToCheckoutBtn.disabled =
             true;
 
+
     } else {
 
         goToCheckoutBtn.disabled =
             false;
+
 
         cart.forEach(
             (item, index) => {
@@ -901,8 +969,10 @@ function updateCartUI() {
                 itemElement.className =
                     'cart-item';
 
+
                 let optionsHTML =
                     '';
+
 
                 if (item.variant) {
 
@@ -915,6 +985,7 @@ function updateCartUI() {
                             )
                             : item.variant;
 
+
                     optionsHTML += `
                         <div class="cart-item-variant">
                             ${item.id === 1
@@ -923,7 +994,9 @@ function updateCartUI() {
                             ${choices}
                         </div>
                     `;
+
                 }
+
 
                 if (item.color) {
 
@@ -933,9 +1006,12 @@ function updateCartUI() {
                             ${item.color}
                         </div>
                     `;
+
                 }
 
+
                 itemElement.innerHTML = `
+
                     <img
                         src="${item.image}"
                         alt="${item.name}"
@@ -1002,14 +1078,19 @@ function updateCartUI() {
                     >
                         &times;
                     </button>
+
                 `;
+
 
                 cartItemsList.appendChild(
                     itemElement
                 );
+
             }
         );
+
     }
+
 
     const total =
         cart.reduce(
@@ -1022,10 +1103,12 @@ function updateCartUI() {
             0
         );
 
+
     cartTotalPrice.textContent =
         `${total
             .toFixed(2)
             .replace('.', ',')} €`;
+
 }
 
 
@@ -1041,6 +1124,7 @@ function changeQty(
     cart[index].quantity +=
         delta;
 
+
     if (
         cart[index].quantity <= 0
     ) {
@@ -1049,9 +1133,12 @@ function changeQty(
             index,
             1
         );
+
     }
 
+
     updateCartUI();
+
 }
 
 
@@ -1067,6 +1154,7 @@ function removeCartItem(index) {
     );
 
     updateCartUI();
+
 }
 
 
@@ -1079,7 +1167,9 @@ function prepareOrderSummary() {
     let summary =
         "DÉTAIL DE LA COMMANDE MAJU'LYAH :\n\n";
 
-    let total = 0;
+    let total =
+        0;
+
 
     cart.forEach(item => {
 
@@ -1087,11 +1177,14 @@ function prepareOrderSummary() {
             item.price *
             item.quantity;
 
+
         total +=
             itemTotal;
 
+
         summary +=
             `- ${item.name}\n`;
+
 
         if (item.variant) {
 
@@ -1104,28 +1197,37 @@ function prepareOrderSummary() {
                     )
                     : item.variant;
 
+
             summary +=
                 `  ${item.id === 1 ? 'Matières' : 'Modèles'} : ${choices}\n`;
+
         }
+
 
         if (item.color) {
 
             summary +=
                 `  Couleur : ${item.color}\n`;
+
         }
+
 
         summary +=
             `  Quantité : ${item.quantity} x ${item.price.toFixed(2)}€ = ${itemTotal.toFixed(2)}€\n\n`;
+
     });
+
 
     summary +=
         `TOTAL GLOBAL DE LA COMMANDE : ${total.toFixed(2)} €`;
+
 
     hiddenOrderSummary.value =
         summary;
 
     hiddenOrderTotal.value =
         `${total.toFixed(2)} €`;
+
 }
 
 
@@ -1134,6 +1236,7 @@ function prepareOrderSummary() {
    ========================================================================== */
 
 function setupEventListeners() {
+
 
     categoryFilters.addEventListener(
         'click',
@@ -1156,14 +1259,18 @@ function setupEventListeners() {
                             )
                     );
 
+
                 e.target.classList.add(
                     'active'
                 );
 
+
                 renderProducts(
                     e.target.dataset.category
                 );
+
             }
+
         }
     );
 
@@ -1175,6 +1282,7 @@ function setupEventListeners() {
             navLinks.classList.toggle(
                 'mobile-open'
             );
+
         }
     );
 
@@ -1192,8 +1300,10 @@ function setupEventListeners() {
                     navLinks.classList.remove(
                         'mobile-open'
                     );
+
                 }
             );
+
         });
 
 
@@ -1201,6 +1311,7 @@ function setupEventListeners() {
         'click',
         closeProductModal
     );
+
 
     closeProductModalBg.addEventListener(
         'click',
@@ -1216,10 +1327,12 @@ function setupEventListeners() {
                 !selectedProductForModal
             ) return;
 
+
             const qty =
                 parseInt(
                     modalQty.value
                 ) || 1;
+
 
             let selectedVariant =
                 null;
@@ -1232,7 +1345,9 @@ function setupEventListeners() {
                 selectedProductForModal.id === 1
             ) {
 
-                selectedVariant = [];
+                selectedVariant =
+                    [];
+
 
                 document
                     .querySelectorAll(
@@ -1244,18 +1359,22 @@ function setupEventListeners() {
                             selectedVariant.push(
                                 checkbox.value
                             );
+
                         }
                     );
+
 
                 const colorSelect =
                     document.getElementById(
                         'dynamicColorSelect'
                     );
 
+
                 selectedColor =
                     colorSelect
                         ? colorSelect.value
                         : null;
+
 
                 if (
                     selectedVariant.length === 0
@@ -1266,7 +1385,9 @@ function setupEventListeners() {
                     );
 
                     return;
+
                 }
+
 
                 if (
                     !selectedColor
@@ -1277,13 +1398,17 @@ function setupEventListeners() {
                     );
 
                     return;
+
                 }
+
 
             } else if (
                 selectedProductForModal.id === 2
             ) {
 
-                selectedVariant = [];
+                selectedVariant =
+                    [];
+
 
                 document
                     .querySelectorAll(
@@ -1295,18 +1420,22 @@ function setupEventListeners() {
                             selectedVariant.push(
                                 checkbox.value
                             );
+
                         }
                     );
+
 
                 const colorSelect =
                     document.getElementById(
                         'dynamicColorSelect'
                     );
 
+
                 selectedColor =
                     colorSelect
                         ? colorSelect.value
                         : null;
+
 
                 if (
                     selectedVariant.length === 0
@@ -1317,7 +1446,9 @@ function setupEventListeners() {
                     );
 
                     return;
+
                 }
+
 
                 if (
                     !selectedColor
@@ -1328,7 +1459,9 @@ function setupEventListeners() {
                     );
 
                     return;
+
                 }
+
 
             } else if (
                 selectedProductForModal.variants &&
@@ -1337,6 +1470,7 @@ function setupEventListeners() {
 
                 selectedVariant =
                     modalVariantSelect.value;
+
             }
 
 
@@ -1347,7 +1481,9 @@ function setupEventListeners() {
                 selectedColor
             );
 
+
             closeProductModal();
+
         }
     );
 
@@ -1387,18 +1523,23 @@ function setupEventListeners() {
                 cart.length === 0
             ) return;
 
+
             prepareOrderSummary();
+
 
             cartStep1.classList.remove(
                 'active'
             );
 
+
             cartStep2.classList.add(
                 'active'
             );
 
+
             cartStep2.style.display =
                 'block';
+
         }
     );
 
@@ -1411,33 +1552,37 @@ function setupEventListeners() {
                 'active'
             );
 
+
             cartStep1.classList.add(
                 'active'
             );
+
         }
     );
 
 
     /* ======================================================================
-       FORMULAIRE FORMSPREE
+       NOUVEL ENVOI FORMSPREE
        ====================================================================== */
 
     orderForm.addEventListener(
         'submit',
-        async (e) => {
+        (e) => {
 
             e.preventDefault();
 
 
-            /* ----------------------------------------------------------------
-               VALIDATION MANUELLE
-               Permet d'avoir un fonctionnement fiable sur mobile.
-               ---------------------------------------------------------------- */
+            /*
+             * On vérifie nous-mêmes les champs obligatoires.
+             * Cela évite que le comportement différent des navigateurs
+             * mobiles bloque le formulaire.
+             */
 
             const requiredFields =
                 orderForm.querySelectorAll(
                     '[required]'
                 );
+
 
             for (
                 const field of requiredFields
@@ -1456,30 +1601,17 @@ function setupEventListeners() {
                     field.focus();
 
                     return;
+
                 }
+
             }
 
 
-            if (
-                orderForm.action.includes(
-                    'VOTRE_ID_FORMSPREE_ICI'
-                )
-            ) {
+            /*
+             * On prépare une dernière fois le récapitulatif.
+             */
 
-                formStatusMessage.className =
-                    'form-status-msg error';
-
-                formStatusMessage.textContent =
-                    "Attention : Vous devez d'abord remplacer VOTRE_ID_FORMSPREE_ICI par votre vrai identifiant Formspree dans le fichier index.html.";
-
-                return;
-            }
-
-
-            const formData =
-                new FormData(
-                    orderForm
-                );
+            prepareOrderSummary();
 
 
             const submitBtn =
@@ -1491,94 +1623,27 @@ function setupEventListeners() {
             submitBtn.disabled =
                 true;
 
+
             submitBtn.textContent =
                 "Envoi de la commande en cours...";
 
 
-            try {
+            /*
+             * IMPORTANT :
+             * On n'utilise plus fetch().
+             *
+             * On utilise l'envoi HTML classique du formulaire.
+             * Cela permet au navigateur du téléphone d'envoyer
+             * directement les données à Formspree.
+             */
 
-                const response =
-                    await fetch(
-                        orderForm.action,
-                        {
-                            method: 'POST',
+            HTMLFormElement.prototype.submit.call(
+                orderForm
+            );
 
-                            body:
-                                formData,
-
-                            headers: {
-                                'Accept':
-                                    'application/json'
-                            }
-                        }
-                    );
-
-
-                if (
-                    response.ok
-                ) {
-
-                    formStatusMessage.className =
-                        'form-status-msg success';
-
-                    formStatusMessage.textContent =
-                        "Merci ! Votre bon de commande a été envoyé avec succès à Maju’Lyah. Vous allez recevoir un accusé de réception.";
-
-                    orderForm.reset();
-
-                    cart = [];
-
-                    updateCartUI();
-
-
-                    setTimeout(
-                        () => {
-
-                            cartDrawer.classList.remove(
-                                'active'
-                            );
-
-                            cartStep2.classList.remove(
-                                'active'
-                            );
-
-                            cartStep1.classList.add(
-                                'active'
-                            );
-
-                            formStatusMessage.style.display =
-                                'none';
-
-                        },
-                        4000
-                    );
-
-                } else {
-
-                    throw new Error(
-                        "Erreur lors de l'envoi"
-                    );
-                }
-
-
-            } catch (error) {
-
-                formStatusMessage.className =
-                    'form-status-msg error';
-
-                formStatusMessage.textContent =
-                    "Une erreur est survenue lors de l'envoi. Vérifiez votre connexion ou réessayez.";
-
-            } finally {
-
-                submitBtn.disabled =
-                    false;
-
-                submitBtn.textContent =
-                    "Valider et envoyer la commande";
-            }
         }
     );
+
 }
 
 
@@ -1593,12 +1658,15 @@ function showToast(message) {
             'toastNotification'
         );
 
+
     toast.textContent =
         message;
+
 
     toast.classList.add(
         'show'
     );
+
 
     setTimeout(
         () => {
@@ -1610,4 +1678,5 @@ function showToast(message) {
         },
         2500
     );
+
 }
