@@ -6,7 +6,7 @@
 const products = [
     {
         id: 1,
-        name: "Carnet d'Organisation Douceur",
+        name: "Stickers organisation 6 ème",
         category: "Organisation",
         price: 18.50,
         image:"https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260821_164820.jpg",
