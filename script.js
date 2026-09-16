@@ -11,7 +11,7 @@ const products = [
         price: 12.00,
         image:"https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260821_164820.jpg",
         description: "Des stickers personnalisés pour organiser tes affaires scolaires et apporter une jolie touche à ta rentrée. Lors de ta commande, pense à préciser dans la partie message La liste des matières souhaitées, la couleur des stickers et ton choix d'écriture.",
-        variants: ["Lin Sauge", "Terracotta Charnelle", "Beige Sablé"]
+        variants: ["Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé", "Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé", "Gris clair", "Gris foncé", "Noir", "Blanc", "Rose", "Violet claire", "Violet foncé", "Marron"]
     },
     {
         id: 2,
