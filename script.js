@@ -8,7 +8,7 @@ const products = [
         name: "Stickers 6ème",
         category: "Organisation",
         price: 12.00,
-        image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260821_164820.jpg",
+        image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/fichier_000000000fd081f5b6a7065f6ad5254a.png",
         description: "Des stickers personnalisés pour organiser tes affaires scolaires.",
         colors: [
             "Bleu foncé",
