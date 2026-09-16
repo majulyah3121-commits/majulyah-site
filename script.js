@@ -1,1682 +1,1764 @@
-/* ==========================================================================
-   MAJU'LYAH - BASE DE DONNÉES DES PRODUITS
-   ========================================================================== */
+/* =========================================================
+   MAJU'LYAH - SCRIPT PRINCIPAL
+   Produits chargés automatiquement depuis Google Sheets
+   ========================================================= */
 
-const products = [
+const PRODUCTS_API_URL =
+  "https://script.google.com/macros/s/AKfycbx1-1iM9zdrZRtq-A47-WxpzX3YVLbHW6fRzmtXEOEmhcc-TRZTTWB24yGPrjY78k0D/exec";
 
-    {
-        id: 1,
-        name: "Stickers 6ème",
-        category: "Organisation",
-        price: 12.00,
-        image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/file_000000000fd081f5b6a7065f6ad5254a.png",
-        description: "Des stickers personnalisés pour organiser tes affaires scolaires.",
-        variants: [
-            "Français",
-            "Anglais",
-            "Espagnol",
-            "Allemand",
-            "Latin",
-            "Mathématiques",
-            "Physique-Chimie",
-            "Sciences physiques",
-            "Physique",
-            "SVT",
-            "Arts plastiques",
-            "Musique",
-            "Sport",
-            "EMC",
-            "Histoire-Géographie",
-            "Technologie",
-            "Vie de classe",
-            "CDI",
-            "Fournitures scolaires",
-            "Divers"
-        ],
-        colors: [
-            "Bleu foncé",
-            "Bleu clair",
-            "Bleu canard",
-            "Vert clair",
-            "Vert foncé",
-            "Orange",
-            "Rouge clair",
-            "Rouge foncé",
-            "Jaune clair",
-            "Jaune foncé",
-            "Gris clair",
-            "Gris foncé",
-            "Noir",
-            "Blanc",
-            "Rose",
-            "Violet clair",
-            "Violet foncé",
-            "Marron"
-        ]
-    },
+const FORMSPREE_URL = "https://formspree.io/f/xeaojpzq";
 
-    {
-        id: 2,
-        name: "Stickers enfants",
-        category: "Organisation",
-        price: 10.00,
-        image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260913_154315.jpg",
-        description: "Des stickers personnalisés pour que chaque jouet trouve sa place !",
-        variants: [
-            "Poupée",
-            "Bébé",
-            "Barbie",
-            "Dînette",
-            "Princesse",
-            "Déguisement",
-            "Coiffure",
-            "Peluche",
-            "Super-héros",
-            "Dinosaure",
-            "Bricolage",
-            "Figurine",
-            "Voiture",
-            "Jeux de société",
-            "Puzzle",
-            "Lego",
-            "Playmobil",
-            "Train",
-            "Avion",
-            "Robot",
-            "Marionnettes",
-            "Instruments de musique",
-            "Licorne",
-            "Animaux"
-        ],
-        colors: [
-            "Bleu foncé",
-            "Bleu clair",
-            "Bleu canard",
-            "Vert clair",
-            "Vert foncé",
-            "Orange",
-            "Rouge clair",
-            "Rouge foncé",
-            "Jaune clair",
-            "Jaune foncé",
-            "Gris clair",
-            "Gris foncé",
-            "Noir",
-            "Blanc",
-            "Rose",
-            "Violet clair",
-            "Violet foncé",
-            "Marron"
-        ]
-    },
+/* =========================================================
+   DONNÉES DE SECOURS
+   Si Google Sheets est momentanément inaccessible,
+   le site peut quand même afficher les anciens produits.
+   ========================================================= */
 
-    {
-        id: 3,
-        name: "Bloc-notes To-Do List Automnale",
-        category: "Papeterie",
-        price: 8.00,
-        image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&q=80",
-        description: "Bloc-notes de 50 pages détachables au papier doux. Idéal pour noter vos priorités quotidiennes en toute sérénité.",
-        variants: [
-            "Standard (50 pages)",
-            "Grand Format (100 pages)"
-        ]
-    },
+const fallbackProducts = [
+  {
+    id: 1,
+    name: "Stickers 6ème",
+    category: "Organisation",
+    price: 12,
+    description:
+      "Stickers personnalisés pour organiser les affaires et espaces d’un collégien.",
+    image:
+      "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/file_000000000fd081f5b6a7065f6ad5254a.png",
+    variants: [
+      "Français",
+      "Anglais",
+      "Espagnol",
+      "Allemand",
+      "Latin",
+      "Mathématiques",
+      "Physique-Chimie",
+      "Sciences physiques",
+      "Physique",
+      "SVT",
+      "Arts plastiques",
+      "Musique",
+      "Sport",
+      "EMC",
+      "Histoire-Géographie",
+      "Technologie",
+      "Vie de classe",
+      "CDI",
+      "Fournitures scolaires",
+      "Divers"
+    ],
+    colors: [
+      "Bleu foncé",
+      "Bleu clair",
+      "Bleu canard",
+      "Vert clair",
+      "Vert foncé",
+      "Orange",
+      "Rouge clair",
+      "Rouge foncé",
+      "Jaune clair",
+      "Jaune foncé",
+      "Gris clair",
+      "Gris foncé",
+      "Noir",
+      "Blanc",
+      "Rose",
+      "Violet clair",
+      "Violet foncé",
+      "Marron"
+    ],
+    visible: true,
+    stock: 999
+  },
 
-    {
-        id: 4,
-        name: "Set de Cartes Poétiques & Enveloppes",
-        category: "Mailow Club",
-        price: 12.00,
-        image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80",
-        description: "Coffret de cartes d'art au fini mat accompagnées de leurs enveloppes.",
-        variants: [
-            "Lot de 5 cartes",
-            "Lot de 10 cartes"
-        ]
-    },
+  {
+    id: 2,
+    name: "Stickers enfants",
+    category: "Organisation",
+    price: 10,
+    description:
+      "Stickers personnalisés pour organiser les jouets et les affaires des enfants.",
+    image:
+      "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260913_154315.jpg",
+    variants: [
+      "Poupée",
+      "Bébé",
+      "Barbie",
+      "Dînette",
+      "Princesse",
+      "Déguisement",
+      "Coiffure",
+      "Peluche",
+      "Super-héros",
+      "Dinosaure",
+      "Bricolage",
+      "Figurine",
+      "Voiture",
+      "Jeux de société",
+      "Puzzle",
+      "Lego",
+      "Playmobil",
+      "Train",
+      "Avion",
+      "Robot",
+      "Marionnettes",
+      "Instruments de musique",
+      "Licorne",
+      "Animaux"
+    ],
+    colors: [
+      "Bleu foncé",
+      "Bleu clair",
+      "Bleu canard",
+      "Vert clair",
+      "Vert foncé",
+      "Orange",
+      "Rouge clair",
+      "Rouge foncé",
+      "Jaune clair",
+      "Jaune foncé",
+      "Gris clair",
+      "Gris foncé",
+      "Noir",
+      "Blanc",
+      "Rose",
+      "Violet clair",
+      "Violet foncé",
+      "Marron"
+    ],
+    visible: true,
+    stock: 999
+  },
 
-    {
-        id: 5,
-        name: "Planner Non Daté 'Sérénité'",
-        category: "Nouveautés",
-        price: 24.00,
-        image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80",
-        description: "Le compagnon idéal pour planifier votre année à votre rythme, sans dates pré-remplies.",
-        variants: [
-            "Reliure Dorée",
-            "Reliure Rose Poudré"
-        ]
-    },
+  {
+    id: 3,
+    name: "Bloc-notes To-Do List Automnale",
+    category: "Papeterie",
+    price: 8,
+    description: "Un joli bloc-notes pour organiser les tâches du quotidien.",
+    image:
+      "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=900&q=80",
+    variants: [],
+    visible: true,
+    stock: 999
+  },
 
-    {
-        id: 6,
-        name: "Marque-page en Laiton & Ruban",
-        category: "Nouveautés",
-        price: 6.50,
-        image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80",
-        description: "Élégant marque-page en métal finition dorée avec son ruban terracotta.",
-        variants: [
-            "Ruban Terracotta",
-            "Ruban Sauge"
-        ]
-    },
+  {
+    id: 4,
+    name: "Set de Cartes Poétiques & Enveloppes",
+    category: "Mailow Club",
+    price: 12,
+    description:
+      "Un joli set de cartes à conserver, offrir ou utiliser pour de petites attentions.",
+    image:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
+    variants: [],
+    visible: true,
+    stock: 999
+  },
 
-    {
-        id: 7,
-        name: "Stickers Citations & Pensées",
-        category: "Stickers",
-        price: 5.20,
-        image: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&w=600&q=80",
-        description: "Mots doux, citations motivantes et calligraphie fine.",
-        variants: [
-            "Finition Matte",
-            "Finition Glossy"
-        ]
-    },
+  {
+    id: 5,
+    name: "Planner Non Daté 'Sérénité'",
+    category: "Nouveautés",
+    price: 24,
+    description:
+      "Un planner non daté pour organiser son quotidien avec simplicité.",
+    image:
+      "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=900&q=80",
+    variants: [],
+    visible: true,
+    stock: 999
+  },
 
-    {
-        id: 8,
-        name: "Kit Papeterie 'Mailow Routine'",
-        category: "Mailow Club",
-        price: 29.90,
-        image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80",
-        description: "Un kit complet comprenant un bloc-notes, une planche de stickers, deux marque-pages et un carnet exclusif Mailow Club.",
-        variants: [
-            "Box Complète"
-        ]
-    }
+  {
+    id: 6,
+    name: "Marque-page en Laiton & Ruban",
+    category: "Nouveautés",
+    price: 6.5,
+    description:
+      "Un marque-page élégant avec finition en laiton et joli ruban.",
+    image:
+      "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=900&q=80",
+    variants: [],
+    visible: true,
+    stock: 999
+  },
+
+  {
+    id: 7,
+    name: "Stickers Citations & Pensées",
+    category: "Stickers",
+    price: 5.2,
+    description:
+      "Une planche de stickers décoratifs autour des citations et pensées positives.",
+    image:
+      "https://images.unsplash.com/photo-1517842536804-bf6629e2c950?auto=format&fit=crop&w=900&q=80",
+    variants: [],
+    visible: true,
+    stock: 999
+  },
+
+  {
+    id: 8,
+    name: "Kit Papeterie 'Mailow Routine'",
+    category: "Mailow Club",
+    price: 29.9,
+    description:
+      "Un joli kit de papeterie pensé pour accompagner l'organisation du quotidien.",
+    image:
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=80",
+    variants: [],
+    visible: true,
+    stock: 999
+  }
 ];
 
 
-/* ==========================================================================
-   ÉTAT DU PANIER
-   ========================================================================== */
+/* =========================================================
+   PRODUITS
+   ========================================================= */
+
+let products = [];
 
 let cart = [];
+
 let selectedProductForModal = null;
 
 
-/* ==========================================================================
-   ÉLÉMENTS DU DOM
-   ========================================================================== */
+/* =========================================================
+   ÉLÉMENTS HTML
+   ========================================================= */
 
-const productsGrid =
-    document.getElementById('productsGrid');
+let productsGrid;
+let categoryFilter;
 
-const categoryFilters =
-    document.getElementById('categoryFilters');
+let productModal;
+let modalImg;
+let modalCategory;
+let modalTitle;
+let modalPrice;
+let modalDescription;
 
-const cartCount =
-    document.getElementById('cartCount');
+let variantGroup;
+let modalVariantSelect;
+let modalQty;
+let modalAddToCartBtn;
 
-const cartDrawer =
-    document.getElementById('cartDrawer');
+let openCartBtn;
+let cartCount;
+let cartDrawer;
+let cartItemsList;
+let cartTotalPrice;
 
-const openCartBtn =
-    document.getElementById('openCartBtn');
+let goToCheckoutBtn;
+let cartStep1;
+let cartStep2;
+let backToCartBtn;
 
-const closeCartBtn =
-    document.getElementById('closeCartBtn');
+let orderForm;
+let hiddenOrderSummary;
+let hiddenOrderTotal;
+let formStatusMessage;
+let submitOrderBtn;
 
-const closeCartBg =
-    document.getElementById('closeCartBg');
-
-const cartItemsList =
-    document.getElementById('cartItemsList');
-
-const cartTotalPrice =
-    document.getElementById('cartTotalPrice');
-
-const goToCheckoutBtn =
-    document.getElementById('goToCheckoutBtn');
-
-const cartStep1 =
-    document.getElementById('cartStep1');
-
-const cartStep2 =
-    document.getElementById('cartStep2');
-
-const backToCartBtn =
-    document.getElementById('backToCartBtn');
+let toastNotification;
 
 
-/* ==========================================================================
-   MODALE PRODUIT
-   ========================================================================== */
-
-const productModal =
-    document.getElementById('productModal');
-
-const closeProductModalBtn =
-    document.getElementById('closeProductModalBtn');
-
-const closeProductModalBg =
-    document.getElementById('closeProductModalBg');
-
-const modalImg =
-    document.getElementById('modalImg');
-
-const modalCategory =
-    document.getElementById('modalCategory');
-
-const modalTitle =
-    document.getElementById('modalTitle');
-
-const modalPrice =
-    document.getElementById('modalPrice');
-
-const modalDescription =
-    document.getElementById('modalDescription');
-
-const variantGroup =
-    document.getElementById('variantGroup');
-
-const modalVariantSelect =
-    document.getElementById('modalVariantSelect');
-
-const modalQty =
-    document.getElementById('modalQty');
-
-const modalAddToCartBtn =
-    document.getElementById('modalAddToCartBtn');
-
-
-/* ==========================================================================
-   FORMULAIRE
-   ========================================================================== */
-
-const orderForm =
-    document.getElementById('orderForm');
-
-const hiddenOrderSummary =
-    document.getElementById('hiddenOrderSummary');
-
-const hiddenOrderTotal =
-    document.getElementById('hiddenOrderTotal');
-
-const formStatusMessage =
-    document.getElementById('formStatusMessage');
-
-
-/* ==========================================================================
-   MENU MOBILE
-   ========================================================================== */
-
-const mobileMenuBtn =
-    document.getElementById('mobileMenuBtn');
-
-const navLinks =
-    document.getElementById('navLinks');
-
-
-/* ==========================================================================
+/* =========================================================
    INITIALISATION
-   ========================================================================== */
+   ========================================================= */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", async function () {
 
-    renderProducts('all');
+  initialiserElements();
 
-    setupEventListeners();
+  await chargerProduitsDepuisGoogle();
 
-    const yearElement =
-        document.getElementById('year');
+  renderProducts("all");
 
-    if (yearElement) {
+  setupEventListeners();
 
-        yearElement.textContent =
-            new Date().getFullYear();
-
-    }
+  updateCartUI();
 
 });
 
 
-/* ==========================================================================
-   AFFICHAGE DES PRODUITS
-   ========================================================================== */
+/* =========================================================
+   RÉCUPÉRATION DES ÉLÉMENTS
+   ========================================================= */
+
+function initialiserElements() {
+
+  productsGrid = document.getElementById("productsGrid");
+
+  categoryFilter =
+    document.getElementById("categoryFilter") ||
+    document.getElementById("categoryFilters");
+
+  productModal = document.getElementById("productModal");
+
+  modalImg = document.getElementById("modalImg");
+  modalCategory = document.getElementById("modalCategory");
+  modalTitle = document.getElementById("modalTitle");
+  modalPrice = document.getElementById("modalPrice");
+  modalDescription = document.getElementById("modalDescription");
+
+  variantGroup = document.getElementById("variantGroup");
+  modalVariantSelect = document.getElementById("modalVariantSelect");
+  modalQty = document.getElementById("modalQty");
+  modalAddToCartBtn = document.getElementById("modalAddToCartBtn");
+
+  openCartBtn = document.getElementById("openCartBtn");
+  cartCount = document.getElementById("cartCount");
+  cartDrawer = document.getElementById("cartDrawer");
+  cartItemsList = document.getElementById("cartItemsList");
+  cartTotalPrice = document.getElementById("cartTotalPrice");
+
+  goToCheckoutBtn = document.getElementById("goToCheckoutBtn");
+  cartStep1 = document.getElementById("cartStep1");
+  cartStep2 = document.getElementById("cartStep2");
+  backToCartBtn = document.getElementById("backToCartBtn");
+
+  orderForm = document.getElementById("orderForm");
+  hiddenOrderSummary = document.getElementById("hiddenOrderSummary");
+  hiddenOrderTotal = document.getElementById("hiddenOrderTotal");
+  formStatusMessage = document.getElementById("formStatusMessage");
+  submitOrderBtn = document.getElementById("submitOrderBtn");
+
+  toastNotification = document.getElementById("toastNotification");
+}
+
+
+/* =========================================================
+   CHARGER LES PRODUITS DEPUIS GOOGLE SHEETS
+   ========================================================= */
+
+async function chargerProduitsDepuisGoogle() {
+
+  try {
+
+    const response = await fetch(PRODUCTS_API_URL, {
+      method: "GET",
+      cache: "no-store"
+    });
+
+    if (!response.ok) {
+      throw new Error("Erreur API : " + response.status);
+    }
+
+    const data = await response.json();
+
+    if (!Array.isArray(data)) {
+      throw new Error("Les données reçues ne sont pas valides.");
+    }
+
+    products = data
+      .filter(function (item) {
+
+        const visible = String(item.Visible || "")
+          .trim()
+          .toLowerCase();
+
+        return (
+          visible === "oui" ||
+          visible === "true" ||
+          visible === "1" ||
+          visible === ""
+        );
+
+      })
+      .map(function (item, index) {
+
+        const produit = {
+
+          id: index + 1,
+
+          name:
+            item.Nom ||
+            "Produit sans nom",
+
+          category:
+            item.Catégorie ||
+            "Autres",
+
+          price:
+            parseFloat(
+              String(item.Prix || 0)
+                .replace(",", ".")
+                .replace("€", "")
+            ) || 0,
+
+          description:
+            item.Description ||
+            "",
+
+          image:
+            item.Photo ||
+            "",
+
+          variants:
+            convertirOptions(item.Options),
+
+          visible: true,
+
+          stock:
+            parseInt(item.Stock, 10) || 0
+
+        };
+
+
+        /*
+         * On conserve automatiquement les options
+         * spéciales des deux produits de stickers.
+         */
+
+        const nom = produit.name.toLowerCase();
+
+        if (
+          nom.includes("stickers 6") ||
+          nom.includes("stickers 6ème") ||
+          nom.includes("stickers 6eme")
+        ) {
+
+          produit.variants = fallbackProducts[0].variants;
+
+          produit.colors = fallbackProducts[0].colors;
+
+        }
+
+        if (nom.includes("stickers enfants")) {
+
+          produit.variants = fallbackProducts[1].variants;
+
+          produit.colors = fallbackProducts[1].colors;
+
+        }
+
+
+        return produit;
+
+      });
+
+
+    /*
+     * Si Google Sheets est vide, on utilise les produits de secours.
+     */
+
+    if (products.length === 0) {
+
+      products = fallbackProducts.slice();
+
+      showToast("Aucun produit trouvé dans Google Sheets.");
+
+    } else {
+
+      showToast("Produits mis à jour automatiquement.");
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Impossible de charger les produits Google :",
+      error
+    );
+
+    /*
+     * Sécurité :
+     * le site continue à fonctionner avec les anciens produits.
+     */
+
+    products = fallbackProducts.slice();
+
+    showToast(
+      "Connexion produits temporairement indisponible."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   TRANSFORMER LES OPTIONS DU TABLEAU
+   ========================================================= */
+
+function convertirOptions(options) {
+
+  if (!options) {
+    return [];
+  }
+
+  return String(options)
+    .split(/[,;\n|]+/)
+    .map(function (item) {
+      return item.trim();
+    })
+    .filter(function (item) {
+      return item !== "";
+    });
+
+}
+
+
+/* =========================================================
+   AFFICHER LES PRODUITS
+   ========================================================= */
 
 function renderProducts(filterCategory) {
 
-    productsGrid.innerHTML = '';
+  if (!productsGrid) {
+    return;
+  }
 
-    const filtered =
-        filterCategory === 'all'
-            ? products
-            : products.filter(
-                p =>
-                    p.category.toLowerCase() ===
-                    filterCategory.toLowerCase()
-            );
+  let produitsAffiches = products.slice();
 
-    filtered.forEach(product => {
+  if (
+    filterCategory &&
+    filterCategory !== "all" &&
+    filterCategory !== "Toutes"
+  ) {
 
-        const card =
-            document.createElement('div');
+    produitsAffiches = produitsAffiches.filter(
+      function (product) {
 
-        card.className =
-            'product-card';
+        return (
+          String(product.category).toLowerCase() ===
+          String(filterCategory).toLowerCase()
+        );
 
-        card.innerHTML = `
+      }
+    );
 
-            <div
-                class="product-image-container"
-                onclick="openProductModal(${product.id})"
-            >
+  }
 
-                <img
-                    src="${product.image}"
-                    alt="${product.name}"
+
+  if (produitsAffiches.length === 0) {
+
+    productsGrid.innerHTML = `
+      <div class="empty-products">
+        <p>Aucun produit dans cette catégorie.</p>
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  productsGrid.innerHTML = produitsAffiches
+    .map(function (product) {
+
+      const prix = Number(product.price || 0)
+        .toFixed(2)
+        .replace(".", ",");
+
+      const image = product.image || "";
+
+      return `
+        <article class="product-card">
+
+          <div
+            class="product-card-image"
+            onclick="openProductModal(${product.id})"
+          >
+
+            ${
+              image
+                ? `<img
+                    src="${escapeHtml(image)}"
+                    alt="${escapeHtml(product.name)}"
                     loading="lazy"
-                >
+                    onerror="this.style.display='none'"
+                  >`
+                : `
+                  <div class="no-product-image">
+                    Maju'Lyah
+                  </div>
+                `
+            }
+
+          </div>
+
+
+          <div class="product-card-content">
+
+            <div class="product-category">
+              ${escapeHtml(product.category)}
+            </div>
+
+            <h3>
+              ${escapeHtml(product.name)}
+            </h3>
+
+            <p class="product-description">
+              ${escapeHtml(product.description)}
+            </p>
+
+            <div class="product-card-bottom">
+
+              <strong class="product-price">
+                ${prix} €
+              </strong>
+
+              <button
+                type="button"
+                class="product-button"
+                onclick="openProductModal(${product.id})"
+              >
+                Voir le produit
+              </button>
 
             </div>
 
-            <div class="product-info">
+          </div>
 
-                <span class="product-category">
-                    ${product.category}
-                </span>
+        </article>
+      `;
 
-                <h3
-                    class="product-name"
-                    onclick="openProductModal(${product.id})"
-                >
-                    ${product.name}
-                </h3>
-
-                <p class="product-desc-short">
-                    ${product.description.substring(0, 65)}...
-                </p>
-
-                <div class="product-bottom">
-
-                    <span class="product-price">
-                        ${product.price
-                            .toFixed(2)
-                            .replace('.', ',')} €
-                    </span>
-
-                    <button
-                        class="btn-order-card"
-                        type="button"
-                        onclick="openProductModal(${product.id})"
-                    >
-                        Voir / Commander
-                    </button>
-
-                </div>
-
-            </div>
-        `;
-
-        productsGrid.appendChild(card);
-
-    });
+    })
+    .join("");
 
 }
 
 
-/* ==========================================================================
-   MODALE PRODUIT
-   ========================================================================== */
+/* =========================================================
+   FICHE PRODUIT
+   ========================================================= */
 
 function openProductModal(productId) {
 
-    const product =
-        products.find(
-            p => p.id === productId
-        );
+  const product = products.find(function (item) {
 
-    if (!product) return;
+    return Number(item.id) === Number(productId);
 
-    selectedProductForModal =
-        product;
+  });
 
-    modalImg.src =
-        product.image;
 
-    modalCategory.textContent =
-        product.category;
+  if (!product) {
+    return;
+  }
 
-    modalTitle.textContent =
-        product.name;
 
-    modalPrice.textContent =
-        `${product.price
-            .toFixed(2)
-            .replace('.', ',')} €`;
+  selectedProductForModal = product;
 
-    modalDescription.textContent =
-        product.description;
 
-    modalQty.value =
-        1;
+  if (modalImg) {
 
-    variantGroup.innerHTML =
-        '';
+    if (product.image) {
 
+      modalImg.src = product.image;
 
-    if (product.id === 1) {
+      modalImg.alt = product.name;
 
-        const title =
-            document.createElement('label');
-
-        title.textContent =
-            "Choisis tes matières :";
-
-        title.style.display =
-            'block';
-
-        title.style.marginBottom =
-            '12px';
-
-        title.style.fontWeight =
-            '600';
-
-        variantGroup.appendChild(
-            title
-        );
-
-
-        product.variants.forEach(variant => {
-
-            const label =
-                document.createElement('label');
-
-            label.style.display =
-                'block';
-
-            label.style.marginBottom =
-                '7px';
-
-            label.style.cursor =
-                'pointer';
-
-            const checkbox =
-                document.createElement('input');
-
-            checkbox.type =
-                'checkbox';
-
-            checkbox.value =
-                variant;
-
-            checkbox.className =
-                'school-subject-checkbox';
-
-            label.appendChild(
-                checkbox
-            );
-
-            label.appendChild(
-                document.createTextNode(
-                    ` ${variant}`
-                )
-            );
-
-            variantGroup.appendChild(
-                label
-            );
-
-        });
-
-
-        const spacer =
-            document.createElement('div');
-
-        spacer.style.height =
-            '15px';
-
-        variantGroup.appendChild(
-            spacer
-        );
-
-
-        const colorTitle =
-            document.createElement('label');
-
-        colorTitle.textContent =
-            "Choisis ta couleur :";
-
-        colorTitle.style.display =
-            'block';
-
-        colorTitle.style.marginBottom =
-            '8px';
-
-        colorTitle.style.fontWeight =
-            '600';
-
-
-        const colorSelect =
-            document.createElement('select');
-
-        colorSelect.id =
-            'dynamicColorSelect';
-
-        colorSelect.style.width =
-            '100%';
-
-
-        const defaultColor =
-            document.createElement('option');
-
-        defaultColor.value =
-            '';
-
-        defaultColor.textContent =
-            '-- Choisir une couleur --';
-
-        colorSelect.appendChild(
-            defaultColor
-        );
-
-
-        product.colors.forEach(color => {
-
-            const option =
-                document.createElement('option');
-
-            option.value =
-                color;
-
-            option.textContent =
-                color;
-
-            colorSelect.appendChild(
-                option
-            );
-
-        });
-
-
-        variantGroup.appendChild(
-            colorTitle
-        );
-
-        variantGroup.appendChild(
-            colorSelect
-        );
-
-        variantGroup.style.display =
-            'block';
-
-
-    } else if (product.id === 2) {
-
-        const title =
-            document.createElement('label');
-
-        title.textContent =
-            "Quels stickers souhaitez-vous ?";
-
-        title.style.display =
-            'block';
-
-        title.style.marginBottom =
-            '12px';
-
-        title.style.fontWeight =
-            '600';
-
-        variantGroup.appendChild(
-            title
-        );
-
-
-        product.variants.forEach(variant => {
-
-            const label =
-                document.createElement('label');
-
-            label.style.display =
-                'block';
-
-            label.style.marginBottom =
-                '7px';
-
-            label.style.cursor =
-                'pointer';
-
-            const checkbox =
-                document.createElement('input');
-
-            checkbox.type =
-                'checkbox';
-
-            checkbox.value =
-                variant;
-
-            checkbox.className =
-                'model-checkbox';
-
-            label.appendChild(
-                checkbox
-            );
-
-            label.appendChild(
-                document.createTextNode(
-                    ` ${variant}`
-                )
-            );
-
-            variantGroup.appendChild(
-                label
-            );
-
-        });
-
-
-        const spacer =
-            document.createElement('div');
-
-        spacer.style.height =
-            '15px';
-
-        variantGroup.appendChild(
-            spacer
-        );
-
-
-        const colorTitle =
-            document.createElement('label');
-
-        colorTitle.textContent =
-            "Choisis ta couleur :";
-
-        colorTitle.style.display =
-            'block';
-
-        colorTitle.style.marginBottom =
-            '8px';
-
-        colorTitle.style.fontWeight =
-            '600';
-
-
-        const colorSelect =
-            document.createElement('select');
-
-        colorSelect.id =
-            'dynamicColorSelect';
-
-        colorSelect.style.width =
-            '100%';
-
-
-        const defaultColor =
-            document.createElement('option');
-
-        defaultColor.value =
-            '';
-
-        defaultColor.textContent =
-            '-- Choisir une couleur --';
-
-        colorSelect.appendChild(
-            defaultColor
-        );
-
-
-        product.colors.forEach(color => {
-
-            const option =
-                document.createElement('option');
-
-            option.value =
-                color;
-
-            option.textContent =
-                color;
-
-            colorSelect.appendChild(
-                option
-            );
-
-        });
-
-
-        variantGroup.appendChild(
-            colorTitle
-        );
-
-        variantGroup.appendChild(
-            colorSelect
-        );
-
-        variantGroup.style.display =
-            'block';
-
-
-    } else if (
-        product.variants &&
-        product.variants.length > 0
-    ) {
-
-        const title =
-            document.createElement('label');
-
-        title.textContent =
-            "Choisis une option :";
-
-        title.style.display =
-            'block';
-
-        title.style.marginBottom =
-            '8px';
-
-        title.style.fontWeight =
-            '600';
-
-        modalVariantSelect.innerHTML =
-            '';
-
-
-        product.variants.forEach(variant => {
-
-            const option =
-                document.createElement('option');
-
-            option.value =
-                variant;
-
-            option.textContent =
-                variant;
-
-            modalVariantSelect.appendChild(
-                option
-            );
-
-        });
-
-
-        variantGroup.appendChild(
-            title
-        );
-
-        variantGroup.appendChild(
-            modalVariantSelect
-        );
-
-        variantGroup.style.display =
-            'block';
-
+      modalImg.style.display = "";
 
     } else {
 
-        variantGroup.style.display =
-            'none';
+      modalImg.style.display = "none";
 
     }
 
+  }
 
-    productModal.classList.add(
-        'active'
-    );
+
+  if (modalCategory) {
+
+    modalCategory.textContent =
+      product.category || "";
+
+  }
+
+
+  if (modalTitle) {
+
+    modalTitle.textContent =
+      product.name || "";
+
+  }
+
+
+  if (modalPrice) {
+
+    modalPrice.textContent =
+      Number(product.price || 0)
+        .toFixed(2)
+        .replace(".", ",") + " €";
+
+  }
+
+
+  if (modalDescription) {
+
+    modalDescription.textContent =
+      product.description || "";
+
+  }
+
+
+  /*
+   * Options
+   */
+
+  if (variantGroup && modalVariantSelect) {
+
+    const variants = Array.isArray(product.variants)
+      ? product.variants
+      : [];
+
+
+    if (variants.length > 0) {
+
+      variantGroup.style.display = "";
+
+      modalVariantSelect.innerHTML = `
+        <option value="">
+          Choisir une option
+        </option>
+      `;
+
+      variants.forEach(function (variant) {
+
+        const option = document.createElement("option");
+
+        option.value = variant;
+
+        option.textContent = variant;
+
+        modalVariantSelect.appendChild(option);
+
+      });
+
+    } else {
+
+      variantGroup.style.display = "none";
+
+      modalVariantSelect.innerHTML = "";
+
+    }
+
+  }
+
+
+  /*
+   * Quantité
+   */
+
+  if (modalQty) {
+
+    modalQty.value = 1;
+
+    modalQty.min = 1;
+
+  }
+
+
+  /*
+   * Ouvrir
+   */
+
+  if (productModal) {
+
+    productModal.classList.add("active");
+
+    productModal.style.display = "flex";
+
+  }
 
 }
 
 
-/* ==========================================================================
-   FERMER LA MODALE
-   ========================================================================== */
+window.openProductModal = openProductModal;
+
+
+/* =========================================================
+   FERMER LA FICHE PRODUIT
+   ========================================================= */
 
 function closeProductModal() {
 
-    productModal.classList.remove(
-        'active'
-    );
+  if (!productModal) {
+    return;
+  }
+
+  productModal.classList.remove("active");
+
+  productModal.style.display = "none";
 
 }
 
 
-/* ==========================================================================
-   AJOUT AU PANIER
-   ========================================================================== */
+/* =========================================================
+   AJOUTER AU PANIER
+   ========================================================= */
 
-function addToCart(
-    product,
-    quantity,
-    selectedVariant,
-    selectedColor
-) {
+function addToCart() {
 
-    const variantKey =
-        Array.isArray(selectedVariant)
-            ? selectedVariant.join('|')
-            : (
-                selectedVariant ||
-                'default'
-            );
-
-    const colorKey =
-        selectedColor ||
-        'default';
-
-    const cartItemId =
-        `${product.id}-${variantKey}-${colorKey}`;
-
-    const existingIndex =
-        cart.findIndex(
-            item =>
-                item.cartItemId ===
-                cartItemId
-        );
+  if (!selectedProductForModal) {
+    return;
+  }
 
 
-    if (existingIndex > -1) {
+  const product = selectedProductForModal;
 
-        cart[existingIndex].quantity +=
-            quantity;
 
-    } else {
+  let variant = "";
 
-        cart.push({
+  if (
+    modalVariantSelect &&
+    variantGroup &&
+    variantGroup.style.display !== "none"
+  ) {
 
-            cartItemId:
-                cartItemId,
+    variant = modalVariantSelect.value;
 
-            id:
-                product.id,
+    if (!variant) {
 
-            name:
-                product.name,
+      showToast(
+        "Choisis une option avant d'ajouter le produit."
+      );
 
-            price:
-                product.price,
-
-            image:
-                product.image,
-
-            variant:
-                selectedVariant || null,
-
-            color:
-                selectedColor || null,
-
-            quantity:
-                quantity
-
-        });
+      return;
 
     }
 
-
-    updateCartUI();
-
-    showToast(
-        `${product.name} ajouté à votre panier !`
-    );
-
-}
+  }
 
 
-/* ==========================================================================
-   AFFICHAGE DU PANIER
-   ========================================================================== */
+  let quantity = 1;
 
-function updateCartUI() {
+  if (modalQty) {
 
-    const totalQty =
-        cart.reduce(
-            (sum, item) =>
-                sum + item.quantity,
-            0
-        );
+    quantity =
+      parseInt(modalQty.value, 10) || 1;
+
+  }
 
 
-    cartCount.textContent =
-        totalQty;
+  /*
+   * Couleur éventuelle
+   */
 
-    cartItemsList.innerHTML =
-        '';
+  let color = "";
 
+  const colorSelect =
+    document.getElementById("modalColorSelect");
 
-    if (cart.length === 0) {
+  if (colorSelect) {
 
-        cartItemsList.innerHTML = `
-            <p
-                style="
-                    text-align:center;
-                    color:var(--color-text-muted);
-                    margin-top:40px;
-                "
-            >
-                Votre panier est vide pour le moment.
-            </p>
-        `;
+    color = colorSelect.value || "";
 
-        goToCheckoutBtn.disabled =
-            true;
+  }
 
 
-    } else {
+  const existingItem = cart.find(
+    function (item) {
 
-        goToCheckoutBtn.disabled =
-            false;
-
-
-        cart.forEach(
-            (item, index) => {
-
-                const itemElement =
-                    document.createElement(
-                        'div'
-                    );
-
-                itemElement.className =
-                    'cart-item';
-
-
-                let optionsHTML =
-                    '';
-
-
-                if (item.variant) {
-
-                    const choices =
-                        Array.isArray(
-                            item.variant
-                        )
-                            ? item.variant.join(
-                                ', '
-                            )
-                            : item.variant;
-
-
-                    optionsHTML += `
-                        <div class="cart-item-variant">
-                            ${item.id === 1
-                                ? 'Matières'
-                                : 'Modèles'} :
-                            ${choices}
-                        </div>
-                    `;
-
-                }
-
-
-                if (item.color) {
-
-                    optionsHTML += `
-                        <div class="cart-item-variant">
-                            Couleur :
-                            ${item.color}
-                        </div>
-                    `;
-
-                }
-
-
-                itemElement.innerHTML = `
-
-                    <img
-                        src="${item.image}"
-                        alt="${item.name}"
-                        class="cart-item-img"
-                    >
-
-                    <div
-                        class="cart-item-details"
-                    >
-
-                        <div
-                            class="cart-item-title"
-                        >
-                            ${item.name}
-                        </div>
-
-                        ${optionsHTML}
-
-                        <div
-                            class="cart-item-price"
-                        >
-                            ${(item.price *
-                                item.quantity)
-                                .toFixed(2)
-                                .replace(
-                                    '.',
-                                    ','
-                                )} €
-                        </div>
-
-                        <div
-                            class="cart-item-qty"
-                        >
-
-                            <button
-                                type="button"
-                                class="qty-btn"
-                                onclick="changeQty(${index}, -1)"
-                            >
-                                -
-                            </button>
-
-                            <span>
-                                ${item.quantity}
-                            </span>
-
-                            <button
-                                type="button"
-                                class="qty-btn"
-                                onclick="changeQty(${index}, 1)"
-                            >
-                                +
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                    <button
-                        type="button"
-                        class="cart-item-remove"
-                        onclick="removeCartItem(${index})"
-                        title="Supprimer"
-                    >
-                        &times;
-                    </button>
-
-                `;
-
-
-                cartItemsList.appendChild(
-                    itemElement
-                );
-
-            }
-        );
+      return (
+        item.productId === product.id &&
+        item.variant === variant &&
+        item.color === color
+      );
 
     }
+  );
 
 
-    const total =
-        cart.reduce(
-            (sum, item) =>
-                sum +
-                (
-                    item.price *
-                    item.quantity
-                ),
-            0
-        );
+  if (existingItem) {
 
+    existingItem.quantity += quantity;
 
-    cartTotalPrice.textContent =
-        `${total
-            .toFixed(2)
-            .replace('.', ',')} €`;
+  } else {
 
-}
+    cart.push({
 
+      productId: product.id,
 
-/* ==========================================================================
-   MODIFICATION QUANTITÉ
-   ========================================================================== */
+      name: product.name,
 
-function changeQty(
-    index,
-    delta
-) {
+      price: Number(product.price) || 0,
 
-    cart[index].quantity +=
-        delta;
+      image: product.image || "",
 
+      variant: variant,
 
-    if (
-        cart[index].quantity <= 0
-    ) {
+      color: color,
 
-        cart.splice(
-            index,
-            1
-        );
-
-    }
-
-
-    updateCartUI();
-
-}
-
-
-/* ==========================================================================
-   SUPPRIMER DU PANIER
-   ========================================================================== */
-
-function removeCartItem(index) {
-
-    cart.splice(
-        index,
-        1
-    );
-
-    updateCartUI();
-
-}
-
-
-/* ==========================================================================
-   PRÉPARATION DU BON DE COMMANDE
-   ========================================================================== */
-
-function prepareOrderSummary() {
-
-    let summary =
-        "DÉTAIL DE LA COMMANDE MAJU'LYAH :\n\n";
-
-    let total =
-        0;
-
-
-    cart.forEach(item => {
-
-        const itemTotal =
-            item.price *
-            item.quantity;
-
-
-        total +=
-            itemTotal;
-
-
-        summary +=
-            `- ${item.name}\n`;
-
-
-        if (item.variant) {
-
-            const choices =
-                Array.isArray(
-                    item.variant
-                )
-                    ? item.variant.join(
-                        ', '
-                    )
-                    : item.variant;
-
-
-            summary +=
-                `  ${item.id === 1 ? 'Matières' : 'Modèles'} : ${choices}\n`;
-
-        }
-
-
-        if (item.color) {
-
-            summary +=
-                `  Couleur : ${item.color}\n`;
-
-        }
-
-
-        summary +=
-            `  Quantité : ${item.quantity} x ${item.price.toFixed(2)}€ = ${itemTotal.toFixed(2)}€\n\n`;
+      quantity: quantity
 
     });
 
-
-    summary +=
-        `TOTAL GLOBAL DE LA COMMANDE : ${total.toFixed(2)} €`;
+  }
 
 
-    hiddenOrderSummary.value =
-        summary;
+  updateCartUI();
 
-    hiddenOrderTotal.value =
-        `${total.toFixed(2)} €`;
+  closeProductModal();
+
+  showToast("Produit ajouté au panier 🛍️");
 
 }
 
 
-/* ==========================================================================
+window.addToCart = addToCart;
+
+
+/* =========================================================
+   PANIER
+   ========================================================= */
+
+function updateCartUI() {
+
+  const totalQuantity = cart.reduce(
+    function (total, item) {
+
+      return total + item.quantity;
+
+    },
+    0
+  );
+
+
+  const totalPrice = cart.reduce(
+    function (total, item) {
+
+      return (
+        total +
+        item.price * item.quantity
+      );
+
+    },
+    0
+  );
+
+
+  if (cartCount) {
+
+    cartCount.textContent =
+      totalQuantity;
+
+  }
+
+
+  if (cartTotalPrice) {
+
+    cartTotalPrice.textContent =
+      totalPrice
+        .toFixed(2)
+        .replace(".", ",") + " €";
+
+  }
+
+
+  renderCartItems();
+
+}
+
+
+/* =========================================================
+   AFFICHER LE CONTENU DU PANIER
+   ========================================================= */
+
+function renderCartItems() {
+
+  if (!cartItemsList) {
+    return;
+  }
+
+
+  if (cart.length === 0) {
+
+    cartItemsList.innerHTML = `
+      <div class="empty-cart">
+        <p>Ton panier est vide.</p>
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  cartItemsList.innerHTML = cart
+    .map(function (item, index) {
+
+      const sousTotal =
+        item.price * item.quantity;
+
+
+      return `
+        <div class="cart-item">
+
+          ${
+            item.image
+              ? `
+                <img
+                  src="${escapeHtml(item.image)}"
+                  alt="${escapeHtml(item.name)}"
+                  class="cart-item-image"
+                >
+              `
+              : ""
+          }
+
+
+          <div class="cart-item-info">
+
+            <strong>
+              ${escapeHtml(item.name)}
+            </strong>
+
+            ${
+              item.variant
+                ? `
+                  <small>
+                    Option : ${escapeHtml(item.variant)}
+                  </small>
+                `
+                : ""
+            }
+
+            ${
+              item.color
+                ? `
+                  <small>
+                    Couleur : ${escapeHtml(item.color)}
+                  </small>
+                `
+                : ""
+            }
+
+
+            <div class="cart-item-price">
+
+              ${item.price
+                .toFixed(2)
+                .replace(".", ",")} €
+
+            </div>
+
+
+            <div class="cart-quantity">
+
+              <button
+                type="button"
+                onclick="changeQty(${index}, -1)"
+              >
+                −
+              </button>
+
+              <span>
+                ${item.quantity}
+              </span>
+
+              <button
+                type="button"
+                onclick="changeQty(${index}, 1)"
+              >
+                +
+              </button>
+
+            </div>
+
+
+            <div class="cart-item-subtotal">
+
+              Sous-total :
+              ${sousTotal
+                .toFixed(2)
+                .replace(".", ",")} €
+
+            </div>
+
+
+            <button
+              type="button"
+              class="remove-cart-item"
+              onclick="removeCartItem(${index})"
+            >
+              Supprimer
+            </button>
+
+          </div>
+
+        </div>
+      `;
+
+    })
+    .join("");
+
+}
+
+
+/* =========================================================
+   MODIFIER QUANTITÉ
+   ========================================================= */
+
+function changeQty(index, amount) {
+
+  if (!cart[index]) {
+    return;
+  }
+
+
+  cart[index].quantity += amount;
+
+
+  if (cart[index].quantity <= 0) {
+
+    cart.splice(index, 1);
+
+  }
+
+
+  updateCartUI();
+
+}
+
+
+window.changeQty = changeQty;
+
+
+/* =========================================================
+   SUPPRIMER DU PANIER
+   ========================================================= */
+
+function removeCartItem(index) {
+
+  if (!cart[index]) {
+    return;
+  }
+
+
+  cart.splice(index, 1);
+
+  updateCartUI();
+
+  showToast("Produit supprimé du panier.");
+
+}
+
+
+window.removeCartItem = removeCartItem;
+
+
+/* =========================================================
+   OUVRIR LE PANIER
+   ========================================================= */
+
+function openCart() {
+
+  if (!cartDrawer) {
+    return;
+  }
+
+  cartDrawer.classList.add("active");
+
+}
+
+
+function closeCart() {
+
+  if (!cartDrawer) {
+    return;
+  }
+
+  cartDrawer.classList.remove("active");
+
+}
+
+
+/* =========================================================
+   RÉSUMÉ DE COMMANDE
+   ========================================================= */
+
+function prepareOrderSummary() {
+
+  if (!cart.length) {
+
+    return "";
+
+  }
+
+
+  let summary = "";
+
+
+  cart.forEach(function (item) {
+
+    summary +=
+      item.name +
+      " x" +
+      item.quantity;
+
+
+    if (item.variant) {
+
+      summary +=
+        " | Option : " +
+        item.variant;
+
+    }
+
+
+    if (item.color) {
+
+      summary +=
+        " | Couleur : " +
+        item.color;
+
+    }
+
+
+    summary +=
+      " | " +
+      (
+        item.price *
+        item.quantity
+      )
+        .toFixed(2)
+        .replace(".", ",") +
+      " €";
+
+
+    summary += "\n";
+
+  });
+
+
+  const total = cart.reduce(
+    function (sum, item) {
+
+      return (
+        sum +
+        item.price *
+        item.quantity
+      );
+
+    },
+    0
+  );
+
+
+  summary +=
+    "\nTOTAL : " +
+    total
+      .toFixed(2)
+      .replace(".", ",") +
+    " €";
+
+
+  return summary;
+
+}
+
+
+/* =========================================================
+   ALLER AU FORMULAIRE
+   ========================================================= */
+
+function goToCheckout() {
+
+  if (cart.length === 0) {
+
+    showToast(
+      "Ton panier est vide."
+    );
+
+    return;
+
+  }
+
+
+  const summary =
+    prepareOrderSummary();
+
+
+  const total =
+    cart.reduce(
+      function (sum, item) {
+
+        return (
+          sum +
+          item.price *
+          item.quantity
+        );
+
+      },
+      0
+    );
+
+
+  if (hiddenOrderSummary) {
+
+    hiddenOrderSummary.value =
+      summary;
+
+  }
+
+
+  if (hiddenOrderTotal) {
+
+    hiddenOrderTotal.value =
+      total
+        .toFixed(2)
+        .replace(".", ",") +
+      " €";
+
+  }
+
+
+  if (cartStep1) {
+
+    cartStep1.style.display =
+      "none";
+
+  }
+
+
+  if (cartStep2) {
+
+    cartStep2.style.display =
+      "block";
+
+  }
+
+}
+
+
+/* =========================================================
+   RETOUR AU PANIER
+   ========================================================= */
+
+function backToCart() {
+
+  if (cartStep1) {
+
+    cartStep1.style.display =
+      "block";
+
+  }
+
+
+  if (cartStep2) {
+
+    cartStep2.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =========================================================
+   FORMULAIRE DE COMMANDE
+   ========================================================= */
+
+function submitOrder(event) {
+
+  if (event) {
+
+    event.preventDefault();
+
+  }
+
+
+  if (!orderForm) {
+    return;
+  }
+
+
+  if (cart.length === 0) {
+
+    showToast(
+      "Ton panier est vide."
+    );
+
+    return;
+
+  }
+
+
+  const summary =
+    prepareOrderSummary();
+
+
+  const total =
+    cart.reduce(
+      function (sum, item) {
+
+        return (
+          sum +
+          item.price *
+          item.quantity
+        );
+
+      },
+      0
+    );
+
+
+  if (hiddenOrderSummary) {
+
+    hiddenOrderSummary.value =
+      summary;
+
+  }
+
+
+  if (hiddenOrderTotal) {
+
+    hiddenOrderTotal.value =
+      total
+        .toFixed(2)
+        .replace(".", ",") +
+      " €";
+
+  }
+
+
+  if (formStatusMessage) {
+
+    formStatusMessage.textContent =
+      "Envoi de votre commande...";
+
+  }
+
+
+  if (submitOrderBtn) {
+
+    submitOrderBtn.disabled = true;
+
+    submitOrderBtn.textContent =
+      "Envoi...";
+
+  }
+
+
+  /*
+   * On utilise l'envoi natif du formulaire.
+   * Cela conserve le fonctionnement Formspree
+   * déjà testé sur ton site.
+   */
+
+  HTMLFormElement.prototype.submit.call(
+    orderForm
+  );
+
+}
+
+
+/* =========================================================
    ÉVÉNEMENTS
-   ========================================================================== */
+   ========================================================= */
 
 function setupEventListeners() {
 
 
-    categoryFilters.addEventListener(
-        'click',
-        (e) => {
+  /*
+   * Filtre catégorie
+   */
 
-            if (
-                e.target.classList.contains(
-                    'filter-btn'
-                )
-            ) {
+  if (categoryFilter) {
 
-                document
-                    .querySelectorAll(
-                        '.filter-btn'
-                    )
-                    .forEach(
-                        btn =>
-                            btn.classList.remove(
-                                'active'
-                            )
-                    );
+    categoryFilter.addEventListener(
+      "change",
+      function () {
 
+        renderProducts(
+          categoryFilter.value
+        );
 
-                e.target.classList.add(
-                    'active'
-                );
-
-
-                renderProducts(
-                    e.target.dataset.category
-                );
-
-            }
-
-        }
+      }
     );
 
+  }
 
-    mobileMenuBtn.addEventListener(
-        'click',
-        () => {
 
-            navLinks.classList.toggle(
-                'mobile-open'
-            );
+  /*
+   * Bouton panier
+   */
 
-        }
-    );
-
-
-    document
-        .querySelectorAll(
-            '.nav-item'
-        )
-        .forEach(link => {
-
-            link.addEventListener(
-                'click',
-                () => {
-
-                    navLinks.classList.remove(
-                        'mobile-open'
-                    );
-
-                }
-            );
-
-        });
-
-
-    closeProductModalBtn.addEventListener(
-        'click',
-        closeProductModal
-    );
-
-
-    closeProductModalBg.addEventListener(
-        'click',
-        closeProductModal
-    );
-
-
-    modalAddToCartBtn.addEventListener(
-        'click',
-        () => {
-
-            if (
-                !selectedProductForModal
-            ) return;
-
-
-            const qty =
-                parseInt(
-                    modalQty.value
-                ) || 1;
-
-
-            let selectedVariant =
-                null;
-
-            let selectedColor =
-                null;
-
-
-            if (
-                selectedProductForModal.id === 1
-            ) {
-
-                selectedVariant =
-                    [];
-
-
-                document
-                    .querySelectorAll(
-                        '.school-subject-checkbox:checked'
-                    )
-                    .forEach(
-                        checkbox => {
-
-                            selectedVariant.push(
-                                checkbox.value
-                            );
-
-                        }
-                    );
-
-
-                const colorSelect =
-                    document.getElementById(
-                        'dynamicColorSelect'
-                    );
-
-
-                selectedColor =
-                    colorSelect
-                        ? colorSelect.value
-                        : null;
-
-
-                if (
-                    selectedVariant.length === 0
-                ) {
-
-                    alert(
-                        "Merci de sélectionner au moins une matière."
-                    );
-
-                    return;
-
-                }
-
-
-                if (
-                    !selectedColor
-                ) {
-
-                    alert(
-                        "Merci de choisir une couleur."
-                    );
-
-                    return;
-
-                }
-
-
-            } else if (
-                selectedProductForModal.id === 2
-            ) {
-
-                selectedVariant =
-                    [];
-
-
-                document
-                    .querySelectorAll(
-                        '.model-checkbox:checked'
-                    )
-                    .forEach(
-                        checkbox => {
-
-                            selectedVariant.push(
-                                checkbox.value
-                            );
-
-                        }
-                    );
-
-
-                const colorSelect =
-                    document.getElementById(
-                        'dynamicColorSelect'
-                    );
-
-
-                selectedColor =
-                    colorSelect
-                        ? colorSelect.value
-                        : null;
-
-
-                if (
-                    selectedVariant.length === 0
-                ) {
-
-                    alert(
-                        "Merci de sélectionner au moins un type de sticker."
-                    );
-
-                    return;
-
-                }
-
-
-                if (
-                    !selectedColor
-                ) {
-
-                    alert(
-                        "Merci de choisir une couleur."
-                    );
-
-                    return;
-
-                }
-
-
-            } else if (
-                selectedProductForModal.variants &&
-                selectedProductForModal.variants.length > 0
-            ) {
-
-                selectedVariant =
-                    modalVariantSelect.value;
-
-            }
-
-
-            addToCart(
-                selectedProductForModal,
-                qty,
-                selectedVariant,
-                selectedColor
-            );
-
-
-            closeProductModal();
-
-        }
-    );
-
+  if (openCartBtn) {
 
     openCartBtn.addEventListener(
-        'click',
-        () =>
-            cartDrawer.classList.add(
-                'active'
-            )
+      "click",
+      function () {
+
+        openCart();
+
+      }
     );
 
+  }
 
-    closeCartBtn.addEventListener(
-        'click',
-        () =>
-            cartDrawer.classList.remove(
-                'active'
-            )
+
+  /*
+   * Bouton ajout panier
+   */
+
+  if (modalAddToCartBtn) {
+
+    modalAddToCartBtn.addEventListener(
+      "click",
+      function () {
+
+        addToCart();
+
+      }
     );
 
+  }
 
-    closeCartBg.addEventListener(
-        'click',
-        () =>
-            cartDrawer.classList.remove(
-                'active'
-            )
-    );
 
+  /*
+   * Bouton passer commande
+   */
+
+  if (goToCheckoutBtn) {
 
     goToCheckoutBtn.addEventListener(
-        'click',
-        () => {
+      "click",
+      function () {
 
-            if (
-                cart.length === 0
-            ) return;
+        goToCheckout();
 
-
-            prepareOrderSummary();
-
-
-            cartStep1.classList.remove(
-                'active'
-            );
-
-
-            cartStep2.classList.add(
-                'active'
-            );
-
-
-            cartStep2.style.display =
-                'block';
-
-        }
+      }
     );
 
+  }
+
+
+  /*
+   * Retour panier
+   */
+
+  if (backToCartBtn) {
 
     backToCartBtn.addEventListener(
-        'click',
-        () => {
+      "click",
+      function () {
 
-            cartStep2.classList.remove(
-                'active'
-            );
+        backToCart();
 
-
-            cartStep1.classList.add(
-                'active'
-            );
-
-        }
+      }
     );
 
+  }
 
-    /* ======================================================================
-       NOUVEL ENVOI FORMSPREE
-       ====================================================================== */
+
+  /*
+   * Formulaire
+   */
+
+  if (orderForm) {
 
     orderForm.addEventListener(
-        'submit',
-        (e) => {
+      "submit",
+      submitOrder
+    );
 
-            e.preventDefault();
-
-
-            /*
-             * On vérifie nous-mêmes les champs obligatoires.
-             * Cela évite que le comportement différent des navigateurs
-             * mobiles bloque le formulaire.
-             */
-
-            const requiredFields =
-                orderForm.querySelectorAll(
-                    '[required]'
-                );
+  }
 
 
-            for (
-                const field of requiredFields
-            ) {
+  /*
+   * Fermer modal en cliquant à l'extérieur
+   */
 
-                if (
-                    !field.checkValidity()
-                ) {
+  if (productModal) {
 
-                    formStatusMessage.className =
-                        'form-status-msg error';
+    productModal.addEventListener(
+      "click",
+      function (event) {
 
-                    formStatusMessage.textContent =
-                        "Merci de remplir tous les champs obligatoires et d'accepter les conditions.";
+        if (
+          event.target ===
+          productModal
+        ) {
 
-                    field.focus();
-
-                    return;
-
-                }
-
-            }
-
-
-            /*
-             * On prépare une dernière fois le récapitulatif.
-             */
-
-            prepareOrderSummary();
-
-
-            const submitBtn =
-                document.getElementById(
-                    'submitOrderBtn'
-                );
-
-
-            submitBtn.disabled =
-                true;
-
-
-            submitBtn.textContent =
-                "Envoi de la commande en cours...";
-
-
-            /*
-             * IMPORTANT :
-             * On n'utilise plus fetch().
-             *
-             * On utilise l'envoi HTML classique du formulaire.
-             * Cela permet au navigateur du téléphone d'envoyer
-             * directement les données à Formspree.
-             */
-
-            HTMLFormElement.prototype.submit.call(
-                orderForm
-            );
+          closeProductModal();
 
         }
+
+      }
     );
+
+  }
+
+
+  /*
+   * Échap = fermer modal/panier
+   */
+
+  document.addEventListener(
+    "keydown",
+    function (event) {
+
+      if (event.key === "Escape") {
+
+        closeProductModal();
+
+        closeCart();
+
+      }
+
+    }
+  );
+
+
+  /*
+   * Boutons ayant une classe close-modal
+   */
+
+  document
+    .querySelectorAll(
+      ".close-modal, [data-close-modal]"
+    )
+    .forEach(
+      function (button) {
+
+        button.addEventListener(
+          "click",
+          closeProductModal
+        );
+
+      }
+    );
+
+
+  /*
+   * Boutons fermeture panier
+   */
+
+  document
+    .querySelectorAll(
+      ".close-cart, [data-close-cart]"
+    )
+    .forEach(
+      function (button) {
+
+        button.addEventListener(
+          "click",
+          closeCart
+        );
+
+      }
+    );
+
+
+  /*
+   * Menu mobile
+   */
+
+  const mobileMenuButton =
+    document.querySelector(
+      ".mobile-menu-button, #mobileMenuButton, #menuToggle"
+    );
+
+  const mobileMenu =
+    document.querySelector(
+      ".mobile-menu, #mobileMenu, nav"
+    );
+
+
+  if (mobileMenuButton && mobileMenu) {
+
+    mobileMenuButton.addEventListener(
+      "click",
+      function () {
+
+        mobileMenu.classList.toggle(
+          "active"
+        );
+
+      }
+    );
+
+  }
 
 }
 
 
-/* ==========================================================================
-   NOTIFICATION
-   ========================================================================== */
+/* =========================================================
+   TOAST
+   ========================================================= */
 
 function showToast(message) {
 
-    const toast =
-        document.getElementById(
-            'toastNotification'
-        );
+  if (!toastNotification) {
+
+    /*
+     * Si le site possède déjà son propre système
+     * de toast, on ne bloque pas le fonctionnement.
+     */
+
+    console.log(message);
+
+    return;
+
+  }
 
 
-    toast.textContent =
-        message;
+  toastNotification.textContent =
+    message;
+
+  toastNotification.classList.add(
+    "show"
+  );
 
 
-    toast.classList.add(
-        'show'
-    );
+  setTimeout(
+    function () {
 
+      toastNotification.classList.remove(
+        "show"
+      );
 
-    setTimeout(
-        () => {
-
-            toast.classList.remove(
-                'show'
-            );
-
-        },
-        2500
-    );
+    },
+    3000
+  );
 
 }
+
+
+/* =========================================================
+   SÉCURISER L'AFFICHAGE HTML
+   ========================================================= */
+
+function escapeHtml(value) {
+
+  if (value === null || value === undefined) {
+
+    return "";
+
+  }
+
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================================
+   FONCTIONS ACCESSIBLES DEPUIS HTML
+   ========================================================= */
+
+window.closeProductModal =
+  closeProductModal;
+
+window.closeCart =
+  closeCart;
+
+window.goToCheckout =
+  goToCheckout;
+
+window.backToCart =
+  backToCart;
+
+window.submitOrder =
+  submitOrder;
