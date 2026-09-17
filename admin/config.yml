@@ -13,7 +13,4 @@ collections:
         label: "Page d'accueil"
         name: "home"
         fields:
-          - {label: "Titre du site (Google / SEO)", name: "title", widget: "string"}
-          - {label: "Description Google (SEO)", name: "description", widget: "text", required: false}
-          - {label: "Image principale", name: "image", widget: "image", required: false}
-          - {label: "Texte de la page", name: "body", widget: "markdown", required: false}
+          - {label: "Contenu complet du site", name: "body", widget: "markdown"}
