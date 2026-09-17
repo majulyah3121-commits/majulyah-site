@@ -7,10 +7,10 @@ public_folder: "/images"
 
 collections:
   - name: "pages"
-    label: "Pages"
+    label: "Pages du site"
     files:
       - file: "index.html"
-        label: "Page d'accueil"
+        label: "Page d'accueil complète"
         name: "home"
         fields:
-          - {label: "Titre", name: "title", widget: "string"}
+          - {label: "Contenu HTML complet (Textes & Photos)", name: "body", widget: "markdown"}
