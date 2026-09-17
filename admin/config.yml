@@ -13,8 +13,36 @@ collections:
         label: "Page d'accueil"
         name: "home"
         fields:
-          - {label: "Sur-titre (Créations artisanales)", name: "subtitle", widget: "string"}
-          - {label: "Grand titre principal", name: "maintitle", widget: "string"}
-          - {label: "Paragraphe de description", name: "description", widget: "text"}
-          - {label: "Texte du bouton", name: "button_text", widget: "string"}
-          - {label: "Photo du sac (Arrière-plan)", name: "hero_image", widget: "image"}
+          - {label: "Titre SEO du site", name: "title", widget: "string"}
+          - {label: "Description Google (SEO)", name: "description", widget: "text", required: false}
+          
+          # Section Hero (Bannière principale)
+          - label: "Bannière d'accueil (Hero)"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Sur-titre", name: "subtitle", widget: "string"}
+              - {label: "Grand Titre Principal", name: "maintitle", widget: "string"}
+              - {label: "Paragraphe de description", name: "description", widget: "text"}
+              - {label: "Texte du bouton", name: "button_text", widget: "string"}
+              - {label: "Photo d'arrière-plan (Sac)", name: "image", widget: "image"}
+
+          # Section Présentation
+          - label: "Présentation (L'art de l'organisation)"
+            name: "intro"
+            widget: "object"
+            fields:
+              - {label: "Titre de section", name: "title", widget: "string"}
+              - {label: "Texte de présentation", name: "text", widget: "text"}
+
+          # Section À Propos (Histoire)
+          - label: "Section À Propos"
+            name: "about"
+            widget: "object"
+            fields:
+              - {label: "Sur-titre", name: "subtitle", widget: "string"}
+              - {label: "Titre", name: "title", widget: "string"}
+              - {label: "Premier paragraphe", name: "p1", widget: "text"}
+              - {label: "Deuxième paragraphe", name: "p2", widget: "text"}
+              - {label: "Troisième paragraphe", name: "p3", widget: "text"}
+              - {label: "Photo de l'atelier", name: "image", widget: "image", required: false}
