@@ -3,6 +3,7 @@
    ========================================================================== */
 
 :root {
+    /* Palette de couleurs artisanale & douce */
     --color-beige-bg: #FAF6F0;
     --color-white: #FFFFFF;
     --color-terracotta: #C87D65;
@@ -15,16 +16,18 @@
     --color-text-muted: #6E6862;
     --color-border: #EADBCE;
 
+    /* Typographies */
     --font-heading: 'Cormorant Garamond', Georgia, serif;
     --font-body: 'Montserrat', -apple-system, sans-serif;
 
+    /* Transitions & Ombrages */
     --transition-smooth: all 0.3s ease;
     --box-shadow-soft: 0 10px 30px rgba(58, 53, 50, 0.05);
     --box-shadow-modal: 0 20px 40px rgba(58, 53, 50, 0.15);
     --border-radius: 8px;
 }
 
-/* RESET */
+/* RESET DE BASE */
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -72,7 +75,10 @@ body {
 
 /* TITRES */
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
     font-family: var(--font-heading);
     font-weight: 600;
     color: var(--color-text-dark);
@@ -227,7 +233,7 @@ h1, h2, h3, h4 {
     background-color: var(--color-text-dark);
 }
 
-/* HERO */
+/* ACCUEIL / HERO */
 
 .hero-section {
     position: relative;
@@ -271,7 +277,7 @@ h1, h2, h3, h4 {
     font-weight: 300;
 }
 
-/* SECTIONS */
+/* SECTIONS COMMUNES */
 
 section {
     padding: 70px 0;
@@ -423,7 +429,7 @@ section {
     color: var(--color-white);
 }
 
-/* À PROPOS */
+/* SECTION À PROPOS */
 
 .about-section {
     background-color: var(--color-white);
@@ -449,7 +455,7 @@ section {
     color: var(--color-text-muted);
 }
 
-/* CONTACT */
+/* SECTION CONTACT */
 
 .contact-section {
     background-color: var(--color-rose-poudre);
@@ -539,7 +545,7 @@ section {
     color: #888;
 }
 
-/* MODALE */
+/* MODALE FICHE PRODUIT */
 
 .modal {
     position: fixed;
@@ -634,7 +640,7 @@ section {
     margin-bottom: 20px;
 }
 
-/* PANIER */
+/* TIROIR DE PANIER */
 
 .cart-drawer {
     position: fixed;
@@ -794,7 +800,7 @@ section {
     font-size: 1.3rem;
 }
 
-/* FORMULAIRE */
+/* FORMULAIRE DE COMMANDE */
 
 .back-btn {
     background: none;
@@ -880,7 +886,7 @@ section {
     color: #721C24;
 }
 
-/* TOAST */
+/* NOTIFICATION TOAST */
 
 .toast {
     position: fixed;
@@ -903,7 +909,7 @@ section {
     transform: translateY(0);
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE DESIGN */
 
 @media (max-width: 768px) {
 
@@ -948,11 +954,50 @@ section {
         max-width: 100%;
     }
 
-    /* CORRECTION DU BOUTON DE COMMANDE SUR ANDROID */
+    /* CORRECTION BOUTON ANDROID */
+
     #submitOrderBtn {
         position: relative;
         z-index: 9999;
+        display: block;
+        width: 100%;
         pointer-events: auto;
         touch-action: manipulation;
     }
 }
+
+/* ==========================================================================
+   CORRECTION MOBILE PORTRAIT
+   ========================================================================== */
+
+@media (max-width: 768px) and (orientation: portrait) {
+
+    .cart-drawer-content {
+        height: 100dvh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 40px;
+    }
+
+    .cart-step.active {
+        min-height: 100%;
+        height: auto;
+    }
+
+    #orderForm {
+        position: relative;
+        z-index: 5000;
+    }
+
+    #submitOrderBtn {
+        position: relative;
+        z-index: 9999;
+        display: block;
+        width: 100%;
+        min-height: 48px;
+        margin-top: 15px;
+        margin-bottom: 20px;
+        pointer-events: auto;
+        touch-action: manipulation;
+    }
+   }
