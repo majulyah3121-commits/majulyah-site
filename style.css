@@ -622,9 +622,7 @@ section {
     transition: right 0.3s ease;
     display: flex;
     flex-direction: column;
-    padding: 25px;
-    /* AJOUT DES MARGES DE SÉCURITÉ MOBILE CI-DESSOUS */
-    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+    padding: 20px 20px calc(100px + env(safe-area-inset-bottom)) 20px;
     overflow-y: auto;
 }
 
@@ -648,7 +646,6 @@ section {
 .cart-step {
     display: none;
     flex-direction: column;
-    height: 100%;
 }
 
 .cart-step.active {
@@ -734,23 +731,27 @@ section {
     font-size: 1.3rem;
 }
 
-/* FORMULAIRES DE COMMANDE */
+/* FORMULAIRES DE COMMANDE (OPTIMISÉ MOBILE) */
+#orderForm {
+    padding-bottom: 80px;
+}
+
 .back-btn {
-    background: none; border: none; color: var(--color-terracotta); cursor: pointer; font-size: 0.85rem; margin-bottom: 12px; text-align: left;
+    background: none; border: none; color: var(--color-terracotta); cursor: pointer; font-size: 0.85rem; margin-bottom: 10px; text-align: left;
 }
 
 .checkout-subtitle {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
+    margin-bottom: 10px;
+    font-size: 1rem;
 }
 
 .form-group {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .form-row {
     display: flex;
-    gap: 10px;
+    gap: 8px;
 }
 
 .form-row .form-group {
@@ -759,19 +760,19 @@ section {
 
 .form-group label {
     display: block;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     color: var(--color-text-dark);
 }
 
 .form-input {
     width: 100%;
-    padding: 9px 12px;
+    padding: 7px 10px;
     border: 1px solid var(--color-border);
     border-radius: 6px;
     font-family: var(--font-body);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     background-color: var(--color-beige-bg);
 }
 
@@ -785,8 +786,9 @@ section {
     display: flex;
     align-items: flex-start;
     gap: 8px;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--color-text-muted);
+    margin-top: 6px;
 }
 
 .checkbox-group input {
@@ -794,9 +796,9 @@ section {
 }
 
 .form-status-msg {
-    margin: 10px 0;
-    font-size: 0.85rem;
-    padding: 8px;
+    margin: 8px 0;
+    font-size: 0.8rem;
+    padding: 6px;
     border-radius: 4px;
     display: none;
 }
@@ -811,6 +813,14 @@ section {
     display: block;
     background-color: #F8D7DA;
     color: #721C24;
+}
+
+/* BOUTON DE VALIDATION OPTIMISÉ */
+#submitOrderBtn {
+    padding: 10px 18px;
+    font-size: 0.85rem;
+    margin-top: 10px;
+    margin-bottom: 60px;
 }
 
 /* NOTIFICATION TOAST */
