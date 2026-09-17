@@ -3,7 +3,6 @@
    ========================================================================== */
 
 :root {
-    /* Palette de couleurs artisanale & douce */
     --color-beige-bg: #FAF6F0;
     --color-white: #FFFFFF;
     --color-terracotta: #C87D65;
@@ -16,18 +15,17 @@
     --color-text-muted: #6E6862;
     --color-border: #EADBCE;
 
-    /* Typographies */
     --font-heading: 'Cormorant Garamond', Georgia, serif;
     --font-body: 'Montserrat', -apple-system, sans-serif;
 
-    /* Transitions & Ombrages */
     --transition-smooth: all 0.3s ease;
     --box-shadow-soft: 0 10px 30px rgba(58, 53, 50, 0.05);
     --box-shadow-modal: 0 20px 40px rgba(58, 53, 50, 0.15);
     --border-radius: 8px;
 }
 
-/* Reset de base */
+/* RESET */
+
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -47,7 +45,8 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Utilitaires de conteneur */
+/* CONTENEURS */
+
 .container {
     width: 90%;
     max-width: 1140px;
@@ -55,12 +54,24 @@ body {
     padding: 0 15px;
 }
 
-.max-w-700 { max-width: 700px; }
-.max-w-600 { max-width: 600px; }
-.text-center { text-align: center; }
-.text-left { text-align: left; }
+.max-w-700 {
+    max-width: 700px;
+}
 
-/* Titres & Soulignements élégants */
+.max-w-600 {
+    max-width: 600px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+/* TITRES */
+
 h1, h2, h3, h4 {
     font-family: var(--font-heading);
     font-weight: 600;
@@ -94,7 +105,8 @@ h1, h2, h3, h4 {
     margin-left: 0;
 }
 
-/* Boutons */
+/* BOUTONS */
+
 .btn {
     display: inline-block;
     padding: 12px 28px;
@@ -126,6 +138,7 @@ h1, h2, h3, h4 {
 }
 
 /* NAVIGATION */
+
 .navbar {
     position: sticky;
     top: 0;
@@ -214,12 +227,20 @@ h1, h2, h3, h4 {
     background-color: var(--color-text-dark);
 }
 
-/* ACCUEIL / HERO */
+/* HERO */
+
 .hero-section {
     position: relative;
     height: 70vh;
     min-height: 450px;
-    background: linear-gradient(rgba(58, 53, 50, 0.4), rgba(58, 53, 50, 0.4)), url('https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+    background:
+        linear-gradient(
+            rgba(58, 53, 50, 0.4),
+            rgba(58, 53, 50, 0.4)
+        ),
+        url('https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1400&q=80')
+        center/cover no-repeat;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -250,7 +271,8 @@ h1, h2, h3, h4 {
     font-weight: 300;
 }
 
-/* SECTIONS COMMUNE */
+/* SECTIONS */
+
 section {
     padding: 70px 0;
 }
@@ -265,6 +287,7 @@ section {
 }
 
 /* BOUTIQUE */
+
 .shop-section {
     background-color: var(--color-beige-bg);
 }
@@ -288,7 +311,8 @@ section {
     transition: var(--transition-smooth);
 }
 
-.filter-btn.active, .filter-btn:hover {
+.filter-btn.active,
+.filter-btn:hover {
     background-color: var(--color-terracotta);
     color: var(--color-white);
     border-color: var(--color-terracotta);
@@ -301,6 +325,7 @@ section {
 }
 
 /* CARTES PRODUITS */
+
 .product-card {
     background-color: var(--color-white);
     border-radius: var(--border-radius);
@@ -326,8 +351,10 @@ section {
 
 .product-image-container img {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     transition: var(--transition-smooth);
 }
@@ -396,7 +423,8 @@ section {
     color: var(--color-white);
 }
 
-/* SECTION À PROPOS */
+/* À PROPOS */
+
 .about-section {
     background-color: var(--color-white);
 }
@@ -421,10 +449,15 @@ section {
     color: var(--color-text-muted);
 }
 
-/* SECTION CONTACT */
+/* CONTACT */
+
 .contact-section {
     background-color: var(--color-rose-poudre);
-    background: linear-gradient(135deg, #F5EAE6 0%, #FAF6F0 100%);
+    background: linear-gradient(
+        135deg,
+        #F5EAE6 0%,
+        #FAF6F0 100%
+    );
 }
 
 .contact-sub {
@@ -454,6 +487,7 @@ section {
 }
 
 /* FOOTER */
+
 .site-footer {
     background-color: var(--color-text-dark);
     color: var(--color-white);
@@ -505,10 +539,14 @@ section {
     color: #888;
 }
 
-/* MODALE FICHE PRODUIT */
+/* MODALE */
+
 .modal {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 200;
     display: flex;
     align-items: center;
@@ -525,7 +563,10 @@ section {
 
 .modal-overlay {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(3px);
 }
@@ -545,9 +586,12 @@ section {
 
 .modal-close {
     position: absolute;
-    top: 15px; right: 20px;
-    background: none; border: none;
-    font-size: 1.8rem; cursor: pointer;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
     color: var(--color-text-muted);
 }
 
@@ -590,10 +634,14 @@ section {
     margin-bottom: 20px;
 }
 
-/* TIROIR DE PANIER (DRAWER) */
+/* PANIER */
+
 .cart-drawer {
     position: fixed;
-    top: 0; right: 0; width: 100%; height: 100%;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
     z-index: 300;
     opacity: 0;
     pointer-events: none;
@@ -607,13 +655,17 @@ section {
 
 .cart-drawer-overlay {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.4);
 }
 
 .cart-drawer-content {
     position: absolute;
-    top: 0; right: -420px;
+    top: 0;
+    right: -420px;
     width: 100%;
     max-width: 420px;
     height: 100%;
@@ -640,7 +692,11 @@ section {
 }
 
 .close-drawer-btn {
-    background: none; border: none; font-size: 1.6rem; cursor: pointer; color: var(--color-text-muted);
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: var(--color-text-muted);
 }
 
 .cart-step {
@@ -702,7 +758,8 @@ section {
 }
 
 .qty-btn {
-    width: 22px; height: 22px;
+    width: 22px;
+    height: 22px;
     border: 1px solid var(--color-border);
     background: var(--color-beige-bg);
     border-radius: 50%;
@@ -710,7 +767,12 @@ section {
 }
 
 .cart-item-remove {
-    background: none; border: none; color: #CC0000; font-size: 1.1rem; cursor: pointer; margin-left: 8px;
+    background: none;
+    border: none;
+    color: #CC0000;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-left: 8px;
 }
 
 .cart-footer {
@@ -732,9 +794,16 @@ section {
     font-size: 1.3rem;
 }
 
-/* FORMULAIRES DE COMMANDE */
+/* FORMULAIRE */
+
 .back-btn {
-    background: none; border: none; color: var(--color-terracotta); cursor: pointer; font-size: 0.85rem; margin-bottom: 12px; text-align: left;
+    background: none;
+    border: none;
+    color: var(--color-terracotta);
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    text-align: left;
 }
 
 .checkout-subtitle {
@@ -811,7 +880,8 @@ section {
     color: #721C24;
 }
 
-/* NOTIFICATION TOAST */
+/* TOAST */
+
 .toast {
     position: fixed;
     bottom: 25px;
@@ -833,12 +903,16 @@ section {
     transform: translateY(0);
 }
 
-/* RESPONSIVE DESIGN (MOBILES ET TABLETTES) */
+/* RESPONSIVE */
+
 @media (max-width: 768px) {
+
     .nav-links {
         display: none;
         position: absolute;
-        top: 100%; left: 0; width: 100%;
+        top: 100%;
+        left: 0;
+        width: 100%;
         background-color: var(--color-beige-bg);
         flex-direction: column;
         padding: 20px;
@@ -872,5 +946,13 @@ section {
 
     .cart-drawer-content {
         max-width: 100%;
+    }
+
+    /* CORRECTION DU BOUTON DE COMMANDE SUR ANDROID */
+    #submitOrderBtn {
+        position: relative;
+        z-index: 9999;
+        pointer-events: auto;
+        touch-action: manipulation;
     }
 }
