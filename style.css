@@ -623,6 +623,8 @@ section {
     display: flex;
     flex-direction: column;
     padding: 25px;
+    /* AJOUT DES MARGES DE SÉCURITÉ MOBILE CI-DESSOUS */
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
     overflow-y: auto;
 }
 
