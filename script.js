@@ -14,7 +14,7 @@ const products = [
         category: "Organisation",
         price: 12.00,
 
-      image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/file_000000000fd081f5b6a7065f6ad5254a.png",
+        image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/file_000000000fd081f5b6a7065f6ad5254a.png",
 
         description: "Des stickers personnalisés pour organiser tes affaires scolaires.",
 
@@ -1869,4 +1869,4 @@ function showToast(message) {
         },
         2500
     );
-   }
+}
