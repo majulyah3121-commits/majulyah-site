@@ -1,210 +1,251 @@
----
-title: "Maju'Lyah | Papeterie & Organisation"
-description: "Découvrez les solutions de rangement et la papeterie artisanale Maju'Lyah."
-image: "/images/file_000000000fd081f5b6a7065f6ad5254a.png"
-hero:
-  image: "/images/file_000000000fd081f5b6a7065f6ad5254a.png"
-  maintitle: "Sublimez votre quotidien & vos pensées"
-  subtitle: "Créations artisanales & douces"
-  description: "Une papeterie minimaliste et élégante, pensée avec amour."
-  button_text: "Découvrir les créations"
-intro:
-  title: "L’art de l’organisation poétique"
-  text: "Maju’Lyah est une marque artisanale française."
-about:
-  title: "Fait main avec passion & douceur"
-  subtitle: "L'Histoire Maju’Lyah"
-  image: "images/about.jpg"
-  p1: "Maju’Lyah est née d'un amour sincère."
-  p2: "Dans un monde qui va vite..."
-  p3: "Chaque pièce est confectionnée dans mon atelier."
----
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maju’Lyah | Papeterie & Organisation Artisanale</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+// LISTE DE TES PRODUITS MAJU'LYAH
+// Tu peux ajouter, modifier le nom, le prix, la catégorie ou l'image de tes articles ici !
+const products = [
+    {
+        id: 1,
+        title: "Carnet d'Organisation Douce",
+        category: "Organisation",
+        price: 14.90,
+        image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80",
+        description: "Un carnet de haute qualité aux teintes douces pour planifier vos semaines avec sérénité."
+    },
+    {
+        id: 2,
+        title: "Planche de Stickers Terracotta",
+        category: "Stickers",
+        price: 4.50,
+        image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=600&q=80",
+        description: "Des illustrations faites main imprimées sur du papier sticker résistant aux couleurs chaleureuses."
+    },
+    {
+        id: 3,
+        title: "Bloc-Notes Semainier Minimaliste",
+        category: "Organisation",
+        price: 9.90,
+        image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&q=80",
+        description: "Idéal pour poser sur le bureau et garder un œil sur les priorités de la semaine."
+    },
+    {
+        id: 4,
+        title: "Marque-Page Poétique Doré",
+        category: "Papeterie",
+        price: 3.50,
+        image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80",
+        description: "Un délicat marque-page imprimé sur papier création texturé avec détails dorés."
+    },
+    {
+        id: 5,
+        title: "Box Exclusive Mailow Club",
+        category: "Mailow Club",
+        price: 24.90,
+        image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80",
+        description: "La sélection mensuelle réservée au club avec des articles inédits et des surprises artisanales."
+    },
+    {
+        id: 6,
+        title: "Kit Nouveautés Printemps",
+        category: "Nouveautés",
+        price: 18.00,
+        image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80",
+        description: "Les toutes dernières créations rassemblées dans un coffret prêt à offrir."
+    }
+];
 
-    <header class="navbar">
-        <div class="container nav-container">
-            <a href="#accueil" class="brand-logo">Maju’Lyah</a>
-            <nav class="nav-links" id="navLinks">
-                <a href="#accueil" class="nav-item">Accueil</a>
-                <a href="#boutique" class="nav-item">Boutique</a>
-                <a href="#apropos" class="nav-item">À propos</a>
-                <a href="#contact" class="nav-item">Contact</a>
-            </nav>
-            <div class="nav-actions">
-                <button class="cart-icon-btn" id="openCartBtn" aria-label="Voir mon panier">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <path d="M16 10a4 4 0 0 1-8 0"></path>
-                    </svg>
-                    <span class="cart-count" id="cartCount">0</span>
-                </button>
-                <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Menu">
-                    <span></span><span></span><span></span>
-                </button>
+let cart = [];
+let currentSelectedProduct = null;
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Année automatique dans le footer
+    const yearSpan = document.getElementById("year");
+    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+    // Initialisation
+    renderProducts(products);
+    initFilters();
+    initModal();
+    initCartDrawer();
+});
+
+// AFFICHER LES PRODUITS DANS LA GRILLE
+function renderProducts(items) {
+    const grid = document.getElementById("productsGrid");
+    if (!grid) return;
+
+    if (items.length === 0) {
+        grid.innerHTML = `<p class="text-center" style="grid-column: 1/-1; padding: 20px;">Aucun article disponible dans cette catégorie pour le moment.</p>`;
+        return;
+    }
+
+    grid.innerHTML = items.map(product => `
+        <div class="product-card">
+            <div class="product-img-wrapper" onclick="openProductModal(${product.id})">
+                <img src="${product.image}" alt="${product.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80'">
+            </div>
+            <div class="product-info">
+                <span class="product-category">${product.category}</span>
+                <h3 class="product-title" onclick="openProductModal(${product.id})">${product.title}</h3>
+                <div class="product-price">${product.price.toFixed(2)} €</div>
+                <button class="btn btn-outline" onclick="addToCart(${product.id}, 1)">Ajouter au panier</button>
             </div>
         </div>
-    </header>
+    `).join("");
+}
 
-    <section id="accueil" class="hero-section">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-            <span class="sub-subtitle" id="cms-hero-subtitle">Créations artisanales & douces</span>
-            <h1 class="hero-title" id="cms-hero-title">Sublimez votre quotidien & vos pensées</h1>
-            <p class="hero-description" id="cms-hero-desc">Une papeterie minimaliste et élégante, pensée avec amour aux teintes douces et chaleureuses.</p>
-            <a href="#boutique" class="btn btn-primary" id="cms-hero-btn">Découvrir les créations</a>
-        </div>
-    </section>
+// FILTRES PAR CATÉGORIE
+function initFilters() {
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    filterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            filterBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
 
-    <section class="intro-section">
-        <div class="container text-center max-w-700">
-            <h2 class="section-title" id="cms-intro-title">L’art de l’organisation poétique</h2>
-            <div class="title-underline"></div>
-            <p class="intro-text" id="cms-intro-text">
-                Maju’Lyah est une marque artisanale française dédiée aux passionnées de papeterie, d'organisation douce et d'esthétique chaleureuse. Chaque création est pensée pour vous accompagner dans votre quotidien avec sérénité et élégance.
-            </p>
-        </div>
-    </section>
+            const category = btn.getAttribute("data-category");
+            if (category === "all") {
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category === category);
+                renderProducts(filtered);
+            }
+        });
+    });
+}
 
-    <section id="boutique" class="shop-section">
-        <div class="container">
-            <h2 class="section-title text-center">Nos Créations</h2>
-            <div class="title-underline"></div>
-            <div class="category-filters" id="categoryFilters">
-                <button class="filter-btn active" data-category="all">Toutes</button>
-                <button class="filter-btn" data-category="Nouveautés">Nouveautés</button>
-                <button class="filter-btn" data-category="Organisation">Organisation</button>
-                <button class="filter-btn" data-category="Papeterie">Papeterie</button>
-                <button class="filter-btn" data-category="Stickers">Stickers</button>
-                <button class="filter-btn" data-category="Mailow Club">Mailow Club</button>
-            </div>
-            <div class="products-grid" id="productsGrid"></div>
-        </div>
-    </section>
+// MODALE PRODUIT
+function initModal() {
+    const closeBtn = document.getElementById("closeProductModalBtn");
+    const backdrop = document.getElementById("closeProductModalBg");
+    const modalAddToCartBtn = document.getElementById("modalAddToCartBtn");
 
-    <section id="apropos" class="about-section">
-        <div class="container about-grid">
-            <div class="about-image-wrapper">
-                <img src="images/about.jpg" id="cms-about-img" alt="Atelier Maju'Lyah" class="about-img" onerror="this.src='https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80'">
-            </div>
-            <div class="about-text-content">
-                <span class="sub-subtitle" id="cms-about-subtitle">L'Histoire Maju’Lyah</span>
-                <h2 class="section-title text-left" id="cms-about-title">Fait main avec passion & douceur</h2>
-                <div class="title-underline left"></div>
-                <p id="cms-about-p1">Maju’Lyah est née d'un amour sincère pour le papier, les belles textures et les moments d'organisation au calme.</p>
-                <p id="cms-about-p2">Dans un monde qui va vite, nous croyons aux rituels bienveillants : noter ses gratitudes, planifier ses semaines dans de beaux carnets, embellir son quotidien avec des petits détails dorés et des teintes sauge, terracotta et rose poudré.</p>
-                <p id="cms-about-p3">Chaque pièce est confectionnée ou préparée dans mon atelier en France, avec un soin tout particulier accordé à la qualité et au charme des finitions.</p>
-            </div>
-        </div>
-    </section>
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+    if (backdrop) backdrop.addEventListener("click", closeModal);
 
-    <section id="contact" class="contact-section">
-        <div class="container max-w-600 text-center">
-            <h2 class="section-title">Une question ?</h2>
-            <div class="title-underline"></div>
-            <p class="contact-sub">Une hésitation sur un produit, une demande de personnalisation ou juste l'envie de dire bonjour ? Écrivez-nous !</p>
-            <a href="mailto:majulyah3121@gmail.com" class="contact-email-link">majulyah3121@gmail.com</a>
-        </div>
-    </section>
+    if (modalAddToCartBtn) {
+        modalAddToCartBtn.addEventListener("click", () => {
+            if (currentSelectedProduct) {
+                const qtyInput = document.getElementById("modalQty");
+                const qty = parseInt(qtyInput.value) || 1;
+                addToCart(currentSelectedProduct.id, qty);
+                closeModal();
+            }
+        });
+    }
+}
 
-    <footer class="site-footer">
-        <div class="container footer-content">
-            <div class="footer-brand"><span class="footer-logo">Maju’Lyah</span></div>
-        </div>
-        <div class="footer-bottom"><p>&copy; <span id="year"></span> Maju’Lyah. Tous droits réservés.</p></div>
-    </footer>
+function openProductModal(id) {
+    const product = products.find(p => p.id === id);
+    if (!product) return;
 
-    <!-- MODALE PRODUIT -->
-    <div class="product-modal-backdrop" id="closeProductModalBg"></div>
-    <div class="product-modal" id="productModal">
-        <button class="close-modal-btn" id="closeProductModalBtn">&times;</button>
-        <div class="product-modal-content">
-            <div class="product-modal-image">
-                <img src="" id="modalImg" alt="Produit">
-            </div>
-            <div class="product-modal-details">
-                <span class="product-category" id="modalCategory"></span>
-                <h2 class="product-modal-title" id="modalTitle"></h2>
-                <div class="product-modal-price" id="modalPrice"></div>
-                <p class="product-modal-description" id="modalDescription"></p>
-                
-                <div class="variant-group" id="variantGroup">
-                    <select id="modalVariantSelect"></select>
+    currentSelectedProduct = product;
+
+    document.getElementById("modalImg").src = product.image;
+    document.getElementById("modalCategory").textContent = product.category;
+    document.getElementById("modalTitle").textContent = product.title;
+    document.getElementById("modalPrice").textContent = `${product.price.toFixed(2)} €`;
+    document.getElementById("modalDescription").textContent = product.description;
+    document.getElementById("modalQty").value = 1;
+
+    document.getElementById("productModal").classList.add("active");
+    document.getElementById("closeProductModalBg").classList.add("active");
+}
+
+function closeModal() {
+    document.getElementById("productModal").classList.remove("active");
+    document.getElementById("closeProductModalBg").classList.remove("active");
+}
+
+// PANIER
+function initCartDrawer() {
+    const openBtn = document.getElementById("openCartBtn");
+    const closeBtn = document.getElementById("closeCartBtn");
+    const backdrop = document.getElementById("closeCartBg");
+
+    if (openBtn) openBtn.addEventListener("click", openCart);
+    if (closeBtn) closeBtn.addEventListener("click", closeCart);
+    if (backdrop) backdrop.addEventListener("click", closeCart);
+}
+
+function openCart() {
+    document.getElementById("cartDrawer").classList.add("active");
+    document.getElementById("closeCartBg").classList.add("active");
+}
+
+function closeCart() {
+    document.getElementById("cartDrawer").classList.remove("active");
+    document.getElementById("closeCartBg").classList.remove("active");
+}
+
+function addToCart(productId, quantity = 1) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    const existingItem = cart.find(item => item.id === productId);
+    if (existingItem) {
+        existingItem.quantity += quantity;
+    } else {
+        cart.push({ ...product, quantity });
+    }
+
+    updateCartUI();
+    showToast(`"${product.title}" ajouté au panier !`);
+}
+
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    updateCartUI();
+}
+
+function updateCartUI() {
+    const cartCount = document.getElementById("cartCount");
+    const cartItemsList = document.getElementById("cartItemsList");
+    const cartTotalPrice = document.getElementById("cartTotalPrice");
+    const mailToCheckout = document.getElementById("mailToCheckout");
+
+    const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    if (cartCount) cartCount.textContent = totalQty;
+    if (cartTotalPrice) cartTotalPrice.textContent = `${totalPrice.toFixed(2)} €`;
+
+    if (cartItemsList) {
+        if (cart.length === 0) {
+            cartItemsList.innerHTML = `<p class="empty-cart-msg text-center" style="padding: 20px;">Votre panier est vide pour le moment.</p>`;
+        } else {
+            cartItemsList.innerHTML = cart.map(item => `
+                <div class="cart-item" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+                    <img src="${item.image}" alt="${item.title}" style="width:50px; height:50px; object-fit:cover; border-radius:6px;">
+                    <div class="cart-item-details" style="flex:1; margin-left:10px;">
+                        <div style="font-weight:600; font-size:14px;">${item.title}</div>
+                        <div style="font-size:13px; color:#666;">${item.price.toFixed(2)} € x ${item.quantity}</div>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" style="background:none; border:none; font-size:18px; cursor:pointer; color:#999;">&times;</button>
                 </div>
+            `).join("");
+        }
+    }
 
-                <div class="quantity-add-group">
-                    <input type="number" id="modalQty" value="1" min="1" class="qty-input">
-                    <button class="btn btn-primary" id="modalAddToCartBtn">Ajouter au panier</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    // Génération du lien mailto automatique
+    if (mailToCheckout) {
+        if (cart.length === 0) {
+            mailToCheckout.style.pointerEvents = "none";
+            mailToCheckout.style.opacity = "0.5";
+            mailToCheckout.href = "#";
+        } else {
+            mailToCheckout.style.pointerEvents = "auto";
+            mailToCheckout.style.opacity = "1";
+            
+            const summary = cart.map(item => `- ${item.title} (x${item.quantity}) : ${(item.price * item.quantity).toFixed(2)}€`).join('%0D%0A');
+            const mailBody = `Bonjour Maju'Lyah,%0D%0A%0D%0AJe souhaite passer commande pour les articles suivants :%0D%0A${summary}%0D%0A%0D%0ATotal : ${totalPrice.toFixed(2)} €%0D%0A%0D%0AMerci !`;
+            
+            mailToCheckout.href = `mailto:majulyah3121@gmail.com?subject=Nouvelle Commande Maju'Lyah&body=${mailBody}`;
+        }
+    }
+}
 
-    <!-- TIROIR PANIER -->
-    <div class="cart-backdrop" id="closeCartBg"></div>
-    <div class="cart-drawer" id="cartDrawer">
-        <div class="cart-header">
-            <h3>Mon Panier</h3>
-            <button class="close-cart-btn" id="closeCartBtn">&times;</button>
-        </div>
-        
-        <div class="cart-body">
-            <div id="cartStep1" class="cart-step active">
-                <div id="cartItemsList" class="cart-items-list"></div>
-                <div class="cart-footer">
-                    <div class="cart-total-row">
-                        <span>Total :</span>
-                        <span id="cartTotalPrice">0,00 €</span>
-                    </div>
-                    <button class="btn btn-primary btn-block" id="goToCheckoutBtn" disabled>Passer la commande</button>
-                </div>
-            </div>
-
-            <div id="cartStep2" class="cart-step" style="display:none;">
-                <button class="btn-back" id="backToCartBtn">&larr; Retour au panier</button>
-                <h4>Vos informations de livraison</h4>
-                <form id="orderForm" action="https://formspree.io/f/VOTRE_ID_FORMSPREE_ICI" method="POST">
-                    <input type="hidden" name="order_summary" id="hiddenOrderSummary">
-                    <input type="hidden" name="order_total" id="hiddenOrderTotal">
-                    
-                    <div class="form-group">
-                        <label for="fullName">Nom & Prénom *</label>
-                        <input type="text" id="fullName" name="fullName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Adresse E-mail *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Adresse de livraison complète *</label>
-                        <textarea id="address" name="address" rows="3" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="notes">Notes ou instructions particulières</label>
-                        <textarea id="notes" name="notes" rows="2"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-block" id="submitOrderBtn">Valider et envoyer la commande</button>
-                    <div id="formStatusMessage" class="form-status-msg"></div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div id="toastNotification" class="toast-notification"></div>
-
-    <script src="script.js"></script>
-</body>
-</html>
-
+// TOAST NOTIFICATION
+function showToast(message) {
+    const toast = document.getElementById("toastNotification");
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 3000);
+}
