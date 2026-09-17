@@ -262,9 +262,11 @@
                         <label for="rgpdCheck">J’accepte que mes informations soient utilisées uniquement pour traiter ma commande. *</label>
                     </div>
 
-                    <div id="formStatusMessage" class="form-status-msg"></div>
-
-                    <button type="submit" class="btn btn-primary btn-block" id="submitOrderBtn">Valider et envoyer la commande</button>
+                    <!-- AJOUT DE LA MARGE DE SÉCURITÉ MOBILE ICI -->
+                    <div class="checkout-actions" style="margin-bottom: 80px; padding-bottom: env(safe-area-inset-bottom);">
+                        <div id="formStatusMessage" class="form-status-msg"></div>
+                        <button type="submit" class="btn btn-primary btn-block" id="submitOrderBtn">Valider et envoyer la commande</button>
+                    </div>
                 </form>
             </div>
         </div>
