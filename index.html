@@ -1,19 +1,130 @@
 ---
-title: .
-description: .
+title: "Maju'Lyah | Papeterie & Organisation"
+description: "Découvrez les solutions de rangement et la papeterie artisanale Maju'Lyah."
+image: "/images/file_000000000fd081f5b6a7065f6ad5254a.png"
 hero:
-  image: /images/file_000000000fd081f5b6a7065f6ad5254a.png
-  subtitle: .
-  maintitle: .
-  description: .
-  button_text: .
+  image: "/images/file_000000000fd081f5b6a7065f6ad5254a.png"
+  maintitle: "Sublimez votre quotidien & vos pensées"
+  subtitle: "Créations artisanales & douces"
+  description: "Une papeterie minimaliste et élégante, pensée avec amour."
+  button_text: "Découvrir les créations"
 intro:
-  title: .
-  text: .
+  title: "L’art de l’organisation poétique"
+  text: "Maju’Lyah est une marque artisanale française."
 about:
-  subtitle: .
-  title: .
-  p1: .
-  p2: .
-  p3: .
+  title: "Fait main avec passion & douceur"
+  subtitle: "L'Histoire Maju’Lyah"
+  image: "images/about.jpg"
+  p1: "Maju’Lyah est née d'un amour sincère."
+  p2: "Dans un monde qui va vite..."
+  p3: "Chaque pièce est confectionnée dans mon atelier."
 ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maju’Lyah | Papeterie & Organisation Artisanale</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#accueil" class="brand-logo">Maju’Lyah</a>
+            <nav class="nav-links" id="navLinks">
+                <a href="#accueil" class="nav-item">Accueil</a>
+                <a href="#boutique" class="nav-item">Boutique</a>
+                <a href="#apropos" class="nav-item">À propos</a>
+                <a href="#contact" class="nav-item">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="cart-icon-btn" id="openCartBtn" aria-label="Voir mon panier">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section id="accueil" class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <span class="sub-subtitle">Créations artisanales & douces</span>
+            <h1 class="hero-title">Sublimez votre quotidien & vos pensées</h1>
+            <p class="hero-description">Une papeterie minimaliste et élégante, pensée avec amour aux teintes douces et chaleureuses.</p>
+            <a href="#boutique" class="btn btn-primary">Découvrir les créations</a>
+        </div>
+    </section>
+
+    <section class="intro-section">
+        <div class="container text-center max-w-700">
+            <h2 class="section-title">L’art de l’organisation poétique</h2>
+            <div class="title-underline"></div>
+            <p class="intro-text">
+                Maju’Lyah est une marque artisanale française dédiée aux passionnées de papeterie, d'organisation douce et d'esthétique chaleureuse. Chaque création est pensée pour vous accompagner dans votre quotidien avec sérénité et élégance.
+            </p>
+        </div>
+    </section>
+
+    <section id="boutique" class="shop-section">
+        <div class="container">
+            <h2 class="section-title text-center">Nos Créations</h2>
+            <div class="title-underline"></div>
+            <div class="category-filters" id="categoryFilters">
+                <button class="filter-btn active" data-category="all">Toutes</button>
+                <button class="filter-btn" data-category="Nouveautés">Nouveautés</button>
+                <button class="filter-btn" data-category="Organisation">Organisation</button>
+                <button class="filter-btn" data-category="Papeterie">Papeterie</button>
+                <button class="filter-btn" data-category="Stickers">Stickers</button>
+                <button class="filter-btn" data-category="Mailow Club">Mailow Club</button>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+    </section>
+
+    <section id="apropos" class="about-section">
+        <div class="container about-grid">
+            <div class="about-image-wrapper">
+                <img src="images/about.jpg" alt="Atelier Maju'Lyah" class="about-img" onerror="this.src='https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80'">
+            </div>
+            <div class="about-text-content">
+                <span class="sub-subtitle">L'Histoire Maju’Lyah</span>
+                <h2 class="section-title text-left">Fait main avec passion & douceur</h2>
+                <div class="title-underline left"></div>
+                <p>Maju’Lyah est née d'un amour sincère pour le papier, les belles textures et les moments d'organisation au calme.</p>
+                <p>Dans un monde qui va vite, nous croyons aux rituels bienveillants : noter ses gratitudes, planifier ses semaines dans de beaux carnets, embellir son quotidien avec des petits détails dorés et des teintes sauge, terracotta et rose poudré.</p>
+                <p>Chaque pièce est confectionnée ou préparée dans mon atelier en France, avec un soin tout particulier accordé à la qualité et au charme des finitions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container max-w-600 text-center">
+            <h2 class="section-title">Une question ?</h2>
+            <div class="title-underline"></div>
+            <p class="contact-sub">Une hésitation sur un produit, une demande de personnalisation ou juste l'envie de dire bonjour ? Écrivez-nous !</p>
+            <a href="mailto:majulyah3121@gmail.com" class="contact-email-link">majulyah3121@gmail.com</a>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div class="footer-brand"><span class="footer-logo">Maju’Lyah</span></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; <span id="year"></span> Maju’Lyah. Tous droits réservés.</p></div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
