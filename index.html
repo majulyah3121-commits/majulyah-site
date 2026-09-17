@@ -1,1429 +1,921 @@
-/* ==========================================================================
-   MAJU'LYAH - BASE DE DONNÉES DES PRODUITS
-   ========================================================================== */
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-const products = [
-    {
-        id: 1,
-        name: "Stickers 6ème",
-        category: "Organisation",
-        price: 12.00,
-        image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/file_000000000fd081f5b6a7065f6ad5254a.png",
-        description: "Des stickers personnalisés pour organiser tes affaires scolaires.",
-        variants: [
-            "Français", "Anglais", "Espagnol", "Allemand", "Latin", "Mathématiques",
-            "Physique-Chimie", "Sciences physiques", "Physique", "SVT", "Arts plastiques",
-            "Musique", "Sport", "EMC", "Histoire-Géographie", "Technologie",
-            "Vie de classe", "CDI", "Fournitures scolaires", "Divers"
-        ],
-        colors: [
-            "Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé",
-            "Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé",
-            "Gris clair", "Gris foncé", "Noir", "Blanc", "Rose", "Violet clair",
-            "Violet foncé", "Marron"
-        ]
-    },
+    <title>Maju’Lyah | Papeterie & Organisation Artisanale</title>
 
-    {
-        id: 2,
-        name: "Stickers enfants",
-        category: "Organisation",
-        price: 10.00,
-        image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260913_154315.jpg",
-        description: "Des stickers personnalisés pour que chaque jouet trouve sa place !",
-        variants: [
-            "Poupée", "Bébé", "Barbie", "Dînette", "Princesse", "Déguisement",
-            "Coiffure", "Peluche", "Super-héros", "Dinosaure", "Bricolage", "Figurine",
-            "Voiture", "Jeux de société", "Puzzle", "Lego", "Playmobil", "Train",
-            "Avion", "Robot", "Marionnettes", "Instruments de musique", "Licorne", "Animaux"
-        ],
-        colors: [
-            "Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé",
-            "Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé",
-            "Gris clair", "Gris foncé", "Noir", "Blanc", "Rose", "Violet clair",
-            "Violet foncé", "Marron"
-        ]
-    },
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    {
-        id: 3,
-        name: "Bloc-notes To-Do List Automnale",
-        category: "Papeterie",
-        price: 8.00,
-        image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&q=80",
-        description: "Bloc-notes de 50 pages détachables au papier doux. Idéal pour noter vos priorités quotidiennes en toute sérénité.",
-        variants: ["Standard (50 pages)", "Grand Format (100 pages)"]
-    },
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
 
-    {
-        id: 4,
-        name: "Set de Cartes Poétiques & Enveloppes",
-        category: "Mailow Club",
-        price: 12.00,
-        image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80",
-        description: "Coffret de cartes d'art au fini mat accompagnées de leurs enveloppes.",
-        variants: ["Lot de 5 cartes", "Lot de 10 cartes"]
-    },
+    <link rel="stylesheet" href="style.css">
+</head>
 
-    {
-        id: 5,
-        name: "Planner Non Daté 'Sérénité'",
-        category: "Nouveautés",
-        price: 24.00,
-        image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80",
-        description: "Le compagnon idéal pour planifier votre année à votre rythme, sans dates pré-remplies.",
-        variants: ["Reliure Dorée", "Reliure Rose Poudré"]
-    },
+<body>
 
-    {
-        id: 6,
-        name: "Marque-page en Laiton & Ruban",
-        category: "Nouveautés",
-        price: 6.50,
-        image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80",
-        description: "Élégant marque-page en métal finition dorée avec son ruban terracotta.",
-        variants: ["Ruban Terracotta", "Ruban Sauge"]
-    },
+    <!-- =========================================================
+         ENTÊTE / NAVIGATION
+         ========================================================= -->
 
-    {
-        id: 7,
-        name: "Stickers Citations & Pensées",
-        category: "Stickers",
-        price: 5.20,
-        image: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&w=600&q=80",
-        description: "Mots doux, citations motivantes et calligraphie fine.",
-        variants: ["Finition Matte", "Finition Glossy"]
-    },
+    <header class="navbar">
 
-    {
-        id: 8,
-        name: "Kit Papeterie 'Mailow Routine'",
-        category: "Mailow Club",
-        price: 29.90,
-        image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80",
-        description: "Un kit complet comprenant un bloc-notes, une planche de stickers, deux marque-pages et un carnet exclusif Mailow Club.",
-        variants: ["Box Complète"]
-    }
-];
+        <div class="container nav-container">
 
+            <a href="#accueil" class="brand-logo">
+                Maju’Lyah
+            </a>
 
-/* ==========================================================================
-   ÉTAT
-   ========================================================================== */
+            <nav class="nav-links" id="navLinks">
 
-let cart = [];
-let selectedProductForModal = null;
+                <a href="#accueil" class="nav-item">
+                    Accueil
+                </a>
 
+                <a href="#boutique" class="nav-item">
+                    Boutique
+                </a>
 
-/* ==========================================================================
-   ÉLÉMENTS DU DOM
-   ========================================================================== */
+                <a href="#apropos" class="nav-item">
+                    À propos
+                </a>
 
-const productsGrid = document.getElementById('productsGrid');
-const categoryFilters = document.getElementById('categoryFilters');
+                <a href="#contact" class="nav-item">
+                    Contact
+                </a>
 
-const cartCount = document.getElementById('cartCount');
-const cartDrawer = document.getElementById('cartDrawer');
-const openCartBtn = document.getElementById('openCartBtn');
-const closeCartBtn = document.getElementById('closeCartBtn');
-const closeCartBg = document.getElementById('closeCartBg');
-const cartItemsList = document.getElementById('cartItemsList');
-const cartTotalPrice = document.getElementById('cartTotalPrice');
+            </nav>
 
-const goToCheckoutBtn = document.getElementById('goToCheckoutBtn');
-const cartStep1 = document.getElementById('cartStep1');
-const cartStep2 = document.getElementById('cartStep2');
-const backToCartBtn = document.getElementById('backToCartBtn');
+            <div class="nav-actions">
 
-
-/* ==========================================================================
-   MODALE PRODUIT
-   ========================================================================== */
-
-const productModal = document.getElementById('productModal');
-const closeProductModalBtn = document.getElementById('closeProductModalBtn');
-const closeProductModalBg = document.getElementById('closeProductModalBg');
-
-const modalImg = document.getElementById('modalImg');
-const modalCategory = document.getElementById('modalCategory');
-const modalTitle = document.getElementById('modalTitle');
-const modalPrice = document.getElementById('modalPrice');
-const modalDescription = document.getElementById('modalDescription');
-
-const variantGroup = document.getElementById('variantGroup');
-const modalVariantSelect = document.getElementById('modalVariantSelect');
-const modalQty = document.getElementById('modalQty');
-const modalAddToCartBtn = document.getElementById('modalAddToCartBtn');
-
-
-/* ==========================================================================
-   FORMULAIRE
-   ========================================================================== */
-
-const orderForm = document.getElementById('orderForm');
-const hiddenOrderSummary = document.getElementById('hiddenOrderSummary');
-const hiddenOrderTotal = document.getElementById('hiddenOrderTotal');
-const formStatusMessage = document.getElementById('formStatusMessage');
-
-
-/* ==========================================================================
-   NAVIGATION MOBILE
-   ========================================================================== */
-
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const navLinks = document.getElementById('navLinks');
-
-
-/* ==========================================================================
-   INITIALISATION
-   ========================================================================== */
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    renderProducts('all');
-
-    setupEventListeners();
-
-    const yearElement = document.getElementById('year');
-
-    if (yearElement) {
-        yearElement.textContent = new Date().getFullYear();
-    }
-
-    updateCartUI();
-});
-
-
-/* ==========================================================================
-   AFFICHAGE DES PRODUITS
-   ========================================================================== */
-
-function renderProducts(filterCategory) {
-
-    if (!productsGrid) return;
-
-    productsGrid.innerHTML = '';
-
-    const filteredProducts = filterCategory === 'all'
-        ? products
-        : products.filter(product =>
-            product.category.toLowerCase() === filterCategory.toLowerCase()
-        );
-
-    filteredProducts.forEach(product => {
-
-        const card = document.createElement('div');
-        card.className = 'product-card';
-
-        card.innerHTML = `
-            <div class="product-image-container">
-                <img
-                    src="${product.image}"
-                    alt="${product.name}"
-                    loading="lazy"
+                <button
+                    class="cart-icon-btn"
+                    id="openCartBtn"
+                    aria-label="Voir mon panier"
+                    type="button"
                 >
-            </div>
 
-            <div class="product-info">
+                    <svg
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
 
-                <span class="product-category">
-                    ${product.category}
-                </span>
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
 
-                <h3 class="product-name">
-                    ${product.name}
-                </h3>
+                        <line
+                            x1="3"
+                            y1="6"
+                            x2="21"
+                            y2="6"
+                        ></line>
 
-                <p class="product-desc-short">
-                    ${product.description.substring(0, 65)}...
-                </p>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
 
-                <div class="product-bottom">
+                    </svg>
 
-                    <span class="product-price">
-                        ${product.price.toFixed(2).replace('.', ',')} €
+                    <span
+                        class="cart-count"
+                        id="cartCount"
+                    >
+                        0
                     </span>
 
-                    <button
-                        type="button"
-                        class="btn-order-card"
-                        data-product-id="${product.id}"
+                </button>
+
+                <button
+                    class="mobile-menu-toggle"
+                    id="mobileMenuBtn"
+                    aria-label="Menu"
+                    type="button"
+                >
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         BANNIÈRE
+         ========================================================= -->
+
+    <section
+        id="accueil"
+        class="hero-section"
+    >
+
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+
+            <span class="sub-subtitle">
+                Créations artisanales & douces
+            </span>
+
+            <h1 class="hero-title">
+                Sublimez votre quotidien & vos pensées
+            </h1>
+
+            <p class="hero-description">
+                Une papeterie minimaliste et élégante,
+                pensée avec amour aux teintes douces et chaleureuses.
+            </p>
+
+            <a
+                href="#boutique"
+                class="btn btn-primary"
+            >
+                Découvrir les créations
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         PRESENTATION
+         ========================================================= -->
+
+    <section class="intro-section">
+
+        <div class="container text-center max-w-700">
+
+            <h2 class="section-title">
+                L’art de l’organisation poétique
+            </h2>
+
+            <div class="title-underline"></div>
+
+            <p class="intro-text">
+                Maju’Lyah est une marque artisanale française dédiée
+                aux passionnées de papeterie, d'organisation douce
+                et d'esthétique chaleureuse.
+                Chaque création est pensée pour vous accompagner
+                dans votre quotidien avec sérénité et élégance.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         BOUTIQUE
+         ========================================================= -->
+
+    <section
+        id="boutique"
+        class="shop-section"
+    >
+
+        <div class="container">
+
+            <h2 class="section-title text-center">
+                Nos Créations
+            </h2>
+
+            <div class="title-underline"></div>
+
+            <div
+                class="category-filters"
+                id="categoryFilters"
+            >
+
+                <button
+                    class="filter-btn active"
+                    data-category="all"
+                    type="button"
+                >
+                    Toutes
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-category="Nouveautés"
+                    type="button"
+                >
+                    Nouveautés
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-category="Organisation"
+                    type="button"
+                >
+                    Organisation
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-category="Papeterie"
+                    type="button"
+                >
+                    Papeterie
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-category="Stickers"
+                    type="button"
+                >
+                    Stickers
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-category="Mailow Club"
+                    type="button"
+                >
+                    Mailow Club
+                </button>
+
+            </div>
+
+            <div
+                class="products-grid"
+                id="productsGrid"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         À PROPOS
+         ========================================================= -->
+
+    <section
+        id="apropos"
+        class="about-section"
+    >
+
+        <div class="container about-grid">
+
+            <div class="about-image-wrapper">
+
+                <img
+                    src="images/about.jpg"
+                    alt="Atelier Maju'Lyah"
+                    class="about-img"
+                    onerror="this.src='https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80'"
+                >
+
+            </div>
+
+            <div class="about-text-content">
+
+                <span class="sub-subtitle">
+                    L'Histoire Maju’Lyah
+                </span>
+
+                <h2 class="section-title text-left">
+                    Fait main avec passion & douceur
+                </h2>
+
+                <div class="title-underline left"></div>
+
+                <p>
+                    Maju’Lyah est née d'un amour sincère pour le papier,
+                    les belles textures et les moments d'organisation au calme.
+                </p>
+
+                <p>
+                    Dans un monde qui va vite, nous croyons aux rituels
+                    bienveillants : noter ses gratitudes, planifier ses semaines
+                    dans de beaux carnets, embellir son quotidien avec
+                    des petits détails dorés et des teintes sauge,
+                    terracotta et rose poudré.
+                </p>
+
+                <p>
+                    Chaque pièce est confectionnée ou préparée dans mon
+                    atelier en France, avec un soin tout particulier accordé
+                    à la qualité et au charme des finitions.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         CONTACT
+         ========================================================= -->
+
+    <section
+        id="contact"
+        class="contact-section"
+    >
+
+        <div class="container max-w-600 text-center">
+
+            <h2 class="section-title">
+                Une question ?
+            </h2>
+
+            <div class="title-underline"></div>
+
+            <p class="contact-sub">
+                Une hésitation sur un produit, une demande de personnalisation
+                ou juste l'envie de dire bonjour ?
+                Écrivez-nous !
+            </p>
+
+            <a
+                href="mailto:majulyah3121@gmail.com"
+                class="contact-email-link"
+            >
+
+                <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+
+                    <polyline points="22,6 12,13 2,6"></polyline>
+
+                </svg>
+
+                majulyah3121@gmail.com
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         FOOTER
+         ========================================================= -->
+
+    <footer class="site-footer">
+
+        <div class="container footer-content">
+
+            <div class="footer-brand">
+
+                <span class="footer-logo">
+                    Maju’Lyah
+                </span>
+
+                <p>
+                    Papeterie & douceurs d'organisation artisanales.
+                </p>
+
+            </div>
+
+            <div class="footer-links">
+
+                <a href="#accueil">Accueil</a>
+                <a href="#boutique">Boutique</a>
+                <a href="#apropos">À propos</a>
+                <a href="#contact">Contact</a>
+
+                <a
+                    href="#mentions"
+                    onclick="alert('Mentions Légales : Maju’Lyah - Entreprise Artisanale France. Email: majulyah3121@gmail.com'); return false;"
+                >
+                    Mentions Légales
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+                &copy;
+                <span id="year"></span>
+                Maju’Lyah. Tous droits réservés.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================================================
+         MODALE PRODUIT
+         ========================================================= -->
+
+    <div
+        class="modal"
+        id="productModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-overlay"
+            id="closeProductModalBg"
+        ></div>
+
+        <div class="modal-card">
+
+            <button
+                class="modal-close"
+                id="closeProductModalBtn"
+                type="button"
+                aria-label="Fermer"
+            >
+                &times;
+            </button>
+
+            <div class="product-detail-grid">
+
+                <div class="product-detail-image">
+
+                    <img
+                        src=""
+                        id="modalImg"
+                        alt="Produit"
                     >
-                        Voir / Commander
+
+                </div>
+
+                <div class="product-detail-info">
+
+                    <span
+                        class="product-badge"
+                        id="modalCategory"
+                    ></span>
+
+                    <h3
+                        id="modalTitle"
+                        class="modal-title"
+                    ></h3>
+
+                    <p
+                        class="modal-price"
+                        id="modalPrice"
+                    ></p>
+
+                    <p
+                        class="modal-description"
+                        id="modalDescription"
+                    ></p>
+
+                    <div
+                        class="form-group"
+                        id="variantGroup"
+                        style="display:none;"
+                    >
+
+                        <label for="modalVariantSelect">
+                            Choisir une finition / option :
+                        </label>
+
+                        <select
+                            id="modalVariantSelect"
+                            class="form-input"
+                        ></select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="modalQty">
+                            Quantité :
+                        </label>
+
+                        <input
+                            type="number"
+                            id="modalQty"
+                            class="form-input qty-input"
+                            value="1"
+                            min="1"
+                            max="99"
+                        >
+
+                    </div>
+
+                    <button
+                        class="btn btn-primary btn-block"
+                        id="modalAddToCartBtn"
+                        type="button"
+                    >
+                        Ajouter à ma commande
                     </button>
 
                 </div>
 
             </div>
-        `;
 
-        productsGrid.appendChild(card);
-    });
-}
+        </div>
 
+    </div>
 
-/* ==========================================================================
-   OUVERTURE DE LA FICHE PRODUIT
-   ========================================================================== */
 
-function openProductModal(productId) {
+    <!-- =========================================================
+         PANIER
+         ========================================================= -->
 
-    const product = products.find(
-        product => product.id === Number(productId)
-    );
+    <div
+        class="cart-drawer"
+        id="cartDrawer"
+        aria-hidden="true"
+    >
 
-    if (!product) {
-        console.error("Produit introuvable :", productId);
-        return;
-    }
+        <div
+            class="cart-drawer-overlay"
+            id="closeCartBg"
+        ></div>
 
-    selectedProductForModal = product;
+        <div class="cart-drawer-content">
 
-    if (modalImg) {
-        modalImg.src = product.image;
-        modalImg.alt = product.name;
-    }
+            <div class="cart-header">
 
-    if (modalCategory) {
-        modalCategory.textContent = product.category;
-    }
-
-    if (modalTitle) {
-        modalTitle.textContent = product.name;
-    }
-
-    if (modalPrice) {
-        modalPrice.textContent =
-            `${product.price.toFixed(2).replace('.', ',')} €`;
-    }
-
-    if (modalDescription) {
-        modalDescription.textContent = product.description;
-    }
-
-    if (modalQty) {
-        modalQty.value = 1;
-    }
-
-    /* Nettoyage complet des variantes */
-    if (variantGroup) {
-        variantGroup.innerHTML = '';
-        variantGroup.style.display = 'none';
-    }
-
-    /*
-       On cache le select présent dans index.html.
-       Pour les produits simples, on en crée un nouveau uniquement
-       lorsque cela est nécessaire.
-    */
-    if (modalVariantSelect) {
-        modalVariantSelect.innerHTML = '';
-        modalVariantSelect.style.display = 'none';
-    }
-
-
-    /* ----------------------------------------------------------------------
-       STICKERS 6ÈME / STICKERS ENFANTS
-       ---------------------------------------------------------------------- */
-
-    if (product.id === 1 || product.id === 2) {
-
-        const labelText = product.id === 1
-            ? "Choisis tes matières :"
-            : "Quels stickers souhaitez-vous ?";
-
-        const title = document.createElement('div');
-
-        title.textContent = labelText;
-
-        title.style.cssText =
-            'display:block; margin-bottom:12px; font-weight:600;';
-
-        variantGroup.appendChild(title);
-
-
-        const checkboxClass = product.id === 1
-            ? 'school-subject-checkbox'
-            : 'model-checkbox';
-
-
-        product.variants.forEach(variant => {
-
-            const label = document.createElement('label');
-
-            label.style.cssText =
-                'display:block; margin-bottom:7px; cursor:pointer;';
-
-
-            const checkbox = document.createElement('input');
-
-            checkbox.type = 'checkbox';
-            checkbox.value = variant;
-            checkbox.className = checkboxClass;
-
-
-            label.appendChild(checkbox);
-            label.appendChild(
-                document.createTextNode(` ${variant}`)
-            );
-
-
-            variantGroup.appendChild(label);
-        });
-
-
-        /* Couleur */
-
-        const colorTitle = document.createElement('div');
-
-        colorTitle.textContent = "Choisis ta couleur :";
-
-        colorTitle.style.cssText =
-            'display:block; margin-top:15px; margin-bottom:8px; font-weight:600;';
-
-        variantGroup.appendChild(colorTitle);
-
-
-        const colorSelect = document.createElement('select');
-
-        colorSelect.id = 'dynamicColorSelect';
-        colorSelect.style.width = '100%';
-
-
-        const defaultOption = document.createElement('option');
-
-        defaultOption.value = '';
-        defaultOption.textContent = '-- Choisir une couleur --';
-
-        colorSelect.appendChild(defaultOption);
-
-
-        product.colors.forEach(color => {
-
-            const option = document.createElement('option');
-
-            option.value = color;
-            option.textContent = color;
-
-            colorSelect.appendChild(option);
-        });
-
-
-        variantGroup.appendChild(colorSelect);
-
-        variantGroup.style.display = 'block';
-    }
-
-
-    /* ----------------------------------------------------------------------
-       AUTRES PRODUITS AVEC VARIANTE
-       ---------------------------------------------------------------------- */
-
-    else if (
-        product.variants &&
-        product.variants.length > 0
-    ) {
-
-        const title = document.createElement('div');
-
-        title.textContent = "Choisis une option :";
-
-        title.style.cssText =
-            'display:block; margin-bottom:8px; font-weight:600;';
-
-
-        const select = document.createElement('select');
-
-        select.id = 'dynamicVariantSelect';
-        select.style.width = '100%';
-
-
-        product.variants.forEach(variant => {
-
-            const option = document.createElement('option');
-
-            option.value = variant;
-            option.textContent = variant;
-
-            select.appendChild(option);
-        });
-
-
-        variantGroup.appendChild(title);
-        variantGroup.appendChild(select);
-
-        variantGroup.style.display = 'block';
-    }
-
-
-    /* Affichage de la modale */
-
-    if (productModal) {
-        productModal.classList.add('active');
-    }
-}
-
-
-/* ==========================================================================
-   FERMETURE DE LA FICHE PRODUIT
-   ========================================================================== */
-
-function closeProductModal() {
-
-    if (productModal) {
-        productModal.classList.remove('active');
-    }
-
-    selectedProductForModal = null;
-}
-
-
-/* ==========================================================================
-   AJOUT AU PANIER
-   ========================================================================== */
-
-function addToCart(
-    product,
-    quantity,
-    selectedVariant,
-    selectedColor
-) {
-
-    const variantKey = Array.isArray(selectedVariant)
-        ? selectedVariant.join('|')
-        : (selectedVariant || 'default');
-
-    const colorKey = selectedColor || 'default';
-
-    const cartItemId =
-        `${product.id}-${variantKey}-${colorKey}`;
-
-
-    const existingIndex = cart.findIndex(
-        item => item.cartItemId === cartItemId
-    );
-
-
-    if (existingIndex > -1) {
-
-        cart[existingIndex].quantity += quantity;
-
-    } else {
-
-        cart.push({
-
-            cartItemId,
-
-            id: product.id,
-
-            name: product.name,
-
-            price: product.price,
-
-            image: product.image,
-
-            variant: selectedVariant || null,
-
-            color: selectedColor || null,
-
-            quantity
-        });
-    }
-
-
-    updateCartUI();
-
-    showToast(
-        `${product.name} ajouté à votre panier !`
-    );
-}
-
-
-/* ==========================================================================
-   MISE À JOUR DU PANIER
-   ========================================================================== */
-
-function updateCartUI() {
-
-    if (!cartCount || !cartItemsList) return;
-
-
-    const totalQty = cart.reduce(
-        (sum, item) => sum + item.quantity,
-        0
-    );
-
-    cartCount.textContent = totalQty;
-
-    cartItemsList.innerHTML = '';
-
-
-    if (cart.length === 0) {
-
-        cartItemsList.innerHTML = `
-            <p style="
-                text-align:center;
-                color:var(--color-text-muted, #777);
-                margin-top:40px;
-            ">
-                Votre panier est vide pour le moment.
-            </p>
-        `;
-
-        if (goToCheckoutBtn) {
-            goToCheckoutBtn.disabled = true;
-        }
-
-    } else {
-
-        if (goToCheckoutBtn) {
-            goToCheckoutBtn.disabled = false;
-        }
-
-
-        cart.forEach((item, index) => {
-
-            const itemElement =
-                document.createElement('div');
-
-            itemElement.className = 'cart-item';
-
-
-            let optionsHTML = '';
-
-
-            if (item.variant) {
-
-                const choices =
-                    Array.isArray(item.variant)
-                        ? item.variant.join(', ')
-                        : item.variant;
-
-                const label =
-                    item.id === 1
-                        ? 'Matières'
-                        : item.id === 2
-                            ? 'Modèles'
-                            : 'Option';
-
-                optionsHTML += `
-                    <div class="cart-item-variant">
-                        ${label} : ${choices}
-                    </div>
-                `;
-            }
-
-
-            if (item.color) {
-
-                optionsHTML += `
-                    <div class="cart-item-variant">
-                        Couleur : ${item.color}
-                    </div>
-                `;
-            }
-
-
-            itemElement.innerHTML = `
-
-                <img
-                    src="${item.image}"
-                    alt="${item.name}"
-                    class="cart-item-img"
-                >
-
-                <div class="cart-item-details">
-
-                    <div class="cart-item-title">
-                        ${item.name}
-                    </div>
-
-                    ${optionsHTML}
-
-                    <div class="cart-item-price">
-                        ${(item.price * item.quantity)
-                            .toFixed(2)
-                            .replace('.', ',')} €
-                    </div>
-
-                    <div class="cart-item-qty">
-
-                        <button
-                            type="button"
-                            class="qty-btn cart-minus"
-                            data-index="${index}"
-                        >
-                            -
-                        </button>
-
-                        <span>
-                            ${item.quantity}
-                        </span>
-
-                        <button
-                            type="button"
-                            class="qty-btn cart-plus"
-                            data-index="${index}"
-                        >
-                            +
-                        </button>
-
-                    </div>
-
-                </div>
+                <h3>
+                    Mon Bon de Commande
+                </h3>
 
                 <button
+                    class="close-drawer-btn"
+                    id="closeCartBtn"
                     type="button"
-                    class="cart-item-remove"
-                    data-index="${index}"
-                    title="Supprimer"
+                    aria-label="Fermer le panier"
                 >
                     &times;
                 </button>
-            `;
 
+            </div>
 
-            cartItemsList.appendChild(itemElement);
-        });
-    }
 
+            <!-- ÉTAPE 1 -->
 
-    const total = cart.reduce(
-        (sum, item) =>
-            sum + (item.price * item.quantity),
-        0
-    );
+            <div
+                id="cartStep1"
+                class="cart-step active"
+            >
 
+                <div
+                    class="cart-items-list"
+                    id="cartItemsList"
+                ></div>
 
-    if (cartTotalPrice) {
+                <div class="cart-footer">
 
-        cartTotalPrice.textContent =
-            `${total.toFixed(2).replace('.', ',')} €`;
-    }
-}
+                    <div class="cart-total-row">
 
+                        <span>
+                            Total (hors livraison) :
+                        </span>
 
-/* ==========================================================================
-   QUANTITÉS
-   ========================================================================== */
+                        <span
+                            class="cart-total-price"
+                            id="cartTotalPrice"
+                        >
+                            0,00 €
+                        </span>
 
-function changeQty(index, delta) {
+                    </div>
 
-    if (!cart[index]) return;
+                    <button
+                        class="btn btn-primary btn-block"
+                        id="goToCheckoutBtn"
+                        type="button"
+                        disabled
+                    >
+                        Remplir mes coordonnées
+                    </button>
 
-    cart[index].quantity += delta;
+                </div>
 
+            </div>
 
-    if (cart[index].quantity <= 0) {
-        cart.splice(index, 1);
-    }
 
+            <!-- ÉTAPE 2 -->
 
-    updateCartUI();
-}
+            <div
+                id="cartStep2"
+                class="cart-step"
+            >
 
+                <button
+                    class="back-btn"
+                    id="backToCartBtn"
+                    type="button"
+                >
+                    &larr; Retour à la commande
+                </button>
 
-/* ==========================================================================
-   SUPPRESSION PANIER
-   ========================================================================== */
+                <h4 class="checkout-subtitle">
+                    Coordonnées de livraison
+                </h4>
 
-function removeCartItem(index) {
 
-    if (!cart[index]) return;
+                <!-- FORMSPREE -->
 
-    cart.splice(index, 1);
+                <form
+                    id="orderForm"
+                    action="https://formspree.io/f/xeaojpzq"
+                    method="POST"
+                    novalidate
+                >
 
-    updateCartUI();
-}
+                    <!-- REDIRECTION APRÈS ENVOI -->
 
+                    <input
+                        type="hidden"
+                        name="_next"
+                        value="https://majulyah3121-commits.github.io/majulyah-site/?commande=envoyee"
+                    >
 
-/* ==========================================================================
-   RÉSUMÉ DE COMMANDE
-   ========================================================================== */
+                    <input
+                        type="hidden"
+                        name="_subject"
+                        value="Nouvelle commande Maju’Lyah"
+                    >
 
-function prepareOrderSummary() {
+                    <!-- RÉCAPITULATIF -->
 
-    let summary =
-        "DÉTAIL DE LA COMMANDE MAJU'LYAH :\n\n";
+                    <input
+                        type="hidden"
+                        name="Recapitulatif_Commande"
+                        id="hiddenOrderSummary"
+                    >
 
-    let total = 0;
+                    <input
+                        type="hidden"
+                        name="Total_Commande"
+                        id="hiddenOrderTotal"
+                    >
 
 
-    cart.forEach(item => {
+                    <!-- PRÉNOM / NOM -->
 
-        const itemTotal =
-            item.price * item.quantity;
+                    <div class="form-row">
 
-        total += itemTotal;
+                        <div class="form-group">
 
+                            <label for="prenom">
+                                Prénom *
+                            </label>
 
-        summary += `- ${item.name}\n`;
+                            <input
+                                type="text"
+                                id="prenom"
+                                name="Prenom"
+                                class="form-input"
+                                required
+                                autocomplete="given-name"
+                                placeholder="ex: Julie"
+                            >
 
+                        </div>
 
-        if (item.variant) {
+                        <div class="form-group">
 
-            const choices =
-                Array.isArray(item.variant)
-                    ? item.variant.join(', ')
-                    : item.variant;
+                            <label for="nom">
+                                Nom *
+                            </label>
 
-            const label =
-                item.id === 1
-                    ? 'Matières'
-                    : item.id === 2
-                        ? 'Modèles'
-                        : 'Option';
+                            <input
+                                type="text"
+                                id="nom"
+                                name="Nom"
+                                class="form-input"
+                                required
+                                autocomplete="family-name"
+                                placeholder="ex: Dupont"
+                            >
 
-            summary +=
-                `  ${label} : ${choices}\n`;
-        }
+                        </div>
 
+                    </div>
 
-        if (item.color) {
 
-            summary +=
-                `  Couleur : ${item.color}\n`;
-        }
+                    <!-- EMAIL -->
 
+                    <div class="form-group">
 
-        summary +=
-            `  Quantité : ${item.quantity} x ${item.price.toFixed(2)}€ = ${itemTotal.toFixed(2)}€\n\n`;
-    });
+                        <label for="email">
+                            Adresse E-mail *
+                        </label>
 
+                        <input
+                            type="email"
+                            id="email"
+                            name="Email"
+                            class="form-input"
+                            required
+                            autocomplete="email"
+                            placeholder="ex: julie@example.com"
+                        >
 
-    summary +=
-        `TOTAL GLOBAL DE LA COMMANDE : ${total.toFixed(2)} €`;
+                    </div>
 
 
-    if (hiddenOrderSummary) {
-        hiddenOrderSummary.value = summary;
-    }
+                    <!-- TÉLÉPHONE -->
 
-    if (hiddenOrderTotal) {
-        hiddenOrderTotal.value =
-            `${total.toFixed(2)} €`;
-    }
-}
+                    <div class="form-group">
 
+                        <label for="telephone">
+                            Téléphone (facultatif)
+                        </label>
 
-/* ==========================================================================
-   TOAST
-   ========================================================================== */
+                        <input
+                            type="tel"
+                            id="telephone"
+                            name="Telephone"
+                            class="form-input"
+                            autocomplete="tel"
+                            placeholder="ex: 06 12 34 56 78"
+                        >
 
-function showToast(message) {
+                    </div>
 
-    const toast =
-        document.getElementById('toastNotification');
 
-    if (!toast) return;
+                    <!-- ADRESSE -->
 
+                    <div class="form-group">
 
-    toast.textContent = message;
+                        <label for="adresse">
+                            Adresse postale *
+                        </label>
 
-    toast.classList.add('show');
+                        <input
+                            type="text"
+                            id="adresse"
+                            name="Adresse"
+                            class="form-input"
+                            required
+                            autocomplete="street-address"
+                            placeholder="ex: 12 rue de la Paix"
+                        >
 
+                    </div>
 
-    setTimeout(() => {
 
-        toast.classList.remove('show');
+                    <!-- COMPLÉMENT -->
 
-    }, 2500);
-}
+                    <div class="form-group">
 
+                        <label for="complement">
+                            Complément d'adresse (facultatif)
+                        </label>
 
-/* ==========================================================================
-   ÉVÉNEMENTS
-   ========================================================================== */
+                        <input
+                            type="text"
+                            id="complement"
+                            name="Complement_Adresse"
+                            class="form-input"
+                            autocomplete="address-line2"
+                            placeholder="ex: Appt 4B, Résidence les Roses"
+                        >
 
-function setupEventListeners() {
+                    </div>
 
 
-    /* ----------------------------------------------------------------------
-       FILTRES
-       ---------------------------------------------------------------------- */
+                    <!-- CODE POSTAL / VILLE -->
 
-    if (categoryFilters) {
+                    <div class="form-row">
 
-        categoryFilters.addEventListener('click', event => {
+                        <div class="form-group">
 
-            const button =
-                event.target.closest('.filter-btn');
+                            <label for="code_postal">
+                                Code Postal *
+                            </label>
 
-            if (!button) return;
+                            <input
+                                type="text"
+                                id="code_postal"
+                                name="Code_Postal"
+                                class="form-input"
+                                required
+                                autocomplete="postal-code"
+                                inputmode="numeric"
+                                placeholder="ex: 31000"
+                            >
 
+                        </div>
 
-            document
-                .querySelectorAll('.filter-btn')
-                .forEach(btn =>
-                    btn.classList.remove('active')
-                );
+                        <div class="form-group">
 
+                            <label for="ville">
+                                Ville *
+                            </label>
 
-            button.classList.add('active');
+                            <input
+                                type="text"
+                                id="ville"
+                                name="Ville"
+                                class="form-input"
+                                required
+                                autocomplete="address-level2"
+                                placeholder="ex: Toulouse"
+                            >
 
+                        </div>
 
-            renderProducts(
-                button.dataset.category
-            );
-        });
-    }
+                    </div>
 
 
-    /* ----------------------------------------------------------------------
-       BOUTONS "VOIR / COMMANDER"
-       ---------------------------------------------------------------------- */
+                    <!-- MESSAGE -->
 
-    if (productsGrid) {
+                    <div class="form-group">
 
-        productsGrid.addEventListener('click', event => {
+                        <label for="message">
+                            Message ou remarque (facultatif)
+                        </label>
 
-            const orderButton =
-                event.target.closest('.btn-order-card');
+                        <textarea
+                            id="message"
+                            name="Message"
+                            class="form-input"
+                            rows="3"
+                            placeholder="Une précision à ajouter à votre commande ?"
+                        ></textarea>
 
-            if (orderButton) {
+                    </div>
 
-                const productId =
-                    orderButton.dataset.productId;
 
-                openProductModal(productId);
+                    <!-- RGPD -->
 
-                return;
-            }
+                    <div class="form-group checkbox-group">
 
+                        <input
+                            type="checkbox"
+                            id="rgpdCheck"
+                            name="RGPD_Accepte"
+                            value="Oui"
+                            required
+                        >
 
-            const productImage =
-                event.target.closest('.product-image-container');
+                        <label for="rgpdCheck">
+                            J’accepte que mes informations soient utilisées
+                            uniquement pour traiter ma commande. *
+                        </label>
 
-            if (productImage) {
+                    </div>
 
-                const card =
-                    productImage.closest('.product-card');
 
-                if (!card) return;
+                    <!-- MESSAGE -->
 
-                const button =
-                    card.querySelector('.btn-order-card');
+                    <div
+                        id="formStatusMessage"
+                        class="form-status-msg"
+                    ></div>
 
-                if (button) {
-                    openProductModal(
-                        button.dataset.productId
-                    );
-                }
 
-                return;
-            }
+                    <!-- BOUTON -->
 
+                    <button
+                        type="submit"
+                        class="btn btn-primary btn-block"
+                        id="submitOrderBtn"
+                    >
+                        Valider et envoyer la commande
+                    </button>
 
-            const productName =
-                event.target.closest('.product-name');
+                </form>
 
-            if (productName) {
+            </div>
 
-                const card =
-                    productName.closest('.product-card');
+        </div>
 
-                if (!card) return;
+    </div>
 
-                const button =
-                    card.querySelector('.btn-order-card');
 
-                if (button) {
-                    openProductModal(
-                        button.dataset.productId
-                    );
-                }
-            }
-        });
-    }
+    <!-- NOTIFICATION -->
 
+    <div
+        id="toastNotification"
+        class="toast"
+    >
+        Produit ajouté au panier !
+    </div>
 
-    /* ----------------------------------------------------------------------
-       MENU MOBILE
-       ---------------------------------------------------------------------- */
 
-    if (mobileMenuBtn && navLinks) {
+    <script src="script.js"></script>
 
-        mobileMenuBtn.addEventListener(
-            'click',
-            () => {
-                navLinks.classList.toggle(
-                    'mobile-open'
-                );
-            }
-        );
-
-
-        document
-            .querySelectorAll('.nav-item')
-            .forEach(link => {
-
-                link.addEventListener(
-                    'click',
-                    () => {
-                        navLinks.classList.remove(
-                            'mobile-open'
-                        );
-                    }
-                );
-            });
-    }
-
-
-    /* ----------------------------------------------------------------------
-       FERMETURE MODALE
-       ---------------------------------------------------------------------- */
-
-    if (closeProductModalBtn) {
-
-        closeProductModalBtn.addEventListener(
-            'click',
-            closeProductModal
-        );
-    }
-
-
-    if (closeProductModalBg) {
-
-        closeProductModalBg.addEventListener(
-            'click',
-            closeProductModal
-        );
-    }
-
-
-    /* ----------------------------------------------------------------------
-       AJOUT AU PANIER
-       ---------------------------------------------------------------------- */
-
-    if (modalAddToCartBtn) {
-
-        modalAddToCartBtn.addEventListener(
-            'click',
-            () => {
-
-                if (!selectedProductForModal) {
-                    return;
-                }
-
-
-                const qty =
-                    parseInt(modalQty?.value) || 1;
-
-
-                let selectedVariant = null;
-                let selectedColor = null;
-
-
-                /* STICKERS */
-
-                if (
-                    selectedProductForModal.id === 1 ||
-                    selectedProductForModal.id === 2
-                ) {
-
-                    selectedVariant = [];
-
-
-                    const checkboxSelector =
-                        selectedProductForModal.id === 1
-                            ? '.school-subject-checkbox:checked'
-                            : '.model-checkbox:checked';
-
-
-                    document
-                        .querySelectorAll(checkboxSelector)
-                        .forEach(checkbox => {
-
-                            selectedVariant.push(
-                                checkbox.value
-                            );
-                        });
-
-
-                    const colorSelect =
-                        document.getElementById(
-                            'dynamicColorSelect'
-                        );
-
-
-                    selectedColor =
-                        colorSelect
-                            ? colorSelect.value
-                            : null;
-
-
-                    if (
-                        selectedVariant.length === 0
-                    ) {
-
-                        alert(
-                            "Merci de sélectionner au moins un choix."
-                        );
-
-                        return;
-                    }
-
-
-                    if (!selectedColor) {
-
-                        alert(
-                            "Merci de choisir une couleur."
-                        );
-
-                        return;
-                    }
-                }
-
-
-                /* AUTRES PRODUITS */
-
-                else if (
-                    selectedProductForModal.variants &&
-                    selectedProductForModal.variants.length > 0
-                ) {
-
-                    const select =
-                        document.getElementById(
-                            'dynamicVariantSelect'
-                        );
-
-
-                    if (select) {
-                        selectedVariant =
-                            select.value;
-                    }
-                }
-
-
-                addToCart(
-                    selectedProductForModal,
-                    qty,
-                    selectedVariant,
-                    selectedColor
-                );
-
-
-                closeProductModal();
-            }
-        );
-    }
-
-
-    /* ----------------------------------------------------------------------
-       PANIER
-       ---------------------------------------------------------------------- */
-
-    if (openCartBtn) {
-
-        openCartBtn.addEventListener(
-            'click',
-            () => {
-
-                cartDrawer?.classList.add(
-                    'active'
-                );
-            }
-        );
-    }
-
-
-    if (closeCartBtn) {
-
-        closeCartBtn.addEventListener(
-            'click',
-            () => {
-
-                cartDrawer?.classList.remove(
-                    'active'
-                );
-            }
-        );
-    }
-
-
-    if (closeCartBg) {
-
-        closeCartBg.addEventListener(
-            'click',
-            () => {
-
-                cartDrawer?.classList.remove(
-                    'active'
-                );
-            }
-        );
-    }
-
-
-    /* ----------------------------------------------------------------------
-       BOUTONS QUANTITÉ DU PANIER
-       ---------------------------------------------------------------------- */
-
-    if (cartItemsList) {
-
-        cartItemsList.addEventListener(
-            'click',
-            event => {
-
-                const minus =
-                    event.target.closest('.cart-minus');
-
-                if (minus) {
-
-                    changeQty(
-                        Number(minus.dataset.index),
-                        -1
-                    );
-
-                    return;
-                }
-
-
-                const plus =
-                    event.target.closest('.cart-plus');
-
-                if (plus) {
-
-                    changeQty(
-                        Number(plus.dataset.index),
-                        1
-                    );
-
-                    return;
-                }
-
-
-                const remove =
-                    event.target.closest(
-                        '.cart-item-remove'
-                    );
-
-                if (remove) {
-
-                    removeCartItem(
-                        Number(remove.dataset.index)
-                    );
-                }
-            }
-        );
-    }
-
-
-    /* ----------------------------------------------------------------------
-       VALIDATION COMMANDE
-       ---------------------------------------------------------------------- */
-
-    if (goToCheckoutBtn) {
-
-        goToCheckoutBtn.addEventListener(
-            'click',
-            () => {
-
-                if (cart.length === 0) {
-                    return;
-                }
-
-
-                prepareOrderSummary();
-
-
-                cartStep1?.classList.remove(
-                    'active'
-                );
-
-                cartStep2?.classList.add(
-                    'active'
-                );
-            }
-        );
-    }
-
-
-    /* ----------------------------------------------------------------------
-       RETOUR PANIER
-       ---------------------------------------------------------------------- */
-
-    if (backToCartBtn) {
-
-        backToCartBtn.addEventListener(
-            'click',
-            () => {
-
-                cartStep2?.classList.remove(
-                    'active'
-                );
-
-                cartStep1?.classList.add(
-                    'active'
-                );
-            }
-        );
-    }
-
-
-    /* ----------------------------------------------------------------------
-       FORMULAIRE FORMSPREE
-       ---------------------------------------------------------------------- */
-
-    if (orderForm) {
-
-        orderForm.addEventListener(
-            'submit',
-            async event => {
-
-                event.preventDefault();
-
-
-                if (
-                    orderForm.action.includes(
-                        'VOTRE_ID_FORMSPREE_ICI'
-                    )
-                ) {
-
-                    if (formStatusMessage) {
-
-                        formStatusMessage.className =
-                            'form-status-msg error';
-
-                        formStatusMessage.textContent =
-                            "Attention : Remplacez VOTRE_ID_FORMSPREE_ICI par votre identifiant Formspree.";
-                    }
-
-                    return;
-                }
-
-
-                const formData =
-                    new FormData(orderForm);
-
-
-                const submitBtn =
-                    document.getElementById(
-                        'submitOrderBtn'
-                    );
-
-
-                if (submitBtn) {
-
-                    submitBtn.disabled = true;
-
-                    submitBtn.textContent =
-                        "Envoi de la commande en cours...";
-                }
-
-
-                try {
-
-                    const response =
-                        await fetch(
-                            orderForm.action,
-                            {
-                                method: 'POST',
-                                body: formData,
-                                headers: {
-                                    'Accept':
-                                        'application/json'
-                                }
-                            }
-                        );
-
-
-                    if (response.ok) {
-
-                        if (formStatusMessage) {
-
-                            formStatusMessage.className =
-                                'form-status-msg success';
-
-                            formStatusMessage.textContent =
-                                "Merci ! Votre commande a été envoyée avec succès.";
-                        }
-
-
-                        orderForm.reset();
-
-                        cart = [];
-
-                        updateCartUI();
-
-
-                        setTimeout(
-                            () => {
-
-                                cartDrawer?.classList.remove(
-                                    'active'
-                                );
-
-                                cartStep2?.classList.remove(
-                                    'active'
-                                );
-
-                                cartStep1?.classList.add(
-                                    'active'
-                                );
-
-
-                                if (formStatusMessage) {
-
-                                    formStatusMessage.className =
-                                        'form-status-msg';
-
-                                    formStatusMessage.textContent =
-                                        '';
-                                }
-
-                            },
-                            4000
-                        );
-
-
-                    } else {
-
-                        throw new Error(
-                            "Erreur Formspree"
-                        );
-                    }
-
-
-                } catch (error) {
-
-                    console.error(
-                        "Erreur d'envoi :",
-                        error
-                    );
-
-
-                    if (formStatusMessage) {
-
-                        formStatusMessage.className =
-                            'form-status-msg error';
-
-                        formStatusMessage.textContent =
-                            "Une erreur est survenue lors de l'envoi. Réessayez.";
-                    }
-
-
-                } finally {
-
-                    if (submitBtn) {
-
-                        submitBtn.disabled = false;
-
-                        submitBtn.textContent =
-                            "Valider et envoyer la commande";
-                    }
-                }
-            }
-        );
-    }
-}
-
-
-/* ==========================================================================
-   FONCTIONS ACCESSIBLES DEPUIS LA PAGE
-   ========================================================================== */
-
-window.openProductModal = openProductModal;
-window.closeProductModal = closeProductModal;
-window.changeQty = changeQty;
-window.removeCartItem = removeCartItem;
+</body>
+</html>
