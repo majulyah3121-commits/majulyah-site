@@ -1,7 +1,7 @@
 backend:
-  name: github
+  name: git-gateway
   repo: ton-utilisateur/majulyah-site # Ton dépôt GitHub (ex: majulyah3121-commits/majulyah-site)
-  branch: main
+  branch: principal
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
