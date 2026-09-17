@@ -1,0 +1,20 @@
+backend:
+  name: github
+  repo: ton-utilisateur/majulyah-site # Ton dépôt GitHub (ex: majulyah3121-commits/majulyah-site)
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "produits"
+    label: "Produits"
+    folder: "content/produits"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nom du produit", name: "title", widget: "string" }
+      - { label: "Prix (€)", name: "price", widget: "number", value_type: "float" }
+      - { label: "Catégorie", name: "category", widget: "select", options: ["Aroma", "Bijoux", "Déco"] }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Description", name: "description", widget: "text" }
