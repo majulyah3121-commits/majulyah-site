@@ -13,4 +13,8 @@ collections:
         label: "Page d'accueil"
         name: "home"
         fields:
-          - {label: "Contenu complet du site", name: "body", widget: "markdown"}
+          - {label: "Sur-titre (Créations artisanales)", name: "subtitle", widget: "string"}
+          - {label: "Grand titre principal", name: "maintitle", widget: "string"}
+          - {label: "Paragraphe de description", name: "description", widget: "text"}
+          - {label: "Texte du bouton", name: "button_text", widget: "string"}
+          - {label: "Photo du sac (Arrière-plan)", name: "hero_image", widget: "image"}
