@@ -1,9 +1,8 @@
 ---
 title: "Maju'Lyah | Papeterie & Organisation"
 description: "Découvrez les solutions de rangement et la papeterie artisanale Maju'Lyah."
-image: "/images/file_000000000fd081f5b6a7065f6ad5254a.png"
+image: "images/about.jpg"
 hero:
-  image: "/images/file_000000000fd081f5b6a7065f6ad5254a.png"
   maintitle: "Sublimez votre quotidien & vos pensées"
   subtitle: "Créations artisanales & douces"
   description: "Une papeterie minimaliste et élégante, pensée avec amour."
@@ -124,6 +123,52 @@ about:
         </div>
         <div class="footer-bottom"><p>&copy; <span id="year"></span> Maju’Lyah. Tous droits réservés.</p></div>
     </footer>
+
+    <!-- MODALE FICHE PRODUIT -->
+    <div class="product-modal-backdrop" id="closeProductModalBg"></div>
+    <div class="product-modal" id="productModal">
+        <button class="close-modal-btn" id="closeProductModalBtn">&times;</button>
+        <div class="product-modal-content">
+            <div class="product-modal-image">
+                <img src="" id="modalImg" alt="Produit">
+            </div>
+            <div class="product-modal-details">
+                <span class="product-category" id="modalCategory"></span>
+                <h2 class="product-modal-title" id="modalTitle"></h2>
+                <div class="product-modal-price" id="modalPrice"></div>
+                <p class="product-modal-description" id="modalDescription"></p>
+
+                <div class="quantity-add-group">
+                    <input type="number" id="modalQty" value="1" min="1" class="qty-input">
+                    <button class="btn btn-primary" id="modalAddToCartBtn">Ajouter au panier</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TIROIR PANIER -->
+    <div class="cart-backdrop" id="closeCartBg"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Mon Panier</h3>
+            <button class="close-cart-btn" id="closeCartBtn">&times;</button>
+        </div>
+        
+        <div class="cart-body">
+            <div id="cartStep1" class="cart-step active">
+                <div id="cartItemsList" class="cart-items-list"></div>
+                <div class="cart-footer">
+                    <div class="cart-total-row">
+                        <span>Total :</span>
+                        <span id="cartTotalPrice">0,00 €</span>
+                    </div>
+                    <a id="mailToCheckout" href="#" class="btn btn-primary btn-block">Passer la commande par email</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toastNotification" class="toast-notification"></div>
 
     <script src="script.js"></script>
 </body>
