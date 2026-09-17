@@ -172,9 +172,3 @@
         -webkit-touch-callout: none;
     }
 }
-/* ==========================================================================
-   MESSAGE ANDROID — ENVOI DU BON DE COMMANDE
-   ========================================================================== */
-
-.message-paysage {
-    display: none;
