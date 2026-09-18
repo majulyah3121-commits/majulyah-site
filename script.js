@@ -8,7 +8,6 @@ const products = [
         name: "Stickers 6ème",
         category: "Organisation",
         price: 12.00,
-       //Utilisation du chemin relatif (recommandé) :
         image: "images/Ecriture%20TEEBRUSH.jpg",
         description: "Des stickers personnalisés pour organiser tes affaires scolaires.",
         variants: [
@@ -30,7 +29,7 @@ const products = [
         name: "Stickers enfants",
         category: "Organisation",
         price: 10.00,
-        image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/20260913_154315.jpg",
+        image: "images/20260913_154315.jpg",
         description: "Des stickers personnalisés pour que chaque jouet trouve sa place !",
         variants: [
             "Poupée", "Bébé", "Barbie", "Dînette", "Princesse", "Déguisement",
@@ -312,11 +311,6 @@ function openProductModal(productId) {
         variantGroup.style.display = 'none';
     }
 
-    /*
-       On cache le select présent dans index.html.
-       Pour les produits simples, on en crée un nouveau uniquement
-       lorsque cela est nécessaire.
-    */
     if (modalVariantSelect) {
         modalVariantSelect.innerHTML = '';
         modalVariantSelect.style.display = 'none';
