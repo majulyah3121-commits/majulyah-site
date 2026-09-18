@@ -8,6 +8,7 @@ const products = [
         name: "Stickers 6ème",
         category: "Organisation",
         price: 12.00,
+       //Utilisation du chemin relatif (recommandé) :
         image: "images/Ecriture%20TEEBRUSH.jpg",
         description: "Des stickers personnalisés pour organiser tes affaires scolaires.",
         variants: [
