@@ -8,7 +8,7 @@ const products = [
         name: "Stickers 6ème",
         category: "Organisation",
         price: 12.00,
-        image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/ecriture-teebrush.png",
+        image: "https://raw.githubusercontent.com/majulyah3121-commits/majulyah-site/main/images/Ecriture%20TEEBRUSH.jpg",
         description: "Des stickers personnalisés pour organiser tes affaires scolaires.",
         variants: [
             "Français", "Anglais", "Espagnol", "Allemand", "Latin", "Mathématiques",
