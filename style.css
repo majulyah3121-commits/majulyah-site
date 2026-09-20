@@ -573,10 +573,11 @@ body {
     max-height: 100vh;
     position: relative;
     z-index: 2;
-    padding: 20px 20px 30px 20px;
+    padding: 20px 20px 60px 20px;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    overflow-y: auto;
 }
 
 .cart-header {
@@ -762,5 +763,10 @@ body {
     .about-grid,
     .product-detail-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Marge de sécurité importante en bas sur mobile pour remonter les boutons et éviter le bandeau de recherche */
+    .cart-drawer-content {
+        padding-bottom: 140px !important;
     }
 }
