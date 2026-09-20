@@ -764,11 +764,4 @@ body {
         max-width: 100% !important;
         padding-bottom: 180px !important;
     }
-
-    .cart-footer, 
-    #orderForm button[type="submit"], 
-    #goToCheckoutBtn {
-        position: static !important;
-        box-shadow: none !important;
-    }
 }
