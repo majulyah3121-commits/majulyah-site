@@ -572,7 +572,7 @@ body {
     height: 100%;
     position: relative;
     z-index: 2;
-    padding: 20px 20px 140px 20px;
+    padding: 20px 20px 180px 20px;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -756,5 +756,27 @@ body {
     .about-grid,
     .product-detail-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Le panier prend toute la largeur sur mobile et le footer (les boutons) devient fixe un peu plus haut pour ne plus être masqué */
+    .cart-drawer-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-bottom: 110px !important;
+    }
+
+    .cart-footer, 
+    #orderForm button[type="submit"], 
+    #goToCheckoutBtn {
+        position: fixed !important;
+        bottom: 45px !important;
+        left: 15px !important;
+        right: 15px !important;
+        width: auto !important;
+        z-index: 10;
+        box-shadow: 0 -4px 10px rgba(0,0,0,0.08);
+        border-radius: 25px;
+        background-color: var(--color-surface);
+        padding: 15px;
     }
 }
