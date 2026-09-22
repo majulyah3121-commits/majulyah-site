@@ -68,7 +68,7 @@ colors: [
 
 {
 id: 4,
-name: "Stickers Jouets",
+name: "Stickers Jouets fille",
 category: "Nouveautés",
 price: 14.00,
 image: "images/stickers-jouets1.jpg",
@@ -88,7 +88,7 @@ colors: [
 
 {
 id: 5,
-name: "Stickers Jouets",
+name: "Stickers Jouets garçon",
 category: "Nouveautés",
 price: 14.00,
 image: "images/stickers-jouets2.jpg",
