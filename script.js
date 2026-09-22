@@ -19,7 +19,7 @@ variants: [
 colors: [
 "Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé",
 "Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé",
-"Gris clair", "Gris foncé", "Noir", "Blanc", "Rose", "Violet clair",
+"Gris clair", "Gris foncé", "Noir", "Blanc", "Doré", "Argenté", "Rose", "Violet clair",
 "Violet foncé", "Marron"
 ]
 }, 
@@ -40,7 +40,7 @@ variants: [
 colors: [
 "Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé",
 "Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé",
-"Gris clair", "Gris foncé", "Noir", "Blanc", "Rose", "Violet clair",
+"Gris clair", "Gris foncé", "Noir", "Blanc", "Doré", "Argenté", "Rose", "Violet clair",
 "Violet foncé", "Marron"
 ]
 }, 
@@ -61,30 +61,50 @@ variants: [
 colors: [
 "Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé",
 "Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé",
-"Gris clair", "Gris foncé", "Noir", "Blanc", "Rose", "Violet clair",
+"Gris clair", "Gris foncé", "Noir", "Blanc", "Doré", "Argenté", "Rose", "Violet clair",
 "Violet foncé", "Marron"
 ]
 }, 
 
 {
 id: 4,
-name: "Set de Cartes Poétiques & Enveloppes",
-category: "Mailow Club",
-price: 12.00,
-image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80",
-description: "Coffret de cartes d'art au fini mat accompagnées de leurs enveloppes.",
-variants: ["Lot de 5 cartes", "Lot de 10 cartes"]
+name: "Stickers Jouets",
+category: "Nouveautés",
+price: 14.00,
+image: "stickers-jouets1.jpg",
+description: "Organise la chambre de ton enfant.",
+variants: [
+"Barbies", "Poupées", "Bébés", "Vêtements Bébé", "Vêtements Barbie", "Accessoires",
+"Sacs", "Dînette", "Peluches", "Déguisements", "Puzzles",
+"Figurines", "Animaux", "Dinosaures", "Licornes", "Lego", "Playmobil", "Super-héros", "Robots", "Voitures", "Coloriage"
+],
+colors: [
+"Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé",
+"Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé",
+"Gris clair", "Gris foncé", "Noir", "Blanc", "Doré", "Argenté", "Rose", "Violet clair",
+"Violet foncé", "Marron"
+]
 }, 
 
 {
 id: 5,
-name: "Planner Non Daté 'Sérénité'",
+name: "Stickers Jouets",
 category: "Nouveautés",
-price: 24.00,
-image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80",
-description: "Le compagnon idéal pour planifier votre année à votre rythme, sans dates pré-remplies.",
-variants: ["Reliure Dorée", "Reliure Rose Poudré"]
-}, 
+price: 14.00,
+image: "stickers-jouets2.jpg",
+description: "Organise la chambre de ton enfant.",
+variants: [
+"Barbies", "Poupées", "Bébés", "Vêtements Bébé", "Vêtements Barbie", "Accessoires",
+"Sacs", "Dînette", "Peluches", "Déguisements", "Puzzles",
+"Figurines", "Animaux", "Dinosaures", "Licornes", "Lego", "Playmobil", "Super-héros", "Robots", "Voitures", "Coloriage"
+],
+colors: [
+"Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé",
+"Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé",
+"Gris clair", "Gris foncé", "Noir", "Blanc", "Doré", "Argenté", "Rose", "Violet clair",
+"Violet foncé", "Marron"
+]
+},  
 
 {
 id: 6,
