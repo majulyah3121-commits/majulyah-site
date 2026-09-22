@@ -91,7 +91,7 @@ id: 5,
 name: "Stickers Jouets garçon",
 category: "Nouveautés",
 price: 14.00,
-image: "images/stickers-jouets2.jpg",
+image: "images/52a85e9dc8144bcb86f5501f9860c99d.webp",
 description: "Organise la chambre de ton enfant.",
 variants: [
 "Barbies", "Poupées", "Bébés", "Vêtements Bébé", "Vêtements Barbie", "Accessoires",
