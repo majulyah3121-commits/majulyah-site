@@ -325,10 +325,10 @@ modalVariantSelect.style.display = 'none';
 
 
 /* ----------------------------------------------------------------------
-STICKERS 6ÈME (ID 1, 2, 3)
+STICKERS (ID 1, 2, 3, 4, 5)
 ---------------------------------------------------------------------- */ 
 
-if (product.id === 1 || product.id === 2 || product.id === 3) { 
+if (product.id === 1 || product.id === 2 || product.id === 3 || product.id === 4 || product.id === 5) { 
 
 const title = document.createElement('div'); 
 title.textContent = "Choisis tes matières :"; 
@@ -506,7 +506,7 @@ let optionsHTML = '';
 
 if (item.variant) { 
 const choices = Array.isArray(item.variant) ? item.variant.join(', ') : item.variant; 
-const label = (item.id === 1 || item.id === 2 || item.id === 3) ? 'Matières' : 'Option'; 
+const label = (item.id === 1 || item.id === 2 || item.id === 3 || item.id === 4 || item.id === 5) ? 'Matières' : 'Option'; 
 optionsHTML += `<div class="cart-item-variant">${label} : ${choices}</div>`;
 }
 
@@ -593,7 +593,7 @@ summary += `- ${item.name}\n`;
 
 if (item.variant) { 
 const choices = Array.isArray(item.variant) ? item.variant.join(', ') : item.variant; 
-const label = (item.id === 1 || item.id === 2 || item.id === 3) ? 'Matières' : 'Option'; 
+const label = (item.id === 1 || item.id === 2 || item.id === 3 || item.id === 4 || item.id === 5) ? 'Matières' : 'Option'; 
 summary += `  ${label} : ${choices}\n`;
 }
 
@@ -733,7 +733,7 @@ let selectedVariant = null;
 let selectedColor = null;
 
 /* STICKERS */ 
-if (selectedProductForModal.id === 1 || selectedProductForModal.id === 2 || selectedProductForModal.id === 3) { 
+if (selectedProductForModal.id === 1 || selectedProductForModal.id === 2 || selectedProductForModal.id === 3 || selectedProductForModal.id === 4 || selectedProductForModal.id === 5) { 
 selectedVariant = [];
 const checkboxSelector = '.school-subject-checkbox:checked';
 
