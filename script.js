@@ -91,7 +91,7 @@ id: 5,
 name: "Stickers Jouets",
 category: "Nouveautés",
 price: 14.00,
-image: "stickers-jouets2.jpg",
+image: "images/stickers-jouets2.jpg",
 description: "Organise la chambre de ton enfant.",
 variants: [
 "Barbies", "Poupées", "Bébés", "Vêtements Bébé", "Vêtements Barbie", "Accessoires",
