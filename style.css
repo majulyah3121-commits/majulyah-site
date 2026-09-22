@@ -144,7 +144,7 @@ body {
     min-height: 45vh; 
     max-height: 350px; 
     background-image: url('images/about2.jpg');
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
