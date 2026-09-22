@@ -141,8 +141,8 @@ body {
 
 .hero-section {
     width: 100%;
-    min-height: 45vh;
-    max-height: 450px;
+    min-height: 200px; /*Réduit la hauteur minimale */
+    max-height: 250px; /* Réduit la hauteur maximale */
     background-image: url('images/about2.jpg');
     background-size: cover;
     background-position: center;
