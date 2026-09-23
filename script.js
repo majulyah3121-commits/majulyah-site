@@ -128,12 +128,23 @@ variants: ["Finition Matte", "Finition Glossy"]
 
 {
 id: 8,
-name: "Kit Papeterie 'Mailow Routine'",
-category: "Mailow Club",
-price: 29.90,
+name: "Le carnet intemporel",
+category: "Maju'Club",
+price: 12.00,
 image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80",
-description: "Un kit complet comprenant un bloc-notes, une planche de stickers, deux marque-pages et un carnet exclusif Mailow Club.",
-variants: ["Box Complète"]
+description: "Le kit complet : carnet intemporel avec pages de couverture interchangeables, perforatrice champignon et kit de la saison en cours (Automne).",
+variants: ["Kit Complet Automne"],
+stock: 10
+},
+
+{
+id: 9,
+name: "Illustration recharges saison automne",
+category: "Maju'Club",
+price: 5.00,
+image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80",
+description: "Recharge de pages et illustrations pour la saison d'automne.",
+variants: ["Recharge Automne"]
 }
 ];
 
@@ -246,6 +257,18 @@ filteredProducts.forEach(product => {
 const card = document.createElement('div');
 card.className = 'product-card'; 
 
+let buttonHtml = `<button type="button" class="btn-order-card" data-product-id="${product.id}">Voir / Commander</button>`;
+let stockInfoHtml = '';
+
+if (product.id === 8) {
+    if (product.stock > 0) {
+        stockInfoHtml = `<p style="font-size: 0.85rem; color: #666; margin: 5px 0;">Stock : ${product.stock} disponibles</p>`;
+    } else {
+        stockInfoHtml = `<p style="font-size: 0.85rem; color: #d9534f; font-weight: bold; margin: 5px 0;">Rupture de stock</p>`;
+        buttonHtml = `<button type="button" class="btn-order-card disabled" disabled style="background-color: #e0e0e0; color: #888; border: none; cursor: not-allowed;">Épuisé</button>`;
+    }
+}
+
 card.innerHTML = `
 <div class="product-image-container">
     <img src="${product.image}" alt="${product.name}" loading="lazy">
@@ -255,12 +278,11 @@ card.innerHTML = `
     <span class="product-category">${product.category}</span> 
     <h3 class="product-name">${product.name}</h3> 
     <p class="product-desc-short">${product.description.substring(0, 65)}...</p> 
+    ${stockInfoHtml}
 
     <div class="product-bottom"> 
         <span class="product-price">${product.price.toFixed(2).replace('.', ',')} €</span> 
-        <button type="button" class="btn-order-card" data-product-id="${product.id}">
-            Voir / Commander
-        </button> 
+        ${buttonHtml}
     </div> 
 </div>
 `; 
@@ -284,6 +306,11 @@ if (!product) {
 console.error("Produit introuvable :", productId);
 return;
 } 
+
+if (product.id === 8 && product.stock <= 0) {
+    alert("Désolé, cet article est en rupture de stock.");
+    return;
+}
 
 selectedProductForModal = product; 
 
@@ -442,6 +469,14 @@ selectedVariant,
 selectedColor
 ) { 
 
+if (product.id === 8) {
+    if (product.stock < quantity) {
+        alert(`Désolé, il ne reste que ${product.stock} exemplaire(s) du carnet intemporel en stock.`);
+        return;
+    }
+    product.stock -= quantity;
+}
+
 const colorKey = selectedColor || 'default'; 
 
 const cartItemId = `${product.id}-${colorKey}`;
@@ -466,6 +501,7 @@ quantity
 }
 
 updateCartUI(); 
+renderProducts(document.querySelector('.filter-btn.active')?.dataset.category || 'all');
 
 showToast(`${product.name} ajouté à votre panier !`);
 }
@@ -506,7 +542,7 @@ let optionsHTML = '';
 
 if (item.variant) { 
 const choices = Array.isArray(item.variant) ? item.variant.join(', ') : item.variant; 
-const label = (item.id === 1 || item.id === 2 || item.id === 3 || item.id === 4 || item.id === 5) ? 'Matières' : 'Option'; 
+const label = (item.id >= 1 && item.id <= 5) ? 'Matières' : 'Option'; 
 optionsHTML += `<div class="cart-item-variant">${label} : ${choices}</div>`;
 }
 
@@ -552,13 +588,31 @@ function changeQty(index, delta) {
 
 if (!cart[index]) return; 
 
-cart[index].quantity += delta;
+const item = cart[index];
 
-if (cart[index].quantity <= 0) {
+if (item.id === 8) {
+    const product = products.find(p => p.id === 8);
+    if (product) {
+        if (delta > 0) {
+            if (product.stock < delta) {
+                alert("Stock maximum atteint pour le carnet intemporel.");
+                return;
+            }
+            product.stock -= delta;
+        } else {
+            product.stock += Math.abs(delta);
+        }
+    }
+}
+
+item.quantity += delta;
+
+if (item.quantity <= 0) {
 cart.splice(index, 1);
 }
 
 updateCartUI();
+renderProducts(document.querySelector('.filter-btn.active')?.dataset.category || 'all');
 }
 
 
@@ -570,9 +624,19 @@ function removeCartItem(index) {
 
 if (!cart[index]) return; 
 
+const item = cart[index];
+
+if (item.id === 8) {
+    const product = products.find(p => p.id === 8);
+    if (product) {
+        product.stock += item.quantity;
+    }
+}
+
 cart.splice(index, 1); 
 
 updateCartUI();
+renderProducts(document.querySelector('.filter-btn.active')?.dataset.category || 'all');
 }
 
 
@@ -593,7 +657,7 @@ summary += `- ${item.name}\n`;
 
 if (item.variant) { 
 const choices = Array.isArray(item.variant) ? item.variant.join(', ') : item.variant; 
-const label = (item.id === 1 || item.id === 2 || item.id === 3 || item.id === 4 || item.id === 5) ? 'Matières' : 'Option'; 
+const label = (item.id >= 1 && item.id <= 5) ? 'Matières' : 'Option'; 
 summary += `  ${label} : ${choices}\n`;
 }
 
@@ -733,7 +797,7 @@ let selectedVariant = null;
 let selectedColor = null;
 
 /* STICKERS */ 
-if (selectedProductForModal.id === 1 || selectedProductForModal.id === 2 || selectedProductForModal.id === 3 || selectedProductForModal.id === 4 || selectedProductForModal.id === 5) { 
+if (selectedProductForModal.id >= 1 && selectedProductForModal.id <= 5) { 
 selectedVariant = [];
 const checkboxSelector = '.school-subject-checkbox:checked';
 
@@ -804,7 +868,7 @@ return;
 
 const plus = event.target.closest('.cart-plus'); 
 if (plus) { 
-changeQty(Number(plus.dataset.index), 1); 
+changeQty(Number(minus.dataset.index), 1); 
 return;
 }
 
@@ -882,6 +946,7 @@ formStatusMessage.textContent = "Merci ! Votre commande a été envoyée avec su
 orderForm.reset(); 
 cart = []; 
 updateCartUI();
+renderProducts('all');
 
 setTimeout(() => { 
 cartDrawer?.classList.remove('active'); 
