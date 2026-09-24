@@ -129,7 +129,7 @@ variants: ["Finition Matte", "Finition Glossy"]
 {
 id: 8,
 name: 'Coffret "Le carnet intemporel" – Édition Limitée Automne 🍂✨',
-category: "Maju'Club",
+category: "Carnet",
 price: 20.00,
 image: "images/file_00000000a0f8824390f2d0f16c23dfdf.png",
 description: "Plonge dans une ambiance douce et réconfortante avec ce coffret idéal pour organiser tes journées. Avec notre concept unique, tu achètes la structure du carnet une seule fois et tu changes simplement la couverture au fil des saisons grâce à notre gamme interchangeable !\n\nCe que contient le coffret (20,00 €) :\n📔 Le carnet ligné et sa couverture soignée.\n🦊 Un marque-page assorti avec son ruban à carreaux.\n🎃 Un marque-page aimanté citrouille dessiné par mes soins.\n🍁 Une planche de stickers automnaux.\n🎁 Un petit cadeau surprise !\n\n📦 Livraison : Mondial Relay (+4,15 €).\n💡 Dans l'encadré \"Message\" de ta commande, pense à noter l'adresse/nom de ton Point Relais ou Locker et ton numéro de téléphone.\n\nOffre-toi une parenthèse de douceur ! ☕️🧡",
