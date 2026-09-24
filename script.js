@@ -139,12 +139,12 @@ stock: 5
 
 {
 id: 9,
-name: "Illustration recharges saison automne",
-category: "Maju'Club",
+name: "Illustration recharges",
+category: "Carnet",
 price: 5.00,
 image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80",
 description: "Recharge de pages et illustrations pour la saison d'automne.",
-variants: ["Recharge Automne"]
+variants: ["Recharge Automne", "Recharge Hiver", "Recharge Printemps", "Recharge été"]
 }
 ];
 
