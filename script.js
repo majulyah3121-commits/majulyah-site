@@ -108,26 +108,6 @@ colors: [
 
 {
 id: 6,
-name: "Marque-page en Laiton & Ruban",
-category: "Nouveautés",
-price: 6.50,
-image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80",
-description: "Élégant marque-page en métal finition dorée avec son ruban terracotta.",
-variants: ["Ruban Terracotta", "Ruban Sauge"]
-}, 
-
-{
-id: 7,
-name: "Stickers Citations & Pensées",
-category: "Stickers",
-price: 5.20,
-image: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&w=600&q=80",
-description: "Mots doux, citations motivantes et calligraphie fine.",
-variants: ["Finition Matte", "Finition Glossy"]
-}, 
-
-{
-id: 8,
 name: 'Coffret "Le carnet intemporel" – Édition Limitée Automne 🍂✨',
 category: "Carnet",
 price: 20.00,
@@ -138,7 +118,7 @@ stock: 5
 },
 
 {
-id: 9,
+id: 7,
 name: "Illustration recharges",
 category: "Carnet",
 price: 5.00,
@@ -260,7 +240,7 @@ card.className = 'product-card';
 let buttonHtml = `<button type="button" class="btn-order-card" data-product-id="${product.id}">Voir / Commander</button>`;
 let stockInfoHtml = '';
 
-if (product.id === 8) {
+if (product.id === 6) {
     if (product.stock > 0) {
         stockInfoHtml = `<p style="font-size: 0.85rem; color: #666; margin: 5px 0;">Stock : ${product.stock} disponibles</p>`;
     } else {
@@ -307,7 +287,7 @@ console.error("Produit introuvable :", productId);
 return;
 } 
 
-if (product.id === 8 && product.stock <= 0) {
+if (product.id === 6 && product.stock <= 0) {
     alert("Désolé, cet article est en rupture de stock.");
     return;
 }
@@ -355,7 +335,7 @@ modalVariantSelect.style.display = 'none';
 STICKERS (ID 1, 2, 3, 4, 5)
 ---------------------------------------------------------------------- */ 
 
-if (product.id === 1 || product.id === 2 || product.id === 3 || product.id === 4 || product.id === 5) { 
+if (product.id >= 1 && product.id <= 5) { 
 
 const title = document.createElement('div'); 
 title.textContent = "Choisis tes matières :"; 
@@ -469,7 +449,7 @@ selectedVariant,
 selectedColor
 ) { 
 
-if (product.id === 8) {
+if (product.id === 6) {
     if (product.stock < quantity) {
         alert(`Désolé, il ne reste que ${product.stock} exemplaire(s) du carnet intemporel en stock.`);
         return;
@@ -590,8 +570,8 @@ if (!cart[index]) return;
 
 const item = cart[index];
 
-if (item.id === 8) {
-    const product = products.find(p => p.id === 8);
+if (item.id === 6) {
+    const product = products.find(p => p.id === 6);
     if (product) {
         if (delta > 0) {
             if (product.stock < delta) {
@@ -626,8 +606,8 @@ if (!cart[index]) return;
 
 const item = cart[index];
 
-if (item.id === 8) {
-    const product = products.find(p => p.id === 8);
+if (item.id === 6) {
+    const product = products.find(p => p.id === 6);
     if (product) {
         product.stock += item.quantity;
     }
