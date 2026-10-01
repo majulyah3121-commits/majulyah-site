@@ -3,14 +3,14 @@ MAJU'LYAH - STYLES PRINCIPAUX
 ========================================================================== */
 
 :root {
---color-bg: #fcf9f5;
+--color-bg: #f7f3ec;
 --color-surface: #ffffff;
---color-text: #333333;
---color-text-muted: #777777;
---color-primary: #b86b5c;
---color-primary-hover: #a2594b;
---color-accent: #e8d0c5;
---color-border: #eee5dd;
+--color-text: #4a3b32;
+--color-text-muted: #8c786d;
+--color-primary: #b85d43;
+--color-primary-hover: #9e4b33;
+--color-accent: #ebdcd0;
+--color-border: #e6d7cc;
 --font-heading: 'Cormorant Garamond', serif;
 --font-body: 'Montserrat', sans-serif;
 --max-width: 1200px;
@@ -18,12 +18,11 @@ MAJU'LYAH - STYLES PRINCIPAUX
 --transition: all 0.3s ease;
 }
 
-{
+* {
 box-sizing: border-box;
 margin: 0;
 padding: 0;
 }
-
 
 body {
 font-family: var(--font-body);
@@ -742,33 +741,14 @@ padding: 20px;
 border-bottom: 1px solid var(--color-border);
 }
 
-.nav-links.mobile-open {  
-    display: flex;  
-}  
-
-.mobile-menu-toggle {  
-    display: flex;  
-}  
-
-.hero-title {  
-    font-size: 2rem;  
-}  
-
-.about-grid,  
-.product-detail-grid {  
-    grid-template-columns: 1fr;  
-}  
-
-/* Panier plein écran avec marge de sécurité et défilement fluide */  
-.cart-drawer-content {  
-    width: 100% !important;  
-    max-width: 100% !important;  
-    padding-bottom: 180px !important;  
+.nav-links.mobile-open { display: flex; } 
+.mobile-menu-toggle { display: flex; } 
+.hero-title { font-size: 2rem; } 
+.about-grid, .product-detail-grid { grid-template-columns: 1fr; } 
+.cart-drawer-content { width: 100% !important; max-width: 100% !important; padding-bottom: 180px !important; } 
 }
 
-}
-
-/* Forçage de la visibilité, du texte et de la couleur des boutons de commande /
+/* Forçage de la visibilité, du texte et de la couleur des boutons de commande */
 #goToCheckoutBtn,
 #orderForm button[type="submit"] {
 background-color: var(--color-primary) !important;
@@ -777,159 +757,4 @@ font-weight: 500 !important;
 display: block !important;
 visibility: visible !important;
 opacity: 1 !important;
-}
-/ =========================================
-🍂 THÈME AUTOMNE — MAJU'LYAH
-========================================= */
-
-:root {
---automne-creme: #F8F3EA;
---automne-papier: #FFFDF8;
---automne-beige: #E8D8C3;
---automne-terracotta: #B86F52;
---automne-brun: #5C4033;
---automne-noisette: #80604D;
---automne-jaune: #D5A63A;
---automne-vert: #7B8060;
-}
-
-/* Fond général */
-body {
-background:
-linear-gradient(rgba(248,243,234,0.92), rgba(248,243,234,0.92)),
-radial-gradient(circle at 10% 20%, #D5A63A22 0 2px, transparent 3px),
-radial-gradient(circle at 85% 70%, #B86F5222 0 2px, transparent 3px);
-color: var(--automne-brun);
-}
-
-/* Titres */
-h1, h2, h3 {
-color: var(--automne-brun);
-}
-
-/* Liens */
-a {
-color: var(--automne-terracotta);
-transition: color 0.2s ease;
-}
-
-a:hover {
-color: var(--automne-jaune);
-}
-
-/* Boutons */
-button,
-.btn,
-button[type="submit"] {
-background: var(--automne-terracotta);
-color: white;
-border: none;
-border-radius: 999px;
-transition: all 0.25s ease;
-}
-
-button:hover,
-.btn:hover,
-button[type="submit"]:hover {
-background: var(--automne-brun);
-transform: translateY(-2px);
-}
-
-/* Cartes produits */
-.product-card,
-.product,
-.card {
-background: var(--automne-papier);
-border: 1px solid var(--automne-beige);
-border-radius: 18px;
-box-shadow: 0 6px 20px rgba(92,64,51,0.08);
-transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.product-card:hover,
-.product:hover,
-.card:hover {
-transform: translateY(-3px);
-box-shadow: 0 10px 25px rgba(92,64,51,0.13);
-}
-
-/* Prix */
-.price {
-color: var(--automne-terracotta);
-font-weight: 700;
-}
-
-/* Navigation */
-nav {
-background: rgba(255,253,248,0.95);
-border-bottom: 1px solid var(--automne-beige);
-}
-
-/* Sections */
-section {
-border-color: var(--automne-beige);
-}
-
-/* Encadrés d'information */
-.info,
-.notice,
-.alert {
-background: #F1E6D7;
-border-left: 4px solid var(--automne-jaune);
-color: var(--automne-brun);
-border-radius: 10px;
-}
-
-/* Panier */
-.cart-drawer,
-.cart,
-#cartDrawer {
-background: var(--automne-papier);
-border-left: 1px solid var(--automne-beige);
-}
-
-/* Champs du formulaire */
-input,
-textarea,
-select {
-background: #FFFDF8;
-border: 1px solid var(--automne-beige);
-color: var(--automne-brun);
-border-radius: 10px;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-outline: none;
-border-color: var(--automne-terracotta);
-box-shadow: 0 0 0 3px rgba(184,111,82,0.12);
-}
-
-/* Petits détails décoratifs */
-.hero::after {
-content: "🍂";
-display: block;
-font-size: 26px;
-margin-top: 12px;
-}
-
-/* Footer */
-footer {
-background: var(--automne-brun);
-color: var(--automne-creme);
-}
-
-footer a {
-color: var(--automne-beige);
-}
-
-footer a:hover {
-color: var(--automne-jaune);
-}
-
-/* Sélection de texte */
-::selection {
-background: var(--automne-beige);
-color: var(--automne-brun);
 }
