@@ -122,7 +122,7 @@ id: 7,
 name: "Illustration recharges",
 category: "Carnet",
 price: 5.00,
-image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80",
+image: "images/Design sans titre_20261001_152036_0000.png",
 description: "Recharge de pages et illustrations pour la saison d'automne.",
 variants: ["Recharge Automne", "Recharge Hiver", "Recharge Printemps", "Recharge été"]
 }
