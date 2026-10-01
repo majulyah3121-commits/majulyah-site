@@ -1,22 +1,38 @@
 /* ==========================================================================
-   MAJU'LYAH - STYLES PRINCIPAUX
+   MAJU'LYAH — STYLES PRINCIPAUX
+   THÈME AUTOMNE 🍂
    ========================================================================== */
 
 :root {
-    --color-bg: #fcf9f5;
-    --color-surface: #ffffff;
-    --color-text: #333333;
-    --color-text-muted: #777777;
-    --color-primary: #b86b5c;
-    --color-primary-hover: #a2594b;
-    --color-accent: #e8d0c5;
-    --color-border: #eee5dd;
+    /* Couleurs automnales */
+    --color-bg: #F7F1E8;
+    --color-surface: #FFFDF9;
+    --color-text: #4D4038;
+    --color-text-muted: #806F63;
+
+    --color-primary: #B86B4F;
+    --color-primary-hover: #96513D;
+
+    --color-accent: #E8D5BD;
+    --color-border: #E4D7C8;
+
+    /* Couleurs secondaires */
+    --color-sage: #85866B;
+    --color-moutarde: #C69A45;
+    --color-brun: #5D4639;
+
     --font-heading: 'Cormorant Garamond', serif;
     --font-body: 'Montserrat', sans-serif;
+
     --max-width: 1200px;
     --border-radius: 8px;
     --transition: all 0.3s ease;
 }
+
+
+/* ==========================================================================
+   RESET
+   ========================================================================== */
 
 * {
     box-sizing: border-box;
@@ -38,17 +54,33 @@ body {
     padding: 0 15px;
 }
 
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.max-w-700 { max-width: 700px; margin-left: auto; margin-right: auto; }
-.max-w-600 { max-width: 600px; margin-left: auto; margin-right: auto; }
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.max-w-700 {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.max-w-600 {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 /* ==========================================================================
    ENTÊTE & NAVIGATION
    ========================================================================== */
 
 .navbar {
-    background-color: var(--color-surface);
+    background-color: rgba(255, 253, 249, 0.97);
     border-bottom: 1px solid var(--color-border);
     position: sticky;
     top: 0;
@@ -109,7 +141,7 @@ body {
     top: -8px;
     right: -10px;
     background-color: var(--color-primary);
-    color: #fff;
+    color: #ffffff;
     font-size: 0.75rem;
     font-weight: 600;
     width: 18px;
@@ -135,14 +167,15 @@ body {
     background-color: var(--color-text);
 }
 
+
 /* ==========================================================================
    SECTION ACCUEIL / BANNIÈRE
    ========================================================================== */
 
 .hero-section {
     width: 100%;
-    min-height: 45vh; 
-    max-height: 350px; 
+    min-height: 45vh;
+    max-height: 350px;
     background-image: url('images/about2.jpg');
     background-size: contain;
     background-position: center;
@@ -159,7 +192,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(255, 248, 239, 0.10);
 }
 
 .hero-content {
@@ -185,6 +218,7 @@ body {
     font-weight: 400;
     margin-bottom: 15px;
     line-height: 1.2;
+    color: var(--color-text);
 }
 
 .hero-description {
@@ -195,6 +229,7 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+
 
 /* ==========================================================================
    BOUTONS & ELEMENTS COMMUNS
@@ -231,6 +266,7 @@ body {
     font-size: 2.2rem;
     font-weight: 400;
     margin-bottom: 10px;
+    color: var(--color-text);
 }
 
 .title-underline {
@@ -243,6 +279,7 @@ body {
 .title-underline.left {
     margin-left: 0;
 }
+
 
 /* ==========================================================================
    SECTIONS CONTENU
@@ -260,7 +297,11 @@ body {
     color: var(--color-text-muted);
 }
 
-/* FILTRES BOUTIQUE */
+
+/* ==========================================================================
+   FILTRES BOUTIQUE
+   ========================================================================== */
+
 .category-filters {
     display: flex;
     justify-content: center;
@@ -270,8 +311,9 @@ body {
 }
 
 .filter-btn {
-    background: none;
+    background: transparent;
     border: 1px solid var(--color-border);
+    color: var(--color-text);
     padding: 8px 18px;
     border-radius: 20px;
     cursor: pointer;
@@ -283,10 +325,14 @@ body {
 .filter-btn:hover {
     background-color: var(--color-accent);
     border-color: var(--color-accent);
-    color: var(--color-text);
+    color: var(--color-brun);
 }
 
-/* GRILLE PRODUITS */
+
+/* ==========================================================================
+   GRILLE PRODUITS
+   ========================================================================== */
+
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -305,7 +351,7 @@ body {
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 20px rgba(91, 64, 48, 0.08);
 }
 
 .product-image-container {
@@ -346,6 +392,7 @@ body {
     font-size: 1.4rem;
     margin-bottom: 8px;
     cursor: pointer;
+    color: var(--color-text);
 }
 
 .product-desc-short {
@@ -365,10 +412,12 @@ body {
 .product-price {
     font-weight: 600;
     font-size: 1.1rem;
+    color: var(--color-brun);
 }
 
 .btn-order-card {
     background-color: var(--color-bg);
+    color: var(--color-text);
     border: 1px solid var(--color-border);
     padding: 6px 14px;
     border-radius: 15px;
@@ -383,7 +432,11 @@ body {
     border-color: var(--color-primary);
 }
 
-/* SECTION À PROPOS */
+
+/* ==========================================================================
+   SECTION À PROPOS
+   ========================================================================== */
+
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -402,7 +455,11 @@ body {
     color: var(--color-text-muted);
 }
 
-/* SECTION CONTACT */
+
+/* ==========================================================================
+   SECTION CONTACT
+   ========================================================================== */
+
 .contact-email-link {
     display: inline-flex;
     align-items: center;
@@ -414,9 +471,13 @@ body {
     margin-top: 15px;
 }
 
-/* FOOTER */
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
 .site-footer {
-    background-color: var(--color-surface);
+    background-color: #EFE4D6;
     border-top: 1px solid var(--color-border);
     padding: 40px 0 20px 0;
     margin-top: 40px;
@@ -435,6 +496,7 @@ body {
     font-family: var(--font-heading);
     font-size: 1.5rem;
     font-weight: 600;
+    color: var(--color-text);
 }
 
 .footer-links {
@@ -449,6 +511,10 @@ body {
     font-size: 0.9rem;
 }
 
+.footer-links a:hover {
+    color: var(--color-primary);
+}
+
 .footer-bottom {
     text-align: center;
     font-size: 0.8rem;
@@ -457,11 +523,11 @@ body {
     padding-top: 20px;
 }
 
+
 /* ==========================================================================
-   MODALE & PANIER (DRAWER)
+   MODALE
    ========================================================================== */
 
-/* MODALE */
 .modal {
     position: fixed;
     top: 0;
@@ -486,7 +552,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .modal-card {
@@ -509,6 +575,7 @@ body {
     border: none;
     font-size: 1.8rem;
     cursor: pointer;
+    color: var(--color-text);
 }
 
 .product-detail-grid {
@@ -532,13 +599,24 @@ body {
     border: 1px solid var(--color-border);
     border-radius: 6px;
     font-family: inherit;
+    background-color: #FFFDF9;
+    color: var(--color-text);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
 }
 
 .qty-input {
     width: 80px;
 }
 
-/* PANIER DRAWER */
+
+/* ==========================================================================
+   PANIER DRAWER
+   ========================================================================== */
+
 .cart-drawer {
     position: fixed;
     top: 0;
@@ -562,7 +640,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .cart-drawer-content {
@@ -593,6 +671,7 @@ body {
     border: none;
     font-size: 1.8rem;
     cursor: pointer;
+    color: var(--color-text);
 }
 
 .cart-step {
@@ -661,7 +740,7 @@ body {
 .cart-item-remove {
     background: none;
     border: none;
-    color: #cc0000;
+    color: #A84D43;
     cursor: pointer;
     font-size: 1.2rem;
 }
@@ -703,12 +782,16 @@ body {
     font-size: 0.8rem;
 }
 
-/* TOAST NOTIFICATION */
+
+/* ==========================================================================
+   TOAST NOTIFICATION
+   ========================================================================== */
+
 .toast {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: var(--color-text);
+    background-color: var(--color-brun);
     color: #ffffff;
     padding: 12px 20px;
     border-radius: 20px;
@@ -724,11 +807,33 @@ body {
     transform: translateY(0);
 }
 
+
 /* ==========================================================================
-   RESPONSIVE (MOBILE & TABLETTE)
+   BOUTONS DE COMMANDE
+   ========================================================================== */
+
+#goToCheckoutBtn,
+#orderForm button[type="submit"] {
+    background-color: var(--color-primary) !important;
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+#goToCheckoutBtn:hover,
+#orderForm button[type="submit"]:hover {
+    background-color: var(--color-primary-hover) !important;
+}
+
+
+/* ==========================================================================
+   RESPONSIVE — MOBILE & TABLETTE
    ========================================================================== */
 
 @media (max-width: 768px) {
+
     .nav-links {
         display: none;
         position: absolute;
@@ -758,7 +863,6 @@ body {
         grid-template-columns: 1fr;
     }
 
-    /* Panier plein écran avec marge de sécurité et défilement fluide */
     .cart-drawer-content {
         width: 100% !important;
         max-width: 100% !important;
@@ -766,168 +870,12 @@ body {
     }
 }
 
-/* Forçage de la visibilité, du texte et de la couleur des boutons de commande */
-#goToCheckoutBtn, 
-#orderForm button[type="submit"] {
-    background-color: var(--color-primary) !important;
-    color: #ffffff !important;
-    font-weight: 500 !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-}
-/* =========================================
-   🍂 THÈME AUTOMNE — MAJU'LYAH
-   ========================================= */
 
-:root {
-  --automne-creme: #F8F3EA;
-  --automne-papier: #FFFDF8;
-  --automne-beige: #E8D8C3;
-  --automne-terracotta: #B86F52;
-  --automne-brun: #5C4033;
-  --automne-noisette: #80604D;
-  --automne-jaune: #D5A63A;
-  --automne-vert: #7B8060;
-}
+/* ==========================================================================
+   PETIT DÉTAIL AUTOMNAL DISCRET
+   ========================================================================== */
 
-/* Fond général */
-body {
-  background:
-    linear-gradient(rgba(248,243,234,0.92), rgba(248,243,234,0.92)),
-    radial-gradient(circle at 10% 20%, #D5A63A22 0 2px, transparent 3px),
-    radial-gradient(circle at 85% 70%, #B86F5222 0 2px, transparent 3px);
-  color: var(--automne-brun);
-}
-
-/* Titres */
-h1, h2, h3 {
-  color: var(--automne-brun);
-}
-
-/* Liens */
-a {
-  color: var(--automne-terracotta);
-  transition: color 0.2s ease;
-}
-
-a:hover {
-  color: var(--automne-jaune);
-}
-
-/* Boutons */
-button,
-.btn,
-button[type="submit"] {
-  background: var(--automne-terracotta);
-  color: white;
-  border: none;
-  border-radius: 999px;
-  transition: all 0.25s ease;
-}
-
-button:hover,
-.btn:hover,
-button[type="submit"]:hover {
-  background: var(--automne-brun);
-  transform: translateY(-2px);
-}
-
-/* Cartes produits */
-.product-card,
-.product,
-.card {
-  background: var(--automne-papier);
-  border: 1px solid var(--automne-beige);
-  border-radius: 18px;
-  box-shadow: 0 6px 20px rgba(92,64,51,0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.product-card:hover,
-.product:hover,
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(92,64,51,0.13);
-}
-
-/* Prix */
-.price {
-  color: var(--automne-terracotta);
-  font-weight: 700;
-}
-
-/* Navigation */
-nav {
-  background: rgba(255,253,248,0.95);
-  border-bottom: 1px solid var(--automne-beige);
-}
-
-/* Sections */
-section {
-  border-color: var(--automne-beige);
-}
-
-/* Encadrés d'information */
-.info,
-.notice,
-.alert {
-  background: #F1E6D7;
-  border-left: 4px solid var(--automne-jaune);
-  color: var(--automne-brun);
-  border-radius: 10px;
-}
-
-/* Panier */
-.cart-drawer,
-.cart,
-#cartDrawer {
-  background: var(--automne-papier);
-  border-left: 1px solid var(--automne-beige);
-}
-
-/* Champs du formulaire */
-input,
-textarea,
-select {
-  background: #FFFDF8;
-  border: 1px solid var(--automne-beige);
-  color: var(--automne-brun);
-  border-radius: 10px;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-  border-color: var(--automne-terracotta);
-  box-shadow: 0 0 0 3px rgba(184,111,82,0.12);
-}
-
-/* Petits détails décoratifs */
-.hero::after {
-  content: "🍂";
-  display: block;
-  font-size: 26px;
-  margin-top: 12px;
-}
-
-/* Footer */
-footer {
-  background: var(--automne-brun);
-  color: var(--automne-creme);
-}
-
-footer a {
-  color: var(--automne-beige);
-}
-
-footer a:hover {
-  color: var(--automne-jaune);
-}
-
-/* Sélection de texte */
 ::selection {
-  background: var(--automne-beige);
-  color: var(--automne-brun);
-}
+    background-color: var(--color-accent);
+    color: var(--color-text);
+   }
