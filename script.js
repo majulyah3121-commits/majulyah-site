@@ -129,6 +129,16 @@ price: 5.00,
 image: "images/Design sans titre_20261001_152036_0000.png",
 description: "Recharge de pages et illustrations pour la saison d'automne.",
 variants: ["Recharge Automne", "Recharge Hiver", "Recharge Printemps", "Recharge été"]
+},
+
+{
+id: 8,
+name: "Maju'Lyah - Le petit courrier",
+category: "Nouveautés",
+price: 10.00,
+image: "images/about2.jpg",
+description: "Découvrez Le petit courrier de Maju'Lyah, une douce attention artisanale pour accompagner vos écrits et correspondances.",
+variants: ["Standard"]
 }
 ];
 
