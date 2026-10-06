@@ -66,6 +66,7 @@ colors: [
 ]
 }, 
 
+/* --- STICKERS JOUETS FILLE MASQUÉS TEMPORAIREMENT ---
 {
 id: 4,
 name: "Stickers Jouets fille",
@@ -85,7 +86,9 @@ colors: [
 "Violet foncé", "Marron"
 ]
 }, 
+-------------------------------------------------- */
 
+/* --- STICKERS JOUETS GARÇON MASQUÉS TEMPORAIREMENT ---
 {
 id: 5,
 name: "Stickers Jouets garçon",
@@ -105,6 +108,7 @@ colors: [
 "Violet foncé", "Marron"
 ]
 },  
+---------------------------------------------------- */
 
 {
 id: 6,
