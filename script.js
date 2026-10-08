@@ -136,7 +136,7 @@ id: 8,
 name: "Maju'Lyah - Le petit courrier",
 category: "Nouveautés",
 price: 10.00,
-image: "images/Hello Jolie toi, Merci infiniment d’avoir commandé le Petit Courrier de Maj_20261008_153741_0000.png",
+image: "images/Hello Jolie toi, Merci infiniment d’avoir commandé le Petit Courrier de Maj_20261008_160734_0000.png",
 description: "Découvrez Le petit courrier de Maju'Lyah, une douce attention artisanale pour accompagner vos écrits et correspondances.",
 variants: ["Standard"]
 }
