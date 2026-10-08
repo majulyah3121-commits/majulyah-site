@@ -138,7 +138,7 @@ category: "Nouveautés",
 price: 10.00,
 image: "images/Hello Jolie toi, Merci infiniment d’avoir commandé le Petit Courrier de Maj_20261008_160734_0000.png",
 description: "Découvrez Le petit courrier de Maju'Lyah, un retour aux sources, comme le courrier d'avant. PAS d'abonnement obligatoire : tu craques pour le mois qui te plaît et tu commandes en toute liberté. À l'intérieur : des illustrations, de l'organisation des surprises pour toi. LE PETIT PLUS : Les frais de port sont offerts !",
-variants: ["Standard"]
+variants: ["le courrier de Novembre"]
 }
 ];
 
