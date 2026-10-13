@@ -653,7 +653,7 @@ function prepareOrderSummary() {
 
 
 /* ==========================================================================
-GESTION DU PAIEMENT PAYPAL DYNAMIQUE (STABLE ET SANS FERMETURE)
+GESTION DU PAIEMENT PAYPAL HÉBERGÉ (CORRIGÉ & VALIDE)
 ========================================================================== */
 
 function checkAndSetupPayPalPayment() {
@@ -665,26 +665,20 @@ function checkAndSetupPayPalPayment() {
 
     if (cart.length > 0) {
         pContainer.style.display = 'block';
+        
+        // Masque le bouton Formspree seul pour éviter le bouton doublon
         sBtn.style.display = 'none';
 
-        // Vidage propre du conteneur pour réinitialiser le bouton sans fermer la modale
+        // Vidage du conteneur pour éviter les rechargements multiples
         paypalButtonContainer.innerHTML = '';
 
-        if (window.paypal) {
-            window.paypal.Buttons({
-                createOrder: (data, actions) => {
-                    // Calcul dynamique du total exact de tout le panier
-                    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        // Sélection de l'identifiant du bouton en fonction du contenu du panier
+        const hasStickers = cart.some(item => item.id >= 1 && item.id <= 3);
+        const buttonId = hasStickers ? "W83FJB9NB7HDW" : "LLATQFBJFN4N6";
 
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: total.toFixed(2)
-                            },
-                            description: "Commande Maju'Lyah"
-                        }]
-                    });
-                },
+        if (window.paypal && window.paypal.HostedButtons) {
+            window.paypal.HostedButtons({
+                hostedButtonId: buttonId,
                 onApprove: (data, actions) => {
                     return actions.order.capture().then(details => {
                         const formStatusMessage = document.getElementById('formStatusMessage');
@@ -693,7 +687,7 @@ function checkAndSetupPayPalPayment() {
                             formStatusMessage.style.color = "#28a745";
                         }
 
-                        // Envoi automatique du bon de commande par e-mail
+                        // Envoi automatique du bon de commande par e-mail via Formspree
                         if (orderForm) {
                             prepareOrderSummary();
                             const formData = new FormData(orderForm);
@@ -719,14 +713,6 @@ function checkAndSetupPayPalPayment() {
                             if (formStatusMessage) formStatusMessage.textContent = "";
                         }, 3500);
                     });
-                },
-                onError: (err) => {
-                    console.error('Erreur PayPal :', err);
-                    const formStatusMessage = document.getElementById('formStatusMessage');
-                    if (formStatusMessage) {
-                        formStatusMessage.textContent = "Une erreur est survenue lors du paiement PayPal.";
-                        formStatusMessage.style.color = "#d9534f";
-                    }
                 }
             }).render('#paypal-button-container');
         }
