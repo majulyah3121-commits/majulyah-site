@@ -476,6 +476,8 @@ function updateCartUI() {
 
     /* Gestion du bandeau dynamique de livraison offerte */
     const notice = document.getElementById('freeShippingNotice');
+    const totalLabel = document.getElementById('cartTotalLabel');
+
     if (notice) {
         if (total === 0) {
             notice.style.display = 'none';
@@ -492,6 +494,14 @@ function updateCartUI() {
             notice.style.color = '#8a5340';
             notice.style.border = '1px dashed #dcae96';
             notice.innerHTML = `🚚 Plus que <strong>${missing} €</strong> pour avoir la <strong>livraison offerte</strong> !`;
+        }
+    }
+
+    if (totalLabel) {
+        if (total >= FREE_SHIPPING_THRESHOLD) {
+            totalLabel.textContent = "Total (livraison offerte) :";
+        } else {
+            totalLabel.textContent = "Total (hors frais de livraison) :";
         }
     }
 
@@ -550,11 +560,6 @@ function updateCartUI() {
 
     if (cartTotalPrice) {
         cartTotalPrice.textContent = `${total.toFixed(2).replace('.', ',')} €`;
-    }
-
-    const totalLabel = document.getElementById('cartTotalLabel');
-    if (totalLabel) {
-        totalLabel.textContent = total >= FREE_SHIPPING_THRESHOLD ? "Total (livraison offerte) :" : "Total (hors frais de livraison) :";
     }
 }
 
