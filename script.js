@@ -668,6 +668,28 @@ function checkAndSetupPayPalPayment() {
         if (!paypalButtonRendered && window.paypal && window.paypal.HostedButtons) {
             window.paypal.HostedButtons({
                 hostedButtonId: "LLATQFBJFN4N6",
+                onApprove: (data, actions) => {
+                    return actions.order.capture().then(details => {
+                        const formStatusMessage = document.getElementById('formStatusMessage');
+                        if (formStatusMessage) {
+                            formStatusMessage.textContent = "Paiement effectué avec succès ! Merci pour votre commande.";
+                            formStatusMessage.style.color = "#28a745";
+                        }
+
+                        cart = [];
+                        updateCartUI();
+
+                        setTimeout(() => {
+                            if (orderForm) orderForm.reset();
+                            if (cartDrawer) cartDrawer.classList.remove('active');
+                            if (cartStep1 && cartStep2) {
+                                cartStep1.style.display = 'block';
+                                cartStep2.style.display = 'none';
+                            }
+                            if (formStatusMessage) formStatusMessage.textContent = "";
+                        }, 3500);
+                    });
+                }
             }).render("#paypal-container-LLATQFBJFN4N6");
             paypalButtonRendered = true;
         }
