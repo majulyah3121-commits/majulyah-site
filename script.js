@@ -532,15 +532,10 @@ function updateCartUI() {
         cartTotalPrice.textContent = `${total.toFixed(2).replace('.', ',')} €`;
     }
 
-    // Gestion dynamique du libellé selon le contenu du panier
-    const totalLabel = document.querySelector('.cart-total-row span:first-child');
+    // Libellé fixe toujours égal à "Total (livraison comprise) :"
+    const totalLabel = document.getElementById('cartTotalLabel');
     if (totalLabel) {
-        const hasPetitCourrierOnly = cart.length > 0 && cart.every(item => item.id === 8);
-        if (hasPetitCourrierOnly) {
-            totalLabel.textContent = "Total (livraison comprise) :";
-        } else {
-            totalLabel.textContent = "Total (hors livraison) :";
-        }
+        totalLabel.textContent = "Total (livraison comprise) :";
     }
 }
 
