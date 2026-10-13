@@ -105,7 +105,6 @@ variants: ["le courrier de Novembre"]
 
 let cart = [];
 let selectedProductForModal = null;
-let paypalInitialized = false;
 
 
 /* ==========================================================================
@@ -532,7 +531,6 @@ function updateCartUI() {
         cartTotalPrice.textContent = `${total.toFixed(2).replace('.', ',')} €`;
     }
 
-    // Libellé fixe toujours égal à "Total (livraison comprise) :"
     const totalLabel = document.getElementById('cartTotalLabel');
     if (totalLabel) {
         totalLabel.textContent = "Total (livraison comprise) :";
@@ -655,23 +653,27 @@ function prepareOrderSummary() {
 
 
 /* ==========================================================================
-GESTION DU PAIEMENT PAYPAL DYNAMIQUE (MONTANT CALCULÉ AUTOMATIQUEMENT)
+GESTION DU PAIEMENT PAYPAL DYNAMIQUE (STABLE ET STABLE)
 ========================================================================== */
 
 function checkAndSetupPayPalPayment() {
     const pContainer = document.getElementById('paypalContainer');
     const sBtn = document.getElementById('submitOrderBtn');
+    const paypalButtonContainer = document.getElementById('paypal-button-container');
 
-    if (!pContainer || !sBtn) return;
+    if (!pContainer || !sBtn || !paypalButtonContainer) return;
 
     if (cart.length > 0) {
         pContainer.style.display = 'block';
         sBtn.style.display = 'none';
 
-        if (!paypalInitialized && window.paypal) {
+        // Vidage propre du conteneur pour réinitialiser le bouton sans fermer la modale
+        paypalButtonContainer.innerHTML = '';
+
+        if (window.paypal) {
             window.paypal.Buttons({
                 createOrder: (data, actions) => {
-                    // Calcul dynamique du total exact de TOUT le panier
+                    // Calcul dynamique du total exact du panier
                     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
                     return actions.order.create({
@@ -691,7 +693,7 @@ function checkAndSetupPayPalPayment() {
                             formStatusMessage.style.color = "#28a745";
                         }
 
-                        // Envoi automatique du bon de commande par e-mail
+                        // Envoi du bon de commande automatique par e-mail
                         if (orderForm) {
                             prepareOrderSummary();
                             const formData = new FormData(orderForm);
@@ -706,7 +708,7 @@ function checkAndSetupPayPalPayment() {
                         cart = [];
                         updateCartUI();
 
-                        // Fermeture et réinitialisation
+                        // Réinitialisation et fermeture
                         setTimeout(() => {
                             if (orderForm) orderForm.reset();
                             if (cartDrawer) cartDrawer.classList.remove('active');
@@ -727,8 +729,6 @@ function checkAndSetupPayPalPayment() {
                     }
                 }
             }).render('#paypal-button-container');
-
-            paypalInitialized = true;
         }
     } else {
         pContainer.style.display = 'none';
