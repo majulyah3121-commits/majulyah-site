@@ -106,8 +106,8 @@ variants: ["le courrier de Novembre"]
 let cart = [];
 let selectedProductForModal = null;
 
-let petitCourrierDetailsSent = false;
-let paypalButtonRendered = false;
+let petitCourrierRendered = false;
+let stickersRendered = false;
 
 
 /* ==========================================================================
@@ -161,6 +161,7 @@ const hiddenOrderTotal = document.getElementById('hiddenOrderTotal');
 const formStatusMessage = document.getElementById('formStatusMessage');
 
 const petitCourrierPayment = document.getElementById('petitCourrierPayment');
+const stickersPayment = document.getElementById('stickersPayment');
 const submitOrderBtn = document.getElementById('submitOrderBtn');
 
 
@@ -533,6 +534,17 @@ function updateCartUI() {
     if (cartTotalPrice) {
         cartTotalPrice.textContent = `${total.toFixed(2).replace('.', ',')} €`;
     }
+
+    // Gestion dynamique du libellé selon le contenu du panier
+    const totalLabel = document.querySelector('.cart-total-row span:first-child');
+    if (totalLabel) {
+        const hasPetitCourrierOnly = cart.length > 0 && cart.every(item => item.id === 8);
+        if (hasPetitCourrierOnly) {
+            totalLabel.textContent = "Total (livraison comprise) :";
+        } else {
+            totalLabel.textContent = "Total (hors livraison) :";
+        }
+    }
 }
 
 
@@ -651,21 +663,30 @@ function prepareOrderSummary() {
 
 
 /* ==========================================================================
-GESTION DU PAIEMENT PAYPAL (LE PETIT COURRIER)
+GESTION DU PAIEMENT PAYPAL (GÉRANT LES DEUX BOUTONS)
 ========================================================================== */
 
 function checkAndSetupPayPalPayment() {
     const hasPetitCourrier = cart.some(item => item.id === 8);
+    const hasStickers = cart.some(item => item.id >= 1 && item.id <= 3);
 
     const pPayment = document.getElementById('petitCourrierPayment');
-    const sBtn = document.getElementById('submitOrderBtn');
+    const sPayment = document.getElementById('stickersPayment');
+    const submitBtn = document.getElementById('submitOrderBtn');
 
-    if (!pPayment || !sBtn) return;
+    if (!pPayment || !sPayment || !submitBtn) return;
 
+    // Cache tout par défaut
+    pPayment.style.display = 'none';
+    sPayment.style.display = 'none';
+    submitBtn.style.display = 'block';
+
+    // 1. Si le panier contient Le Petit Courrier (ID 8)
     if (hasPetitCourrier) {
         pPayment.style.display = 'block';
+        submitBtn.style.display = 'none';
 
-        if (!paypalButtonRendered && window.paypal && window.paypal.HostedButtons) {
+        if (!petitCourrierRendered && window.paypal && window.paypal.HostedButtons) {
             window.paypal.HostedButtons({
                 hostedButtonId: "LLATQFBJFN4N6",
                 onApprove: (data, actions) => {
@@ -691,10 +712,43 @@ function checkAndSetupPayPalPayment() {
                     });
                 }
             }).render("#paypal-container-LLATQFBJFN4N6");
-            paypalButtonRendered = true;
+            petitCourrierRendered = true;
         }
-    } else {
-        pPayment.style.display = 'none';
+    }
+
+    // 2. Si le panier contient les Stickers (ID 1, 2 ou 3)
+    if (hasStickers) {
+        sPayment.style.display = 'block';
+        submitBtn.style.display = 'none';
+
+        if (!stickersRendered && window.paypal && window.paypal.HostedButtons) {
+            window.paypal.HostedButtons({
+                hostedButtonId: "W83FJB9NB7HDW",
+                onApprove: (data, actions) => {
+                    return actions.order.capture().then(details => {
+                        const formStatusMessage = document.getElementById('formStatusMessage');
+                        if (formStatusMessage) {
+                            formStatusMessage.textContent = "Paiement effectué avec succès ! Merci pour votre commande.";
+                            formStatusMessage.style.color = "#28a745";
+                        }
+
+                        cart = [];
+                        updateCartUI();
+
+                        setTimeout(() => {
+                            if (orderForm) orderForm.reset();
+                            if (cartDrawer) cartDrawer.classList.remove('active');
+                            if (cartStep1 && cartStep2) {
+                                cartStep1.style.display = 'block';
+                                cartStep2.style.display = 'none';
+                            }
+                            if (formStatusMessage) formStatusMessage.textContent = "";
+                        }, 3500);
+                    });
+                }
+            }).render("#paypal-container-W83FJB9NB7HDW");
+            stickersRendered = true;
+        }
     }
 }
 
