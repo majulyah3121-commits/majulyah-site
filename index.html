@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- PAYPAL : chargement du bouton de paiement hébergé -->
+    <!-- PAYPAL : chargement du SDK Hosted Buttons -->
     <script src="https://www.paypal.com/sdk/js?client-id=BAAyqRBwZ_hKThCIJ7xAiplhdbQIyzQHsG2bCOG41Fh1CvH7bXWP-RRgpbN2TBbP5mJgHznW7SlcQIm6Pc&components=hosted-buttons&disable-funding=venmo&currency=EUR"></script>
 </head>
 
@@ -685,10 +685,7 @@
 
 
                     <!-- =================================================
-                         NOUVEAU : PAIEMENT PAYPAL DU PETIT COURRIER
-                         Caché par défaut.
-                         Le script.js l'affichera uniquement après
-                         l'envoi réussi de la commande concernée.
+                         PAIEMENT PAYPAL DU PETIT COURRIER
                          ================================================= -->
 
                     <div
@@ -700,9 +697,8 @@
                             Finaliser le paiement du Petit Courrier
                         </h4>
 
-                        <p>
-                            Vos coordonnées ont été envoyées. Vous pouvez
-                            maintenant régler votre Petit Courrier avec PayPal.
+                        <p style="margin-bottom: 15px; font-size: 0.9rem;">
+                            Vous pouvez régler votre commande en toute sécurité avec PayPal ci-dessous :
                         </p>
 
                         <div id="paypal-container-LLATQFBJFN4N6"></div>
