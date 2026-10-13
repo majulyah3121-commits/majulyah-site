@@ -531,7 +531,7 @@ function updateCartUI() {
 
     const totalLabel = document.getElementById('cartTotalLabel');
     if (totalLabel) {
-        totalLabel.textContent = "Total (livraison comprise) :";
+        totalLabel.textContent = "Total (hors frais de livraison) :";
     }
 }
 
@@ -638,7 +638,7 @@ function prepareOrderSummary() {
         summary += `  Quantité : ${item.quantity} x ${item.price.toFixed(2)}€ = ${itemTotal.toFixed(2)}€\n\n`;
     });
 
-    summary += `TOTAL GLOBAL DE LA COMMANDE : ${total.toFixed(2)} €`;
+    summary += `TOTAL GLOBAL DE LA COMMANDE (hors frais de livraison) : ${total.toFixed(2)} €`;
 
     if (hiddenOrderSummary) {
         hiddenOrderSummary.value = summary;
