@@ -15,6 +15,9 @@
     >
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- PAYPAL : chargement du bouton de paiement hébergé -->
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAyqRBwZ_hKThCIJ7xAiplhdbQIyzQHsG2bCOG41Fh1CvH7bXWP-RRgpbN2TBbP5mJgHznW7SlcQIm6Pc&components=hosted-buttons&disable-funding=venmo&currency=EUR"></script>
 </head>
 
 <body>
@@ -33,21 +36,10 @@
 
             <nav class="nav-links" id="navLinks">
 
-                <a href="#accueil" class="nav-item">
-                    Accueil
-                </a>
-
-                <a href="#boutique" class="nav-item">
-                    Boutique
-                </a>
-
-                <a href="#apropos" class="nav-item">
-                    À propos
-                </a>
-
-                <a href="#contact" class="nav-item">
-                    Contact
-                </a>
+                <a href="#accueil" class="nav-item">Accueil</a>
+                <a href="#boutique" class="nav-item">Boutique</a>
+                <a href="#apropos" class="nav-item">À propos</a>
+                <a href="#contact" class="nav-item">Contact</a>
 
             </nav>
 
@@ -59,7 +51,6 @@
                     aria-label="Voir mon panier"
                     type="button"
                 >
-
                     <svg
                         width="22"
                         height="22"
@@ -70,27 +61,12 @@
                         stroke-linecap="round"
                         stroke-linejoin="round"
                     >
-
                         <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-
-                        <line
-                            x1="3"
-                            y1="6"
-                            x2="21"
-                            y2="6"
-                        ></line>
-
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
                         <path d="M16 10a4 4 0 0 1-8 0"></path>
-
                     </svg>
 
-                    <span
-                        class="cart-count"
-                        id="cartCount"
-                    >
-                        0
-                    </span>
-
+                    <span class="cart-count" id="cartCount">0</span>
                 </button>
 
                 <button
@@ -99,11 +75,9 @@
                     aria-label="Menu"
                     type="button"
                 >
-
                     <span></span>
                     <span></span>
                     <span></span>
-
                 </button>
 
             </div>
@@ -114,27 +88,21 @@
 
 
     <!-- =========================================================
-         BANNIÈRE (Image seule sans texte)
+         BANNIÈRE
          ========================================================= -->
 
-    <section
-        id="accueil"
-        class="hero-section"
-    >
-    </section>
+    <section id="accueil" class="hero-section"></section>
 
 
     <!-- =========================================================
-         PRESENTATION
+         PRÉSENTATION
          ========================================================= -->
 
     <section class="intro-section">
 
         <div class="container text-center max-w-700">
 
-            <h2 class="section-title">
-                Bienvenue chez Maju'Lyah !
-            </h2>
+            <h2 class="section-title">Bienvenue chez Maju'Lyah !</h2>
 
             <div class="title-underline"></div>
 
@@ -143,7 +111,7 @@
             </p>
 
             <p class="intro-text" style="margin-bottom: 20px;">
-                <strong>Comment commander?</strong> Ajouter vos créations à votre panier et envoyez votre bon de commande. 
+                <strong>Comment commander?</strong> Ajouter vos créations à votre panier et envoyez votre bon de commande.
             </p>
 
             <p class="intro-text" style="margin-bottom: 20px;">
@@ -167,82 +135,27 @@
          BOUTIQUE
          ========================================================= -->
 
-    <section
-        id="boutique"
-        class="shop-section"
-    >
+    <section id="boutique" class="shop-section">
 
         <div class="container">
 
-            <h2 class="section-title text-center">
-                Nos Créations
-            </h2>
+            <h2 class="section-title text-center">Nos Créations</h2>
 
             <div class="title-underline"></div>
 
-            <div
-                class="category-filters"
-                id="categoryFilters"
-            >
+            <div class="category-filters" id="categoryFilters">
 
-                <button
-                    class="filter-btn active"
-                    data-category="all"
-                    type="button"
-                >
-                    Toutes
-                </button>
-
-                <button
-                    class="filter-btn"
-                    data-category="Nouveautés"
-                    type="button"
-                >
-                    Nouveautés
-                </button>
-
-                <button
-                    class="filter-btn"
-                    data-category="Organisation"
-                    type="button"
-                >
-                    Organisation
-                </button>
-
-                <button
-                    class="filter-btn"
-                    data-category="Papeterie"
-                    type="button"
-                >
-                    Papeterie
-                </button>
-
-                <button
-                    class="filter-btn"
-                    data-category="Stickers"
-                    type="button"
-                >
-                    Stickers
-                </button>
-
-                <button
-                    class="filter-btn"
-                    data-category="Carnet"
-                    type="button"
-                >
-                    Carnet
-                </button>
+                <button class="filter-btn active" data-category="all" type="button">Toutes</button>
+                <button class="filter-btn" data-category="Nouveautés" type="button">Nouveautés</button>
+                <button class="filter-btn" data-category="Organisation" type="button">Organisation</button>
+                <button class="filter-btn" data-category="Papeterie" type="button">Papeterie</button>
+                <button class="filter-btn" data-category="Stickers" type="button">Stickers</button>
+                <button class="filter-btn" data-category="Carnet" type="button">Carnet</button>
 
             </div>
 
-            <div
-                class="products-grid"
-                id="productsGrid"
-            >
-                <!-- NOTE : Si tes produits sont injectés via ton script.js, assure-toi 
-                     que ton code JS ajoute dynamiquement la classe "carnet-featured" 
-                     et le bloc <span class="badge-featured">Coup de cœur 🍂</span> 
-                     aux cartes de tes carnets pour que le style s'applique ! -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Les produits sont ajoutés par script.js -->
             </div>
 
         </div>
@@ -254,10 +167,7 @@
          À PROPOS
          ========================================================= -->
 
-    <section
-        id="apropos"
-        class="about-section"
-    >
+    <section id="apropos" class="about-section">
 
         <div class="container about-grid">
 
@@ -274,9 +184,7 @@
 
             <div class="about-text-content">
 
-                <span class="sub-subtitle">
-                    L'Histoire Maju’Lyah
-                </span>
+                <span class="sub-subtitle">L'Histoire Maju’Lyah</span>
 
                 <h2 class="section-title text-left">
                     Fait main avec passion & douceur
@@ -307,16 +215,11 @@
          CONTACT
          ========================================================= -->
 
-    <section
-        id="contact"
-        class="contact-section"
-    >
+    <section id="contact" class="contact-section">
 
         <div class="container max-w-600 text-center">
 
-            <h2 class="section-title">
-                Une question ?
-            </h2>
+            <h2 class="section-title">Une question ?</h2>
 
             <div class="title-underline"></div>
 
@@ -326,10 +229,7 @@
                 Écrivez-nous !
             </p>
 
-            <a
-                href="mailto:majulyah3121@gmail.com"
-                class="contact-email-link"
-            >
+            <a href="mailto:majulyah3121@gmail.com" class="contact-email-link">
 
                 <svg
                     width="20"
@@ -339,11 +239,8 @@
                     stroke="currentColor"
                     stroke-width="2"
                 >
-
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-
                     <polyline points="22,6 12,13 2,6"></polyline>
-
                 </svg>
 
                 majulyah3121@gmail.com
@@ -365,13 +262,9 @@
 
             <div class="footer-brand">
 
-                <span class="footer-logo">
-                    Maju’Lyah
-                </span>
+                <span class="footer-logo">Maju’Lyah</span>
 
-                <p>
-                    Organisation & papeterie artisanales.
-                </p>
+                <p>Organisation & papeterie artisanales.</p>
 
             </div>
 
@@ -410,16 +303,9 @@
          MODALE PRODUIT
          ========================================================= -->
 
-    <div
-        class="modal"
-        id="productModal"
-        aria-hidden="true"
-    >
+    <div class="modal" id="productModal" aria-hidden="true">
 
-        <div
-            class="modal-overlay"
-            id="closeProductModalBg"
-        ></div>
+        <div class="modal-overlay" id="closeProductModalBg"></div>
 
         <div class="modal-card">
 
@@ -435,59 +321,32 @@
             <div class="product-detail-grid">
 
                 <div class="product-detail-image">
-
-                    <img
-                        src=""
-                        id="modalImg"
-                        alt="Produit"
-                    >
-
+                    <img src="" id="modalImg" alt="Produit">
                 </div>
 
                 <div class="product-detail-info">
 
-                    <span
-                        class="product-badge"
-                        id="modalCategory"
-                    ></span>
+                    <span class="product-badge" id="modalCategory"></span>
 
-                    <h3
-                        id="modalTitle"
-                        class="modal-title"
-                    ></h3>
+                    <h3 id="modalTitle" class="modal-title"></h3>
 
-                    <p
-                        class="modal-price"
-                        id="modalPrice"
-                    ></p>
+                    <p class="modal-price" id="modalPrice"></p>
 
-                    <p
-                        class="modal-description"
-                        id="modalDescription"
-                    ></p>
+                    <p class="modal-description" id="modalDescription"></p>
 
-                    <div
-                        class="form-group"
-                        id="variantGroup"
-                        style="display:none;"
-                    >
+                    <div class="form-group" id="variantGroup" style="display:none;">
 
                         <label for="modalVariantSelect">
                             Choisir une finition / option :
                         </label>
 
-                        <select
-                            id="modalVariantSelect"
-                            class="form-input"
-                        ></select>
+                        <select id="modalVariantSelect" class="form-input"></select>
 
                     </div>
 
                     <div class="form-group">
 
-                        <label for="modalQty">
-                            Quantité :
-                        </label>
+                        <label for="modalQty">Quantité :</label>
 
                         <input
                             type="number"
@@ -521,24 +380,15 @@
          PANIER
          ========================================================= -->
 
-    <div
-        class="cart-drawer"
-        id="cartDrawer"
-        aria-hidden="true"
-    >
+    <div class="cart-drawer" id="cartDrawer" aria-hidden="true">
 
-        <div
-            class="cart-drawer-overlay"
-            id="closeCartBg"
-        ></div>
+        <div class="cart-drawer-overlay" id="closeCartBg"></div>
 
         <div class="cart-drawer-content">
 
             <div class="cart-header">
 
-                <h3>
-                    Mon Bon de Commande
-                </h3>
+                <h3>Mon Bon de Commande</h3>
 
                 <button
                     class="close-drawer-btn"
@@ -552,30 +402,19 @@
             </div>
 
 
-            <!-- ÉTAPE 1 -->
+            <!-- ÉTAPE 1 : PANIER -->
 
-            <div
-                id="cartStep1"
-                class="cart-step active"
-            >
+            <div id="cartStep1" class="cart-step active">
 
-                <div
-                    class="cart-items-list"
-                    id="cartItemsList"
-                ></div>
+                <div class="cart-items-list" id="cartItemsList"></div>
 
                 <div class="cart-footer">
 
                     <div class="cart-total-row">
 
-                        <span>
-                            Total (hors livraison) :
-                        </span>
+                        <span>Total (hors livraison) :</span>
 
-                        <span
-                            class="cart-total-price"
-                            id="cartTotalPrice"
-                        >
+                        <span class="cart-total-price" id="cartTotalPrice">
                             0,00 €
                         </span>
 
@@ -594,27 +433,15 @@
             </div>
 
 
-            <!-- ÉTAPE 2 -->
+            <!-- ÉTAPE 2 : COORDONNÉES -->
 
-            <div
-                id="cartStep2"
-                class="cart-step"
-            >
+            <div id="cartStep2" class="cart-step">
 
-                <button
-                    class="back-btn"
-                    id="backToCartBtn"
-                    type="button"
-                >
+                <button class="back-btn" id="backToCartBtn" type="button">
                     &larr; Retour à la commande
                 </button>
 
-                <h4 class="checkout-subtitle">
-                    Coordonnées de livraison
-                </h4>
-
-
-                <!-- FORMSPREE -->
+                <h4 class="checkout-subtitle">Coordonnées de livraison</h4>
 
                 <form
                     id="orderForm"
@@ -622,8 +449,6 @@
                     method="POST"
                     novalidate
                 >
-
-                    <!-- REDIRECTION APRÈS ENVOI -->
 
                     <input
                         type="hidden"
@@ -636,8 +461,6 @@
                         name="_subject"
                         value="Nouvelle commande Maju’Lyah"
                     >
-
-                    <!-- RÉCAPITULATIF -->
 
                     <input
                         type="hidden"
@@ -658,9 +481,7 @@
 
                         <div class="form-group">
 
-                            <label for="prenom">
-                                Prénom *
-                            </label>
+                            <label for="prenom">Prénom *</label>
 
                             <input
                                 type="text"
@@ -676,9 +497,7 @@
 
                         <div class="form-group">
 
-                            <label for="nom">
-                                Nom *
-                            </label>
+                            <label for="nom">Nom *</label>
 
                             <input
                                 type="text"
@@ -699,9 +518,7 @@
 
                     <div class="form-group">
 
-                        <label for="email">
-                            Adresse E-mail *
-                        </label>
+                        <label for="email">Adresse E-mail *</label>
 
                         <input
                             type="email"
@@ -720,9 +537,7 @@
 
                     <div class="form-group">
 
-                        <label for="telephone">
-                            Téléphone (facultatif)
-                        </label>
+                        <label for="telephone">Téléphone (facultatif)</label>
 
                         <input
                             type="tel"
@@ -740,9 +555,7 @@
 
                     <div class="form-group">
 
-                        <label for="adresse">
-                            Adresse postale *
-                        </label>
+                        <label for="adresse">Adresse postale *</label>
 
                         <input
                             type="text"
@@ -757,13 +570,11 @@
                     </div>
 
 
-                    <!-- COMPLÉMENT -->
+                    <!-- COMPLÉMENT D'ADRESSE -->
 
                     <div class="form-group">
 
-                        <label for="complement">
-                            Complément d'adresse (facultatif)
-                        </label>
+                        <label for="complement">Complément d'adresse (facultatif)</label>
 
                         <input
                             type="text"
@@ -783,9 +594,7 @@
 
                         <div class="form-group">
 
-                            <label for="code_postal">
-                                Code Postal *
-                            </label>
+                            <label for="code_postal">Code Postal *</label>
 
                             <input
                                 type="text"
@@ -802,9 +611,7 @@
 
                         <div class="form-group">
 
-                            <label for="ville">
-                                Ville *
-                            </label>
+                            <label for="ville">Ville *</label>
 
                             <input
                                 type="text"
@@ -825,9 +632,7 @@
 
                     <div class="form-group">
 
-                        <label for="message">
-                            Message ou remarque (facultatif)
-                        </label>
+                        <label for="message">Message ou remarque (facultatif)</label>
 
                         <textarea
                             id="message"
@@ -860,7 +665,7 @@
                     </div>
 
 
-                    <!-- MESSAGE -->
+                    <!-- MESSAGE DE STATUT -->
 
                     <div
                         id="formStatusMessage"
@@ -868,7 +673,7 @@
                     ></div>
 
 
-                    <!-- BOUTON -->
+                    <!-- BOUTON D'ENVOI DE COMMANDE -->
 
                     <button
                         type="submit"
@@ -877,6 +682,32 @@
                     >
                         Valider et envoyer la commande
                     </button>
+
+
+                    <!-- =================================================
+                         NOUVEAU : PAIEMENT PAYPAL DU PETIT COURRIER
+                         Caché par défaut.
+                         Le script.js l'affichera uniquement après
+                         l'envoi réussi de la commande concernée.
+                         ================================================= -->
+
+                    <div
+                        id="petitCourrierPayment"
+                        style="display: none; margin-top: 24px;"
+                    >
+
+                        <h4 class="checkout-subtitle">
+                            Finaliser le paiement du Petit Courrier
+                        </h4>
+
+                        <p>
+                            Vos coordonnées ont été envoyées. Vous pouvez
+                            maintenant régler votre Petit Courrier avec PayPal.
+                        </p>
+
+                        <div id="paypal-container-LLATQFBJFN4N6"></div>
+
+                    </div>
 
                 </form>
 
@@ -889,10 +720,7 @@
 
     <!-- NOTIFICATION -->
 
-    <div
-        id="toastNotification"
-        class="toast"
-    >
+    <div id="toastNotification" class="toast">
         Produit ajouté au panier !
     </div>
 
