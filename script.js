@@ -66,50 +66,6 @@ colors: [
 ]
 },
 
-/* --- STICKERS JOUETS FILLE MASQUÉS TEMPORAIREMENT ---
-{
-id: 4,
-name: "Stickers Jouets fille",
-category: "Nouveautés",
-price: 14.00,
-image: "images/stickers-jouets1.jpg",
-description: "Organise la chambre de ton enfant.",
-variants: [
-"Barbies", "Poupées", "Bébés", "Vêtements Bébé", "Vêtements Barbie", "Accessoires",
-"Sacs", "Dînette", "Peluches", "Déguisements", "Puzzles",
-"Figurines", "Animaux", "Dinosaures", "Licornes", "Lego", "Playmobil", "Super-héros", "Robots", "Voitures", "Coloriage"
-],
-colors: [
-"Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé",
-"Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé",
-"Gris clair", "Gris foncé", "Noir", "Blanc", "Doré", "Argenté", "Rose", "Violet clair",
-"Violet foncé", "Marron"
-]
-},
--------------------------------------------------- */
-
-/* --- STICKERS JOUETS GARÇON MASQUÉS TEMPORAIREMENT ---
-{
-id: 5,
-name: "Stickers Jouets garçon",
-category: "Nouveautés",
-price: 14.00,
-image: "images/52a85e9dc8144bcb86f5501f9860c99d.webp",
-description: "Organise la chambre de ton enfant.",
-variants: [
-"Barbies", "Poupées", "Bébés", "Vêtements Bébé", "Vêtements Barbie", "Accessoires",
-"Sacs", "Dînette", "Peluches", "Déguisements", "Puzzles",
-"Figurines", "Animaux", "Dinosaures", "Licornes", "Lego", "Playmobil", "Super-héros", "Robots", "Voitures", "Coloriage"
-],
-colors: [
-"Bleu foncé", "Bleu clair", "Bleu canard", "Vert clair", "Vert foncé",
-"Orange", "Rouge clair", "Rouge foncé", "Jaune clair", "Jaune foncé",
-"Gris clair", "Gris foncé", "Noir", "Blanc", "Doré", "Argenté", "Rose", "Violet clair",
-"Violet foncé", "Marron"
-]
-},
----------------------------------------------------- */
-
 {
 id: 6,
 name: 'Coffret "Le carnet intemporel" – Édition Limitée Automne 🍂✨',
@@ -150,7 +106,6 @@ variants: ["le courrier de Novembre"]
 let cart = [];
 let selectedProductForModal = null;
 
-/* NOUVEAU : état du paiement du Petit Courrier */
 let petitCourrierDetailsSent = false;
 let paypalButtonRendered = false;
 
@@ -205,7 +160,6 @@ const hiddenOrderSummary = document.getElementById('hiddenOrderSummary');
 const hiddenOrderTotal = document.getElementById('hiddenOrderTotal');
 const formStatusMessage = document.getElementById('formStatusMessage');
 
-/* NOUVEAU : éléments PayPal */
 const petitCourrierPayment = document.getElementById('petitCourrierPayment');
 const submitOrderBtn = document.getElementById('submitOrderBtn');
 
@@ -352,9 +306,9 @@ function openProductModal(productId) {
         modalVariantSelect.style.display = 'none';
     }
 
-    /* STICKERS (ID 1, 2, 3, 4, 5) */
+    /* STICKERS (ID 1, 2, 3) */
 
-    if (product.id >= 1 && product.id <= 5) {
+    if (product.id >= 1 && product.id <= 3) {
 
         const title = document.createElement('div');
         title.textContent = "Choisis tes matières :";
@@ -544,7 +498,7 @@ function updateCartUI() {
 
             if (item.variant) {
                 const choices = Array.isArray(item.variant) ? item.variant.join(', ') : item.variant;
-                const label = (item.id >= 1 && item.id <= 5) ? 'Matières' : 'Option';
+                const label = (item.id >= 1 && item.id <= 3) ? 'Matières' : 'Option';
                 optionsHTML += `<div class="cart-item-variant">${label} : ${choices}</div>`;
             }
 
@@ -672,7 +626,7 @@ function prepareOrderSummary() {
         if (item.variant) {
 
             const choices = Array.isArray(item.variant) ? item.variant.join(', ') : item.variant;
-            const label = (item.id >= 1 && item.id <= 5) ? 'Matières' : 'Option';
+            const label = (item.id >= 1 && item.id <= 3) ? 'Matières' : 'Option';
 
             summary += `  ${label} : ${choices}\n`;
         }
@@ -688,3 +642,194 @@ function prepareOrderSummary() {
 
     if (hiddenOrderSummary) {
         hiddenOrderSummary.value = summary;
+    }
+
+    if (hiddenOrderTotal) {
+        hiddenOrderTotal.value = `${total.toFixed(2)} €`;
+    }
+}
+
+
+/* ==========================================================================
+GESTION DU PAIEMENT PAYPAL (LE PETIT COURRIER)
+========================================================================== */
+
+function checkAndSetupPayPalPayment() {
+    const hasPetitCourrier = cart.some(item => item.id === 8);
+
+    const pPayment = document.getElementById('petitCourrierPayment');
+    const sBtn = document.getElementById('submitOrderBtn');
+
+    if (!pPayment || !sBtn) return;
+
+    if (hasPetitCourrier) {
+        pPayment.style.display = 'block';
+
+        if (!paypalButtonRendered && window.paypal && window.paypal.HostedButtons) {
+            window.paypal.HostedButtons({
+                hostedButtonId: "LLATQFBJFN4N6",
+            }).render("#paypal-container-LLATQFBJFN4N6");
+            paypalButtonRendered = true;
+        }
+    } else {
+        pPayment.style.display = 'none';
+    }
+}
+
+
+/* ==========================================================================
+TOAST / NOTIFICATIONS
+========================================================================== */
+
+function showToast(message) {
+    let toast = document.getElementById('toastNotification');
+
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toastNotification';
+        toast.className = 'toast';
+        document.body.appendChild(toast);
+    }
+
+    toast.textContent = message;
+    toast.classList.add('active');
+
+    setTimeout(() => {
+        toast.classList.remove('active');
+    }, 3000);
+}
+
+
+/* ==========================================================================
+ÉCOUTEURS D'ÉVÉNEMENTS (EVENT LISTENERS)
+========================================================================== */
+
+function setupEventListeners() {
+
+    if (categoryFilters) {
+        categoryFilters.addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                renderProducts(e.target.dataset.category);
+            }
+        });
+    }
+
+    if (productsGrid) {
+        productsGrid.addEventListener('click', (e) => {
+            const btn = e.target.closest('.btn-order-card');
+            if (btn && !btn.disabled) {
+                openProductModal(btn.dataset.productId);
+            }
+        });
+    }
+
+    if (closeProductModalBtn) closeProductModalBtn.addEventListener('click', closeProductModal);
+    if (closeProductModalBg) closeProductModalBg.addEventListener('click', closeProductModal);
+
+    if (modalAddToCartBtn) {
+        modalAddToCartBtn.addEventListener('click', () => {
+            if (!selectedProductForModal) return;
+
+            const quantity = modalQty ? parseInt(modalQty.value, 10) || 1 : 1;
+            let selectedVariants = [];
+            let selectedColor = null;
+
+            if (selectedProductForModal.id >= 1 && selectedProductForModal.id <= 3) {
+                const checkboxes = document.querySelectorAll('.school-subject-checkbox:checked');
+                selectedVariants = Array.from(checkboxes).map(cb => cb.value);
+
+                const colorSelect = document.getElementById('dynamicColorSelect');
+                if (colorSelect) {
+                    selectedColor = colorSelect.value;
+                }
+
+                if (selectedVariants.length === 0) {
+                    alert("Veuillez sélectionner au moins une matière.");
+                    return;
+                }
+
+                if (!selectedColor) {
+                    alert("Veuillez choisir une couleur.");
+                    return;
+                }
+            } 
+            else if (selectedProductForModal.variants && selectedProductForModal.variants.length > 0) {
+                const select = document.getElementById('dynamicVariantSelect');
+                if (select) {
+                    selectedVariants = [select.value];
+                }
+            }
+
+            addToCart(selectedProductForModal, quantity, selectedVariants, selectedColor);
+            closeProductModal();
+        });
+    }
+
+    if (openCartBtn) {
+        openCartBtn.addEventListener('click', () => {
+            if (cartDrawer) cartDrawer.classList.add('active');
+        });
+    }
+
+    if (closeCartBtn) {
+        closeCartBtn.addEventListener('click', () => {
+            if (cartDrawer) cartDrawer.classList.remove('active');
+        });
+    }
+
+    if (closeCartBg) {
+        closeCartBg.addEventListener('click', () => {
+            if (cartDrawer) cartDrawer.classList.remove('active');
+        });
+    }
+
+    if (cartItemsList) {
+        cartItemsList.addEventListener('click', (e) => {
+            const index = e.target.dataset.index;
+
+            if (e.target.classList.contains('cart-plus')) {
+                changeQty(Number(index), 1);
+            } else if (e.target.classList.contains('cart-minus')) {
+                changeQty(Number(index), -1);
+            } else if (e.target.classList.contains('cart-item-remove')) {
+                removeCartItem(Number(index));
+            }
+        });
+    }
+
+    if (goToCheckoutBtn) {
+        goToCheckoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) return;
+
+            if (cartStep1 && cartStep2) {
+                cartStep1.style.display = 'none';
+                cartStep2.style.display = 'block';
+            }
+
+            checkAndSetupPayPalPayment();
+        });
+    }
+
+    if (backToCartBtn) {
+        backToCartBtn.addEventListener('click', () => {
+            if (cartStep1 && cartStep2) {
+                cartStep1.style.display = 'block';
+                cartStep2.style.display = 'none';
+            }
+        });
+    }
+
+    if (orderForm) {
+        orderForm.addEventListener('submit', (e) => {
+            prepareOrderSummary();
+        });
+    }
+
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+}
