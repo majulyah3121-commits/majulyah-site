@@ -617,3 +617,160 @@ padding-right: 5px;
 .cart-item {
 display: flex;
 gap: 12px;
+margin-bottom: 15px;
+padding-bottom: 15px;
+border-bottom: 1px solid var(--color-border);
+}
+
+.cart-item-img {
+width: 60px;
+height: 60px;
+object-fit: cover;
+border-radius: 4px;
+}
+
+.cart-item-details {
+flex-grow: 1;
+}
+
+.cart-item-title {
+font-weight: 600;
+font-size: 0.9rem;
+}
+
+.cart-item-variant {
+font-size: 0.75rem;
+color: var(--color-text-muted);
+}
+
+.cart-item-price {
+font-size: 0.85rem;
+font-weight: 500;
+}
+
+.cart-item-qty {
+display: flex;
+align-items: center;
+gap: 8px;
+margin-top: 5px;
+}
+
+.qty-btn {
+background: var(--color-bg);
+border: 1px solid var(--color-border);
+width: 22px;
+height: 22px;
+border-radius: 50%;
+cursor: pointer;
+}
+
+.cart-item-remove {
+background: none;
+border: none;
+color: #cc0000;
+cursor: pointer;
+font-size: 1.2rem;
+}
+
+.cart-footer {
+border-top: 1px solid var(--color-border);
+padding-top: 15px;
+margin-top: auto;
+background-color: var(--color-surface);
+flex-shrink: 0;
+}
+
+.cart-total-row {
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-weight: 600;
+font-size: 1.05rem;
+margin-bottom: 15px;
+flex-wrap: wrap;
+gap: 5px;
+}
+
+.back-btn {
+background: none;
+border: none;
+color: var(--color-primary);
+cursor: pointer;
+margin-bottom: 15px;
+align-self: flex-start;
+}
+
+.form-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+}
+
+.checkbox-group {
+display: flex;
+gap: 8px;
+align-items: flex-start;
+font-size: 0.8rem;
+}
+
+/* BANDEAU LIVRAISON OFFERTE DANS LE PANIER */
+#freeShippingNotice {
+flex-shrink: 0;
+}
+
+/* TOAST NOTIFICATION */
+.toast {
+position: fixed;
+bottom: 20px;
+right: 20px;
+background-color: var(--color-text);
+color: #ffffff;
+padding: 12px 20px;
+border-radius: 20px;
+font-size: 0.85rem;
+opacity: 0;
+transform: translateY(20px);
+transition: var(--transition);
+z-index: 2000;
+}
+
+.toast.show {
+opacity: 1;
+transform: translateY(0);
+}
+
+/* ==========================================================================
+RESPONSIVE (MOBILE & TABLETTE)
+========================================================================== */
+
+@media (max-width: 768px) {
+.nav-links {
+display: none;
+position: absolute;
+top: 70px;
+left: 0;
+width: 100%;
+background-color: var(--color-surface);
+flex-direction: column;
+padding: 20px;
+border-bottom: 1px solid var(--color-border);
+box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+}
+
+.nav-links.active { display: flex; } 
+.mobile-menu-toggle { display: flex; } 
+.hero-title { font-size: 2rem; } 
+.about-grid, .product-detail-grid { grid-template-columns: 1fr; } 
+.cart-drawer-content { width: 100% !important; max-width: 100% !important; padding: 15px; } 
+}
+
+/* Forçage de la visibilité, du texte et de la couleur des boutons de commande */
+#goToCheckoutBtn,
+#orderForm button[type="submit"] {
+background-color: var(--color-primary) !important;
+color: #ffffff !important;
+font-weight: 500 !important;
+display: block !important;
+visibility: visible !important;
+opacity: 1 !important;
+}
