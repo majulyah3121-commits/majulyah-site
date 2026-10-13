@@ -16,8 +16,8 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- PAYPAL : chargement du SDK Hosted Buttons -->
-    <script src="https://www.paypal.com/sdk/js?client-id=BAAyqRBwZ_hKThCIJ7xAiplhdbQIyzQHsG2bCOG41Fh1CvH7bXWP-RRgpbN2TBbP5mJgHznW7SlcQIm6Pc&components=hosted-buttons&disable-funding=venmo&currency=EUR"></script>
+    <!-- PAYPAL : SDK pour Bouton Dynamique -->
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAyqRBwZ_hKThCIJ7xAiplhdbQIyzQHsG2bCOG41Fh1CvH7bXWP-RRgpbN2TBbP5mJgHznW7SlcQIm6Pc&disable-funding=venmo&currency=EUR"></script>
 </head>
 
 <body>
@@ -673,7 +673,7 @@
                     ></div>
 
 
-                    <!-- BOUTON D'ENVOI DE COMMANDE -->
+                    <!-- BOUTON D'ENVOI DE COMMANDE (SANS PAYPAL) -->
 
                     <button
                         type="submit"
@@ -685,11 +685,11 @@
 
 
                     <!-- =================================================
-                         PAIEMENT PAYPAL : LE PETIT COURRIER (ID 8)
+                         PAIEMENT PAYPAL DYNAMIQUE (UNIVERSEL)
                          ================================================= -->
 
                     <div
-                        id="petitCourrierPayment"
+                        id="paypalContainer"
                         style="display: none; margin-top: 24px;"
                     >
 
@@ -697,25 +697,11 @@
                             Finaliser le paiement avec PayPal
                         </h4>
 
-                        <div id="paypal-container-LLATQFBJFN4N6"></div>
+                        <p style="margin-bottom: 15px; font-size: 0.9rem;">
+                            Réglez le montant total de votre commande en toute sécurité :
+                        </p>
 
-                    </div>
-
-
-                    <!-- =================================================
-                         PAIEMENT PAYPAL : STICKERS 6EME (ID 1, 2, 3)
-                         ================================================= -->
-
-                    <div
-                        id="stickersPayment"
-                        style="display: none; margin-top: 24px;"
-                    >
-
-                        <h4 class="checkout-subtitle">
-                            Finaliser le paiement avec PayPal
-                        </h4>
-
-                        <div id="paypal-container-W83FJB9NB7HDW"></div>
+                        <div id="paypal-button-container"></div>
 
                     </div>
 
