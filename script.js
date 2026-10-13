@@ -653,7 +653,7 @@ function prepareOrderSummary() {
 
 
 /* ==========================================================================
-GESTION DU PAIEMENT PAYPAL DYNAMIQUE (STABLE ET STABLE)
+GESTION DU PAIEMENT PAYPAL DYNAMIQUE (STABLE ET SANS FERMETURE)
 ========================================================================== */
 
 function checkAndSetupPayPalPayment() {
@@ -673,7 +673,7 @@ function checkAndSetupPayPalPayment() {
         if (window.paypal) {
             window.paypal.Buttons({
                 createOrder: (data, actions) => {
-                    // Calcul dynamique du total exact du panier
+                    // Calcul dynamique du total exact de tout le panier
                     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
                     return actions.order.create({
@@ -693,7 +693,7 @@ function checkAndSetupPayPalPayment() {
                             formStatusMessage.style.color = "#28a745";
                         }
 
-                        // Envoi du bon de commande automatique par e-mail
+                        // Envoi automatique du bon de commande par e-mail
                         if (orderForm) {
                             prepareOrderSummary();
                             const formData = new FormData(orderForm);
