@@ -7,7 +7,7 @@ const products = [
 id: 1,
 name: "Stickers 6ème - Écriture TEEBRUSH",
 category: "Organisation",
-price: 15.00,
+price: 12.00,
 image: "images/ecriture-teebrush.png",
 description: "Des stickers personnalisés pour organiser tes affaires scolaires.",
 variants: [
@@ -28,7 +28,7 @@ colors: [
 id: 2,
 name: "Stickers 6ème - Écriture KARLEY",
 category: "Organisation",
-price: 15.00,
+price: 12.00,
 image: "images/ecriture-karley.png",
 description: "Des stickers personnalisés pour organiser tes affaires scolaires.",
 variants: [
@@ -49,7 +49,7 @@ colors: [
 id: 3,
 name: "Stickers 6ème - Écriture MOCHIY",
 category: "Organisation",
-price: 15.00,
+price: 12.00,
 image: "images/ecriture-mochiy.png",
 description: "Des stickers personnalisés pour organiser tes affaires scolaires.",
 variants: [
@@ -105,9 +105,7 @@ variants: ["le courrier de Novembre"]
 
 let cart = [];
 let selectedProductForModal = null;
-
-let petitCourrierRendered = false;
-let stickersRendered = false;
+let paypalInitialized = false;
 
 
 /* ==========================================================================
@@ -160,8 +158,7 @@ const hiddenOrderSummary = document.getElementById('hiddenOrderSummary');
 const hiddenOrderTotal = document.getElementById('hiddenOrderTotal');
 const formStatusMessage = document.getElementById('formStatusMessage');
 
-const petitCourrierPayment = document.getElementById('petitCourrierPayment');
-const stickersPayment = document.getElementById('stickersPayment');
+const paypalContainer = document.getElementById('paypalContainer');
 const submitOrderBtn = document.getElementById('submitOrderBtn');
 
 
@@ -663,32 +660,34 @@ function prepareOrderSummary() {
 
 
 /* ==========================================================================
-GESTION DU PAIEMENT PAYPAL (GÉRANT LES DEUX BOUTONS)
+GESTION DU PAIEMENT PAYPAL DYNAMIQUE (MONTANT CALCULÉ AUTOMATIQUEMENT)
 ========================================================================== */
 
 function checkAndSetupPayPalPayment() {
-    const hasPetitCourrier = cart.some(item => item.id === 8);
-    const hasStickers = cart.some(item => item.id >= 1 && item.id <= 3);
+    const pContainer = document.getElementById('paypalContainer');
+    const sBtn = document.getElementById('submitOrderBtn');
 
-    const pPayment = document.getElementById('petitCourrierPayment');
-    const sPayment = document.getElementById('stickersPayment');
-    const submitBtn = document.getElementById('submitOrderBtn');
+    if (!pContainer || !sBtn) return;
 
-    if (!pPayment || !sPayment || !submitBtn) return;
+    if (cart.length > 0) {
+        pContainer.style.display = 'block';
+        sBtn.style.display = 'none';
 
-    // Cache tout par défaut
-    pPayment.style.display = 'none';
-    sPayment.style.display = 'none';
-    submitBtn.style.display = 'block';
+        if (!paypalInitialized && window.paypal) {
+            window.paypal.Buttons({
+                createOrder: (data, actions) => {
+                    // Calcul dynamique du total exact de TOUT le panier
+                    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-    // 1. Si le panier contient Le Petit Courrier (ID 8)
-    if (hasPetitCourrier) {
-        pPayment.style.display = 'block';
-        submitBtn.style.display = 'none';
-
-        if (!petitCourrierRendered && window.paypal && window.paypal.HostedButtons) {
-            window.paypal.HostedButtons({
-                hostedButtonId: "LLATQFBJFN4N6",
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: total.toFixed(2)
+                            },
+                            description: "Commande Maju'Lyah"
+                        }]
+                    });
+                },
                 onApprove: (data, actions) => {
                     return actions.order.capture().then(details => {
                         const formStatusMessage = document.getElementById('formStatusMessage');
@@ -697,9 +696,22 @@ function checkAndSetupPayPalPayment() {
                             formStatusMessage.style.color = "#28a745";
                         }
 
+                        // Envoi automatique du bon de commande par e-mail
+                        if (orderForm) {
+                            prepareOrderSummary();
+                            const formData = new FormData(orderForm);
+                            fetch(orderForm.action, {
+                                method: 'POST',
+                                body: formData,
+                                headers: { 'Accept': 'application/json' }
+                            }).catch(err => console.error(err));
+                        }
+
+                        // Vider le panier
                         cart = [];
                         updateCartUI();
 
+                        // Fermeture et réinitialisation
                         setTimeout(() => {
                             if (orderForm) orderForm.reset();
                             if (cartDrawer) cartDrawer.classList.remove('active');
@@ -710,45 +722,22 @@ function checkAndSetupPayPalPayment() {
                             if (formStatusMessage) formStatusMessage.textContent = "";
                         }, 3500);
                     });
+                },
+                onError: (err) => {
+                    console.error('Erreur PayPal :', err);
+                    const formStatusMessage = document.getElementById('formStatusMessage');
+                    if (formStatusMessage) {
+                        formStatusMessage.textContent = "Une erreur est survenue lors du paiement PayPal.";
+                        formStatusMessage.style.color = "#d9534f";
+                    }
                 }
-            }).render("#paypal-container-LLATQFBJFN4N6");
-            petitCourrierRendered = true;
+            }).render('#paypal-button-container');
+
+            paypalInitialized = true;
         }
-    }
-
-    // 2. Si le panier contient les Stickers (ID 1, 2 ou 3)
-    if (hasStickers) {
-        sPayment.style.display = 'block';
-        submitBtn.style.display = 'none';
-
-        if (!stickersRendered && window.paypal && window.paypal.HostedButtons) {
-            window.paypal.HostedButtons({
-                hostedButtonId: "W83FJB9NB7HDW",
-                onApprove: (data, actions) => {
-                    return actions.order.capture().then(details => {
-                        const formStatusMessage = document.getElementById('formStatusMessage');
-                        if (formStatusMessage) {
-                            formStatusMessage.textContent = "Paiement effectué avec succès ! Merci pour votre commande.";
-                            formStatusMessage.style.color = "#28a745";
-                        }
-
-                        cart = [];
-                        updateCartUI();
-
-                        setTimeout(() => {
-                            if (orderForm) orderForm.reset();
-                            if (cartDrawer) cartDrawer.classList.remove('active');
-                            if (cartStep1 && cartStep2) {
-                                cartStep1.style.display = 'block';
-                                cartStep2.style.display = 'none';
-                            }
-                            if (formStatusMessage) formStatusMessage.textContent = "";
-                        }, 3500);
-                    });
-                }
-            }).render("#paypal-container-W83FJB9NB7HDW");
-            stickersRendered = true;
-        }
+    } else {
+        pContainer.style.display = 'none';
+        sBtn.style.display = 'block';
     }
 }
 
