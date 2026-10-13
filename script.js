@@ -2,6 +2,8 @@
 MAJU'LYAH - BASE DE DONNÉES DES PRODUITS
 ========================================================================== */
 
+const FREE_SHIPPING_THRESHOLD = 35.00; // Seuil de livraison offerte
+
 const products = [
 {
 id: 1,
@@ -93,7 +95,7 @@ name: "Maju'Lyah - Le petit courrier",
 category: "Nouveautés",
 price: 10.00,
 image: "images/Hello Jolie toi, Merci infiniment d’avoir commandé le Petit Courrier de Maj_20261008_160734_0000.png",
-description: "Découvrez Le petit courrier de Maju'Lyah, un retour aux sources, comme le courrier d'avant. PAS d'abonnement obligatoire : tu craques pour le mois qui te plaît et tu commandes en toute liberté. À l'intérieur : des illustrations, de l'organisation des surprises pour toi. LE PETIT PLUS : Les frais de port sont offerts !",
+description: "Découvrez Le petit courrier de Maju'Lyah, un retour aux sources, comme le courrier d'avant. PAS d'abonnement obligatoire : tu craques pour le mois qui te plaît et tu commandes en toute liberté. À l'intérieur : des illustrations, de l'organisation des surprises pour toi.",
 variants: ["le courrier de Novembre"]
 }
 ];
@@ -470,6 +472,29 @@ function updateCartUI() {
     cartCount.textContent = totalQty;
     cartItemsList.innerHTML = '';
 
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    /* Gestion du bandeau dynamique de livraison offerte */
+    const notice = document.getElementById('freeShippingNotice');
+    if (notice) {
+        if (total === 0) {
+            notice.style.display = 'none';
+        } else if (total >= FREE_SHIPPING_THRESHOLD) {
+            notice.style.display = 'block';
+            notice.style.backgroundColor = '#e8f5e9';
+            notice.style.color = '#2e7d32';
+            notice.style.border = '1px solid #c8e6c9';
+            notice.innerHTML = '🎁 <strong>Félicitations !</strong> Vous bénéficiez de la <strong>livraison offerte</strong> !';
+        } else {
+            const missing = (FREE_SHIPPING_THRESHOLD - total).toFixed(2).replace('.', ',');
+            notice.style.display = 'block';
+            notice.style.backgroundColor = '#fdf8f5';
+            notice.style.color = '#8a5340';
+            notice.style.border = '1px dashed #dcae96';
+            notice.innerHTML = `🚚 Plus que <strong>${missing} €</strong> pour avoir la <strong>livraison offerte</strong> !`;
+        }
+    }
+
     if (cart.length === 0) {
 
         cartItemsList.innerHTML = '<p style="text-align:center; color:var(--color-text-muted, #777); margin-top:40px;">Votre panier est vide pour le moment.</p>';
@@ -523,15 +548,13 @@ function updateCartUI() {
         });
     }
 
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
     if (cartTotalPrice) {
         cartTotalPrice.textContent = `${total.toFixed(2).replace('.', ',')} €`;
     }
 
     const totalLabel = document.getElementById('cartTotalLabel');
     if (totalLabel) {
-        totalLabel.textContent = "Total (hors frais de livraison) :";
+        totalLabel.textContent = total >= FREE_SHIPPING_THRESHOLD ? "Total (livraison offerte) :" : "Total (hors frais de livraison) :";
     }
 }
 
@@ -638,14 +661,16 @@ function prepareOrderSummary() {
         summary += `  Quantité : ${item.quantity} x ${item.price.toFixed(2)}€ = ${itemTotal.toFixed(2)}€\n\n`;
     });
 
-    summary += `TOTAL GLOBAL DE LA COMMANDE (hors frais de livraison) : ${total.toFixed(2)} €`;
+    const isFreeShipping = total >= FREE_SHIPPING_THRESHOLD;
+    summary += `TOTAL GLOBAL DE LA COMMANDE : ${total.toFixed(2)} €\n`;
+    summary += isFreeShipping ? "LIVRAISON : OFFERTE (>= 35€)" : "LIVRAISON : Hors frais de livraison";
 
     if (hiddenOrderSummary) {
         hiddenOrderSummary.value = summary;
     }
 
     if (hiddenOrderTotal) {
-        hiddenOrderTotal.value = `${total.toFixed(2)} €`;
+        hiddenOrderTotal.value = `${total.toFixed(2)} € ${isFreeShipping ? '(Livraison offerte)' : ''}`;
     }
 }
 
