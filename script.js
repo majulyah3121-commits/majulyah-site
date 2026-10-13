@@ -156,8 +156,6 @@ const orderForm = document.getElementById('orderForm');
 const hiddenOrderSummary = document.getElementById('hiddenOrderSummary');
 const hiddenOrderTotal = document.getElementById('hiddenOrderTotal');
 const formStatusMessage = document.getElementById('formStatusMessage');
-
-const paypalContainer = document.getElementById('paypalContainer');
 const submitOrderBtn = document.getElementById('submitOrderBtn');
 
 
@@ -653,77 +651,6 @@ function prepareOrderSummary() {
 
 
 /* ==========================================================================
-GESTION DU PAIEMENT PAYPAL HÉBERGÉ (CORRIGÉ & VALIDE)
-========================================================================== */
-
-function checkAndSetupPayPalPayment() {
-    const pContainer = document.getElementById('paypalContainer');
-    const sBtn = document.getElementById('submitOrderBtn');
-    const paypalButtonContainer = document.getElementById('paypal-button-container');
-
-    if (!pContainer || !sBtn || !paypalButtonContainer) return;
-
-    if (cart.length > 0) {
-        pContainer.style.display = 'block';
-        
-        // Masque le bouton Formspree seul pour éviter le bouton doublon
-        sBtn.style.display = 'none';
-
-        // Vidage du conteneur pour éviter les rechargements multiples
-        paypalButtonContainer.innerHTML = '';
-
-        // Sélection de l'identifiant du bouton en fonction du contenu du panier
-        const hasStickers = cart.some(item => item.id >= 1 && item.id <= 3);
-        const buttonId = hasStickers ? "W83FJB9NB7HDW" : "LLATQFBJFN4N6";
-
-        if (window.paypal && window.paypal.HostedButtons) {
-            window.paypal.HostedButtons({
-                hostedButtonId: buttonId,
-                onApprove: (data, actions) => {
-                    return actions.order.capture().then(details => {
-                        const formStatusMessage = document.getElementById('formStatusMessage');
-                        if (formStatusMessage) {
-                            formStatusMessage.textContent = "Paiement effectué avec succès ! Merci pour votre commande.";
-                            formStatusMessage.style.color = "#28a745";
-                        }
-
-                        // Envoi automatique du bon de commande par e-mail via Formspree
-                        if (orderForm) {
-                            prepareOrderSummary();
-                            const formData = new FormData(orderForm);
-                            fetch(orderForm.action, {
-                                method: 'POST',
-                                body: formData,
-                                headers: { 'Accept': 'application/json' }
-                            }).catch(err => console.error(err));
-                        }
-
-                        // Vider le panier
-                        cart = [];
-                        updateCartUI();
-
-                        // Réinitialisation et fermeture
-                        setTimeout(() => {
-                            if (orderForm) orderForm.reset();
-                            if (cartDrawer) cartDrawer.classList.remove('active');
-                            if (cartStep1 && cartStep2) {
-                                cartStep1.style.display = 'block';
-                                cartStep2.style.display = 'none';
-                            }
-                            if (formStatusMessage) formStatusMessage.textContent = "";
-                        }, 3500);
-                    });
-                }
-            }).render('#paypal-button-container');
-        }
-    } else {
-        pContainer.style.display = 'none';
-        sBtn.style.display = 'block';
-    }
-}
-
-
-/* ==========================================================================
 TOAST / NOTIFICATIONS
 ========================================================================== */
 
@@ -853,8 +780,6 @@ function setupEventListeners() {
                 cartStep1.style.display = 'none';
                 cartStep2.style.display = 'block';
             }
-
-            checkAndSetupPayPalPayment();
         });
     }
 
