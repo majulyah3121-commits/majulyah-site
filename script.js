@@ -7,7 +7,7 @@ const products = [
 id: 1,
 name: "Stickers 6ème - Écriture TEEBRUSH",
 category: "Organisation",
-price: 12.00,
+price: 15.00,
 image: "images/ecriture-teebrush.png",
 description: "Des stickers personnalisés pour organiser tes affaires scolaires.",
 variants: [
@@ -28,7 +28,7 @@ colors: [
 id: 2,
 name: "Stickers 6ème - Écriture KARLEY",
 category: "Organisation",
-price: 12.00,
+price: 15.00,
 image: "images/ecriture-karley.png",
 description: "Des stickers personnalisés pour organiser tes affaires scolaires.",
 variants: [
@@ -49,7 +49,7 @@ colors: [
 id: 3,
 name: "Stickers 6ème - Écriture MOCHIY",
 category: "Organisation",
-price: 12.00,
+price: 15.00,
 image: "images/ecriture-mochiy.png",
 description: "Des stickers personnalisés pour organiser tes affaires scolaires.",
 variants: [
