@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartUI();
     updateVisitCount();
     
-    // Initialise le bandeau ruban rouge de lancement
+    // Initialise le ruban rouge interactif sous la photo
     initLaunchRibbon();
 });
 
@@ -740,48 +740,62 @@ function updateVisitCount() {
 
 
 /* ==========================================================================
-BANDEAU NŒUD ROUGE DE LANCEMENT (Fonctionnel au clic / toucher)
+RUBAN ROUGE DE LANCEMENT (Sous la photo, sans texte, se dénoue au clic)
 ========================================================================== */
 
 function initLaunchRibbon() {
     if (document.getElementById('launchRibbonOverlay')) return;
 
+    const introSection = document.querySelector('.intro-section .container');
+    if (!introSection) return;
+
     const ribbon = document.createElement('div');
     ribbon.id = 'launchRibbonOverlay';
-    ribbon.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; cursor: pointer; user-select: none;';
+    ribbon.style.cssText = 'margin: 0 auto 25px auto; width: 100%; max-width: 650px; height: 50px; cursor: pointer; user-select: none; position: relative; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 15px rgba(217, 37, 37, 0.3); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);';
     
     ribbon.innerHTML = `
-        <div style="background-color: #d92525; color: #ffffff; text-align: center; padding: 12px 15px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
-            <span style="font-size: 1.6rem; line-height: 1;">🎀</span>
-            <span>🎁 C'est le grand jour ! Cliquez ici ou n'importe où pour déballer la boutique !</span>
-            <span style="font-size: 1.6rem; line-height: 1;">🎀</span>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, #b81c1c, #e63939 50%, #b81c1c); display: flex; align-items: center; justify-content: center;">
+            <div style="position: absolute; width: 100%; height: 4px; background: rgba(255,255,255,0.3); top: 50%; transform: translateY(-50%);"></div>
+            <div id="giftBow" style="position: relative; font-size: 2.2rem; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); transition: transform 0.4s ease;">
+                🎀
+            </div>
         </div>
     `;
 
-    document.body.appendChild(ribbon);
+    introSection.insertBefore(ribbon, introSection.firstChild);
 
-    const removeRibbon = (e) => {
+    const unwrapRibbon = () => {
         if (ribbon.dataset.dismissed) return;
         ribbon.dataset.dismissed = "true";
 
-        ribbon.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-        ribbon.style.opacity = '0';
-        ribbon.style.transform = 'translateY(-100%)';
+        const bow = document.getElementById('giftBow');
+        if (bow) {
+            bow.style.transform = 'scale(1.4) rotate(15deg)';
+        }
 
         setTimeout(() => {
-            ribbon.remove();
-        }, 400);
+            ribbon.style.transform = 'scaleX(0)';
+            ribbon.style.opacity = '0';
+            ribbon.style.height = '0px';
+            ribbon.style.margin = '0 auto';
+        }, 200);
 
-        window.removeEventListener('click', removeRibbon, true);
-        window.removeEventListener('touchstart', removeRibbon, true);
+        setTimeout(() => {
+            if (ribbon && ribbon.parentNode) {
+                ribbon.parentNode.removeChild(ribbon);
+            }
+        }, 600);
+
+        window.removeEventListener('click', unwrapRibbon, true);
+        window.removeEventListener('touchstart', unwrapRibbon, true);
     };
 
     setTimeout(() => {
-        ribbon.addEventListener('click', removeRibbon);
-        ribbon.addEventListener('touchstart', removeRibbon);
-        window.addEventListener('click', removeRibbon, true);
-        window.addEventListener('touchstart', removeRibbon, true);
-    }, 100);
+        ribbon.addEventListener('click', unwrapRibbon);
+        ribbon.addEventListener('touchstart', unwrapRibbon, { passive: true });
+        window.addEventListener('click', unwrapRibbon, { capture: true, once: true });
+        window.addEventListener('touchstart', unwrapRibbon, { capture: true, once: true, passive: true });
+    }, 150);
 }
 
 
