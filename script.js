@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartUI();
     updateVisitCount();
 
-    // Initialise le nœud ruban sous la photo
+    // Initialise le nœud ruban volumineux sous la photo
     initLaunchRibbon();
 });
 
@@ -740,7 +740,7 @@ function updateVisitCount() {
 
 
 /* ==========================================================================
-RUBAN ROUGE DE LANCEMENT (Placé sous la photo d'accueil)
+RUBAN ROUGE DE LANCEMENT (Gros Nœud Volumineux sous la photo)
 ========================================================================== */
 
 function initLaunchRibbon() {
@@ -752,14 +752,30 @@ function initLaunchRibbon() {
 
     const ribbon = document.createElement('div');
     ribbon.id = 'launchRibbonOverlay';
-    ribbon.style.cssText = 'margin: 0 auto 25px auto; width: 100%; max-width: 650px; height: 50px; cursor: pointer; user-select: none; position: relative; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 15px rgba(217, 37, 37, 0.3); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);';
-    
+    ribbon.style.cssText = 'margin: 10px auto 30px auto; width: 100%; max-width: 650px; cursor: pointer; user-select: none; position: relative; transition: all 0.5s ease-in-out; text-align: center;';
+
     ribbon.innerHTML = `
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, #b81c1c, #e63939 50%, #b81c1c); display: flex; align-items: center; justify-content: center;">
-            <div style="position: absolute; width: 100%; height: 4px; background: rgba(255,255,255,0.3); top: 50%; transform: translateY(-50%);"></div>
-            <div id="giftBow" style="position: relative; font-size: 2.2rem; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); transition: transform 0.4s ease;">
-                🎀
-            </div>
+        <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; min-height: 90px;">
+            <!-- Bande de ruban rouge qui fait toute la largeur -->
+            <div style="position: absolute; width: 100%; height: 35px; background: linear-gradient(180deg, #d92525 0%, #b01818 100%); top: 50%; transform: translateY(-50%); box-shadow: 0 4px 10px rgba(0,0,0,0.15); border-radius: 4px;"></div>
+            
+            <!-- Gros nœud rouge volumineux au centre -->
+            <svg id="bigGiftBow" viewBox="0 0 500 400" style="width: 140px; height: auto; position: relative; z-index: 2; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3)); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                <!-- Pans du nœud (rubans pendants) -->
+                <path d="M 180 230 Q 130 330 110 370 Q 150 350 200 290 Q 220 250 210 230 Z" fill="#9e0c0c"/>
+                <path d="M 320 230 Q 370 330 390 370 Q 350 350 300 290 Q 280 250 290 230 Z" fill="#9e0c0c"/>
+                <path d="M 190 230 Q 120 330 90 380 Q 140 350 210 280 Z" fill="#c91818"/>
+                <path d="M 310 230 Q 380 330 410 380 Q 360 350 290 280 Z" fill="#c91818"/>
+                <!-- Boucle Gauche -->
+                <path d="M 230 200 C 120 80 40 180 200 220 C 230 225 240 210 230 200 Z" fill="#d92525"/>
+                <path d="M 225 190 C 130 100 70 170 195 210 Z" fill="#ff4d4d"/>
+                <!-- Boucle Droite -->
+                <path d="M 270 200 C 380 80 460 180 300 220 C 270 225 260 210 270 200 Z" fill="#d92525"/>
+                <path d="M 275 190 C 370 100 430 170 305 210 Z" fill="#ff4d4d"/>
+                <!-- Nœud Central -->
+                <rect x="225" y="180" width="50" height="45" rx="12" fill="#a81111" />
+                <rect x="230" y="183" width="40" height="39" rx="10" fill="#e62e2e" />
+            </svg>
         </div>
     `;
 
@@ -769,165 +785,17 @@ function initLaunchRibbon() {
         if (ribbon.dataset.dismissed) return;
         ribbon.dataset.dismissed = "true";
 
-        const bow = document.getElementById('giftBow');
+        const bow = document.getElementById('bigGiftBow');
         if (bow) {
-            bow.style.transform = 'scale(1.4) rotate(15deg)';
+            bow.style.transform = 'scale(1.3) rotate(-10deg)';
         }
 
         setTimeout(() => {
-            ribbon.style.transform = 'scaleX(0)';
+            ribbon.style.transform = 'scale(0.8)';
             ribbon.style.opacity = '0';
             ribbon.style.height = '0px';
             ribbon.style.margin = '0 auto';
         }, 200);
 
         setTimeout(() => {
-            if (ribbon && ribbon.parentNode) {
-                ribbon.parentNode.removeChild(ribbon);
-            }
-        }, 600);
-
-        window.removeEventListener('click', unwrapRibbon, true);
-        window.removeEventListener('touchstart', unwrapRibbon, true);
-    };
-
-    setTimeout(() => {
-        ribbon.addEventListener('click', unwrapRibbon);
-        ribbon.addEventListener('touchstart', unwrapRibbon, { passive: true });
-        window.addEventListener('click', unwrapRibbon, { capture: true, once: true });
-        window.addEventListener('touchstart', unwrapRibbon, { capture: true, once: true, passive: true });
-    }, 150);
-}
-
-
-/* ==========================================================================
-ÉCOUTEURS D'ÉVÉNEMENTS (EVENT LISTENERS)
-========================================================================== */
-
-function setupEventListeners() {
-
-    if (categoryFilters) {
-        categoryFilters.addEventListener('click', (e) => {
-            if (e.target.classList.contains('filter-btn')) {
-                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-                e.target.classList.add('active');
-                renderProducts(e.target.dataset.category);
-            }
-        });
-    }
-
-    if (productsGrid) {
-        productsGrid.addEventListener('click', (e) => {
-            const btn = e.target.closest('.btn-order-card');
-            if (btn && !btn.disabled) {
-                openProductModal(btn.dataset.productId);
-            }
-        });
-    }
-
-    if (closeProductModalBtn) closeProductModalBtn.addEventListener('click', closeProductModal);
-    if (closeProductModalBg) closeProductModalBg.addEventListener('click', closeProductModal);
-
-    if (modalAddToCartBtn) {
-        modalAddToCartBtn.addEventListener('click', () => {
-            if (!selectedProductForModal) return;
-
-            const quantity = modalQty ? parseInt(modalQty.value, 10) || 1 : 1;
-            let selectedVariants = [];
-            let selectedColor = null;
-
-            if (selectedProductForModal.id >= 1 && selectedProductForModal.id <= 3) {
-                const checkboxes = document.querySelectorAll('.school-subject-checkbox:checked');
-                selectedVariants = Array.from(checkboxes).map(cb => cb.value);
-
-                const colorSelect = document.getElementById('dynamicColorSelect');
-                if (colorSelect) {
-                    selectedColor = colorSelect.value;
-                }
-
-                if (selectedVariants.length === 0) {
-                    alert("Veuillez sélectionner au moins une matière.");
-                    return;
-                }
-
-                if (!selectedColor) {
-                    alert("Veuillez choisir une couleur.");
-                    return;
-                }
-            } 
-            else if (selectedProductForModal.variants && selectedProductForModal.variants.length > 0) {
-                const select = document.getElementById('dynamicVariantSelect');
-                if (select) {
-                    selectedVariants = [select.value];
-                }
-            }
-
-            addToCart(selectedProductForModal, quantity, selectedVariants, selectedColor);
-            closeProductModal();
-        });
-    }
-
-    if (openCartBtn) {
-        openCartBtn.addEventListener('click', () => {
-            if (cartDrawer) cartDrawer.classList.add('active');
-        });
-    }
-
-    if (closeCartBtn) {
-        closeCartBtn.addEventListener('click', () => {
-            if (cartDrawer) cartDrawer.classList.remove('active');
-        });
-    }
-
-    if (closeCartBg) {
-        closeCartBg.addEventListener('click', () => {
-            if (cartDrawer) cartDrawer.classList.remove('active');
-        });
-    }
-
-    if (cartItemsList) {
-        cartItemsList.addEventListener('click', (e) => {
-            const index = e.target.dataset.index;
-
-            if (e.target.classList.contains('cart-plus')) {
-                changeQty(Number(index), 1);
-            } else if (e.target.classList.contains('cart-minus')) {
-                changeQty(Number(index), -1);
-            } else if (e.target.classList.contains('cart-item-remove')) {
-                removeCartItem(Number(index));
-            }
-        });
-    }
-
-    if (goToCheckoutBtn) {
-        goToCheckoutBtn.addEventListener('click', () => {
-            if (cart.length === 0) return;
-
-            if (cartStep1 && cartStep2) {
-                cartStep1.style.display = 'none';
-                cartStep2.style.display = 'block';
-            }
-        });
-    }
-
-    if (backToCartBtn) {
-        backToCartBtn.addEventListener('click', () => {
-            if (cartStep1 && cartStep2) {
-                cartStep1.style.display = 'block';
-                cartStep2.style.display = 'none';
-            }
-        });
-    }
-
-    if (orderForm) {
-        orderForm.addEventListener('submit', (e) => {
-            prepareOrderSummary();
-        });
-    }
-
-    if (mobileMenuBtn && navLinks) {
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-    }
-}
+            if (rib
