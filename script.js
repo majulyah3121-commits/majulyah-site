@@ -97,6 +97,15 @@ price: 10.00,
 image: "images/Hello Jolie toi, Merci infiniment d’avoir commandé le Petit Courrier de Maj_20261008_160734_0000.png",
 description: "Découvrez Le petit courrier de Maju'Lyah, un retour aux sources, comme le courrier d'avant. PAS d'abonnement obligatoire : tu craques pour le mois qui te plaît et tu commandes en toute liberté. À l'intérieur : des illustrations, de l'organisation des surprises pour toi.",
 variants: ["le courrier de Novembre"]
+},
+
+{
+id: 9,
+name: "Planche de Stickers « Douceur d’Automne »",
+category: "Stickers",
+price: 3.50,
+image: "images/stickers-automne.jpg",
+description: "Apportez une touche cocooning à vos agendas et carnets ! 12 motifs chaleureux (citrouilles, cannelle, thé...) pour célébrer la saison.<br><br><strong>💛 Seulement 3,50 € — Faites le plein de réconfort !</strong>"
 }
 ];
 
