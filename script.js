@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartUI();
     updateVisitCount();
     
-    // Initialise le bandeau ruban rouge de lancement (à conserver ou supprimer le lendemain)
+    // Initialise le bandeau ruban rouge de lancement
     initLaunchRibbon();
 });
 
@@ -740,35 +740,47 @@ function updateVisitCount() {
 
 
 /* ==========================================================================
-BANDEAU NŒUD ROUGE DE LANCEMENT (Disparaît au premier clic)
+BANDEAU NŒUD ROUGE DE LANCEMENT (Fonctionnel au clic / toucher)
 ========================================================================== */
 
 function initLaunchRibbon() {
-    // Crée et injecte automatiquement le bandeau rouge tout en haut
+    if (document.getElementById('launchRibbonOverlay')) return;
+
     const ribbon = document.createElement('div');
     ribbon.id = 'launchRibbonOverlay';
-    ribbon.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; pointer-events: auto; cursor: pointer;';
+    ribbon.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; cursor: pointer; user-select: none;';
+    
     ribbon.innerHTML = `
-        <div style="background-color: #d92525; color: #ffffff; text-align: center; padding: 10px 15px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; gap: 10px;">
-            <span style="font-size: 1.8rem; line-height: 1;">🎀</span>
-            <span>🎁 C'est le grand jour ! Cliquez n'importe où pour déballer la boutique !</span>
-            <span style="font-size: 1.8rem; line-height: 1;">🎀</span>
+        <div style="background-color: #d92525; color: #ffffff; text-align: center; padding: 12px 15px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span style="font-size: 1.6rem; line-height: 1;">🎀</span>
+            <span>🎁 C'est le grand jour ! Cliquez ici ou n'importe où pour déballer la boutique !</span>
+            <span style="font-size: 1.6rem; line-height: 1;">🎀</span>
         </div>
     `;
+
     document.body.appendChild(ribbon);
 
-    const removeRibbon = () => {
-        ribbon.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    const removeRibbon = (e) => {
+        if (ribbon.dataset.dismissed) return;
+        ribbon.dataset.dismissed = "true";
+
+        ribbon.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
         ribbon.style.opacity = '0';
         ribbon.style.transform = 'translateY(-100%)';
+
         setTimeout(() => {
             ribbon.remove();
-        }, 500);
-        document.removeEventListener('click', removeRibbon);
+        }, 400);
+
+        window.removeEventListener('click', removeRibbon, true);
+        window.removeEventListener('touchstart', removeRibbon, true);
     };
 
     setTimeout(() => {
-        document.addEventListener('click', removeRibbon, { once: true });
+        ribbon.addEventListener('click', removeRibbon);
+        ribbon.addEventListener('touchstart', removeRibbon);
+        window.addEventListener('click', removeRibbon, true);
+        window.addEventListener('touchstart', removeRibbon, true);
     }, 100);
 }
 
