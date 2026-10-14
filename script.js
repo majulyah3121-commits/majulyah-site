@@ -186,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     updateCartUI();
+    updateVisitCount(); // Compteur de vues initialisé
 });
 
 
@@ -700,6 +701,29 @@ function showToast(message) {
     setTimeout(() => {
         toast.classList.remove('active');
     }, 3000);
+}
+
+
+/* ==========================================================================
+COMPTEUR DE VUES
+========================================================================== */
+
+function updateVisitCount() {
+    fetch('https://api.countapi.xyz/hit/majulyah-boutique-site/visits')
+        .then(response => response.json())
+        .then(data => {
+            const countElement = document.getElementById('visitCount');
+            if (countElement) {
+                countElement.textContent = data.value.toLocaleString('fr-FR');
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors du chargement du compteur de vues:', error);
+            const countElement = document.getElementById('visitCount');
+            if (countElement && countElement.parentElement) {
+                countElement.parentElement.style.display = 'none';
+            }
+        });
 }
 
 
