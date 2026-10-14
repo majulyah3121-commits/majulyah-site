@@ -741,7 +741,7 @@ padding: 20px;
 border-bottom: 1px solid var(--color-border);
 }
 
-.nav-links.active { display: flex; } 
+.nav-links.mobile-open { display: flex; } 
 .mobile-menu-toggle { display: flex; } 
 .hero-title { font-size: 2rem; } 
 .about-grid, .product-detail-grid { grid-template-columns: 1fr; } 
