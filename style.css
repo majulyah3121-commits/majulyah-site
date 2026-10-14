@@ -1,787 +1,229 @@
-/* ==========================================================================
-MAJU'LYAH - STYLES PRINCIPAUX
-========================================================================== */
-
-:root {
---color-bg: #f7f3ec;
---color-surface: #ffffff;
---color-text: #4a3b32;
---color-text-muted: #8c786d;
---color-primary: #b85d43;
---color-primary-hover: #9e4b33;
---color-accent: #ebdcd0;
---color-border: #e6d7cc;
---font-heading: 'Cormorant Garamond', serif;
---font-body: 'Montserrat', sans-serif;
---max-width: 1200px;
---border-radius: 8px;
---transition: all 0.3s ease;
-}
-
-* {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-}
-
-body {
-font-family: var(--font-body);
-background-color: var(--color-bg);
-color: var(--color-text);
-line-height: 1.6;
-}
-
-.container {
-width: 90%;
-max-width: var(--max-width);
-margin: 0 auto;
-padding: 0 15px;
-}
-
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.max-w-700 { max-width: 700px; margin-left: auto; margin-right: auto; }
-.max-w-600 { max-width: 600px; margin-left: auto; margin-right: auto; }
-
-/* ==========================================================================
-ENTÊTE & NAVIGATION
-========================================================================== */
-
-.navbar {
-background-color: var(--color-surface);
-border-bottom: 1px solid var(--color-border);
-position: sticky;
-top: 0;
-z-index: 100;
-}
-
-.nav-container {
-display: flex;
-justify-content: space-between;
-align-items: center;
-height: 70px;
-position: relative;
-}
-
-.brand-logo {
-font-family: var(--font-heading);
-font-size: 1.8rem;
-font-weight: 600;
-color: var(--color-text);
-text-decoration: none;
-letter-spacing: 1px;
-}
-
-.nav-links {
-display: flex;
-gap: 25px;
-}
-
-.nav-item {
-text-decoration: none;
-color: var(--color-text);
-font-weight: 500;
-font-size: 0.95rem;
-transition: var(--transition);
-}
-
-.nav-item:hover {
-color: var(--color-primary);
-}
-
-.nav-actions {
-display: flex;
-align-items: center;
-gap: 15px;
-}
-
-.cart-icon-btn {
-background: none;
-border: none;
-cursor: pointer;
-position: relative;
-color: var(--color-text);
-display: flex;
-align-items: center;
-}
-
-.cart-count {
-position: absolute;
-top: -8px;
-right: -10px;
-background-color: var(--color-primary);
-color: #fff;
-font-size: 0.75rem;
-font-weight: 600;
-width: 18px;
-height: 18px;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-
-.mobile-menu-toggle {
-display: none;
-flex-direction: column;
-justify-content: center;
-gap: 5px;
-background: none;
-border: none;
-cursor: pointer;
-padding: 5px;
-}
-
-.mobile-menu-toggle span {
-width: 22px;
-height: 2px;
-background-color: var(--color-text);
-display: block;
-}
-
-/* ==========================================================================
-SECTION ACCUEIL / BANNIÈRE
-========================================================================== */
-
-.hero-section {
-width: 100%;
-min-height: 45vh;
-max-height: 350px;
-background-image: url('images/about2.jpg');
-background-size: contain;
-background-position: center;
-background-repeat: no-repeat;
-display: flex;
-align-items: center;
-justify-content: center;
-position: relative;
-}
-
-.hero-overlay {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0, 0, 0, 0.05);
-}
-
-.hero-content {
-position: relative;
-z-index: 2;
-text-align: center;
-color: var(--color-text);
-}
-
-.sub-subtitle {
-text-transform: uppercase;
-font-size: 0.85rem;
-letter-spacing: 2px;
-color: var(--color-primary);
-margin-bottom: 10px;
-display: block;
-font-weight: 600;
-}
-
-.hero-title {
-font-family: var(--font-heading);
-font-size: 2.8rem;
-font-weight: 400;
-margin-bottom: 15px;
-line-height: 1.2;
-}
-
-.hero-description {
-font-size: 1.05rem;
-color: var(--color-text-muted);
-margin-bottom: 25px;
-max-width: 550px;
-margin-left: auto;
-margin-right: auto;
-}
-
-/* ==========================================================================
-BOUTONS & ELEMENTS COMMUNS
-========================================================================== */
-
-.btn {
-display: inline-block;
-padding: 12px 28px;
-border-radius: 30px;
-text-decoration: none;
-font-weight: 500;
-font-size: 0.95rem;
-transition: var(--transition);
-border: none;
-cursor: pointer;
-}
-
-.btn-primary {
-background-color: var(--color-primary);
-color: #ffffff;
-}
-
-.btn-primary:hover {
-background-color: var(--color-primary-hover);
-}
-
-.btn-block {
-display: block;
-width: 100%;
-}
-
-.section-title {
-font-family: var(--font-heading);
-font-size: 2.2rem;
-font-weight: 400;
-margin-bottom: 10px;
-}
-
-.title-underline {
-width: 50px;
-height: 2px;
-background-color: var(--color-primary);
-margin: 0 auto 30px auto;
-}
-
-.title-underline.left {
-margin-left: 0;
-}
-
-/* ==========================================================================
-SECTIONS CONTENU
-========================================================================== */
-
-.intro-section,
-.shop-section,
-.about-section,
-.contact-section {
-padding: 60px 0;
-}
-
-.intro-text {
-font-size: 1.1rem;
-color: var(--color-text-muted);
-}
-
-/* FILTRES BOUTIQUE */
-.category-filters {
-display: flex;
-justify-content: center;
-gap: 10px;
-margin-bottom: 40px;
-flex-wrap: wrap;
-}
-
-.filter-btn {
-background: none;
-border: 1px solid var(--color-border);
-padding: 8px 18px;
-border-radius: 20px;
-cursor: pointer;
-font-size: 0.9rem;
-transition: var(--transition);
-}
-
-.filter-btn.active,
-.filter-btn:hover {
-background-color: var(--color-accent);
-border-color: var(--color-accent);
-color: var(--color-text);
-}
-
-/* GRILLE PRODUITS */
-.products-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-gap: 30px;
-}
-
-.product-card {
-background-color: var(--color-surface);
-border-radius: var(--border-radius);
-overflow: hidden;
-border: 1px solid var(--color-border);
-transition: var(--transition);
-display: flex;
-flex-direction: column;
-}
-
-.product-card:hover {
-transform: translateY(-5px);
-box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-}
-
-.product-image-container {
-width: 100%;
-height: 220px;
-overflow: hidden;
-cursor: pointer;
-}
-
-.product-image-container img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-transition: var(--transition);
-}
-
-.product-card:hover .product-image-container img {
-transform: scale(1.03);
-}
-
-.product-info {
-padding: 20px;
-display: flex;
-flex-direction: column;
-flex-grow: 1;
-}
-
-.product-category {
-font-size: 0.75rem;
-text-transform: uppercase;
-color: var(--color-primary);
-letter-spacing: 1px;
-margin-bottom: 5px;
-}
-
-.product-name {
-font-family: var(--font-heading);
-font-size: 1.4rem;
-margin-bottom: 8px;
-cursor: pointer;
-}
-
-.product-desc-short {
-font-size: 0.85rem;
-color: var(--color-text-muted);
-margin-bottom: 15px;
-flex-grow: 1;
-}
-
-.product-bottom {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-top: auto;
-}
-
-.product-price {
-font-weight: 600;
-font-size: 1.1rem;
-}
-
-.btn-order-card {
-background-color: var(--color-bg);
-border: 1px solid var(--color-border);
-padding: 6px 14px;
-border-radius: 15px;
-font-size: 0.85rem;
-cursor: pointer;
-transition: var(--transition);
-}
-
-.btn-order-card:hover {
-background-color: var(--color-primary);
-color: #ffffff;
-border-color: var(--color-primary);
-}
-
-/* SECTION À PROPOS */
-.about-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 40px;
-align-items: center;
-}
-
-.about-img {
-width: 100%;
-border-radius: var(--border-radius);
-object-fit: cover;
-}
-
-.about-text-content p {
-margin-bottom: 15px;
-color: var(--color-text-muted);
-}
-
-/* SECTION CONTACT */
-.contact-email-link {
-display: inline-flex;
-align-items: center;
-gap: 10px;
-font-size: 1.2rem;
-color: var(--color-primary);
-text-decoration: none;
-font-weight: 500;
-margin-top: 15px;
-}
-
-/* FOOTER */
-.site-footer {
-background-color: var(--color-surface);
-border-top: 1px solid var(--color-border);
-padding: 40px 0 20px 0;
-margin-top: 40px;
-}
-
-.footer-content {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 30px;
-flex-wrap: wrap;
-gap: 20px;
-}
-
-.footer-logo {
-font-family: var(--font-heading);
-font-size: 1.5rem;
-font-weight: 600;
-}
-
-.footer-links {
-display: flex;
-gap: 20px;
-flex-wrap: wrap;
-}
-
-.footer-links a {
-color: var(--color-text-muted);
-text-decoration: none;
-font-size: 0.9rem;
-}
-
-.footer-bottom {
-text-align: center;
-font-size: 0.8rem;
-color: var(--color-text-muted);
-border-top: 1px solid var(--color-border);
-padding-top: 20px;
-}
-
-/* ==========================================================================
-MODALE & PANIER (DRAWER)
-========================================================================== */
-
-/* MODALE */
-.modal {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: 1000;
-display: flex;
-align-items: center;
-justify-content: center;
-opacity: 0;
-pointer-events: none;
-transition: var(--transition);
-}
-
-.modal.active {
-opacity: 1;
-pointer-events: auto;
-}
-
-.modal-overlay {
-position: absolute;
-width: 100%;
-height: 100%;
-background: rgba(0,0,0,0.5);
-}
-
-.modal-card {
-background: var(--color-surface);
-width: 90%;
-max-width: 700px;
-border-radius: var(--border-radius);
-padding: 30px;
-position: relative;
-z-index: 2;
-max-height: 90vh;
-overflow-y: auto;
-}
-
-.modal-close {
-position: absolute;
-top: 15px;
-right: 20px;
-background: none;
-border: none;
-font-size: 1.8rem;
-cursor: pointer;
-}
-
-.product-detail-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 25px;
-}
-
-.product-detail-image img {
-width: 100%;
-border-radius: var(--border-radius);
-}
-
-.form-group {
-margin-bottom: 15px;
-}
-
-.form-input {
-width: 100%;
-padding: 10px;
-border: 1px solid var(--color-border);
-border-radius: 6px;
-font-family: inherit;
-}
-
-.qty-input {
-width: 80px;
-}
-
-/* PANIER DRAWER */
-.cart-drawer {
-position: fixed;
-top: 0;
-right: 0;
-width: 100%;
-height: 100%;
-z-index: 1000;
-display: flex;
-justify-content: flex-end;
-opacity: 0;
-pointer-events: none;
-transition: var(--transition);
-}
-
-.cart-drawer.active {
-opacity: 1;
-pointer-events: auto;
-}
-
-.cart-drawer-overlay {
-position: absolute;
-width: 100%;
-height: 100%;
-background: rgba(0,0,0,0.4);
-}
-
-.cart-drawer-content {
-width: 100%;
-max-width: 420px;
-background: var(--color-surface);
-height: 100vh;
-position: relative;
-z-index: 2;
-padding: 20px;
-display: flex;
-flex-direction: column;
-box-sizing: border-box;
-overflow: hidden;
-}
-
-.cart-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-border-bottom: 1px solid var(--color-border);
-padding-bottom: 15px;
-margin-bottom: 15px;
-flex-shrink: 0;
-}
-
-.close-drawer-btn {
-background: none;
-border: none;
-font-size: 1.8rem;
-cursor: pointer;
-}
-
-.cart-step {
-display: none;
-flex-direction: column;
-height: 100%;
-overflow: hidden;
-}
-
-.cart-step.active {
-display: flex;
-}
-
-.cart-items-list {
-margin-bottom: 10px;
-overflow-y: auto;
-flex-grow: 1;
-padding-right: 5px;
-}
-
-.cart-item {
-display: flex;
-gap: 12px;
-margin-bottom: 15px;
-padding-bottom: 15px;
-border-bottom: 1px solid var(--color-border);
-}
-
-.cart-item-img {
-width: 60px;
-height: 60px;
-object-fit: cover;
-border-radius: 4px;
-}
-
-.cart-item-details {
-flex-grow: 1;
-}
-
-.cart-item-title {
-font-weight: 600;
-font-size: 0.9rem;
-}
-
-.cart-item-variant {
-font-size: 0.75rem;
-color: var(--color-text-muted);
-}
-
-.cart-item-price {
-font-size: 0.85rem;
-font-weight: 500;
-}
-
-.cart-item-qty {
-display: flex;
-align-items: center;
-gap: 8px;
-margin-top: 5px;
-}
-
-.qty-btn {
-background: var(--color-bg);
-border: 1px solid var(--color-border);
-width: 22px;
-height: 22px;
-border-radius: 50%;
-cursor: pointer;
-}
-
-.cart-item-remove {
-background: none;
-border: none;
-color: #cc0000;
-cursor: pointer;
-font-size: 1.2rem;
-}
-
-.cart-footer {
-border-top: 1px solid var(--color-border);
-padding-top: 15px;
-padding-bottom: 35px;
-margin-top: auto;
-background-color: var(--color-surface);
-flex-shrink: 0;
-}
-
-.cart-total-row {
-display: flex;
-justify-content: space-between;
-align-items: center;
-font-weight: 600;
-font-size: 1.05rem;
-margin-bottom: 15px;
-flex-wrap: wrap;
-gap: 5px;
-}
-
-.back-btn {
-background: none;
-border: none;
-color: var(--color-primary);
-cursor: pointer;
-margin-bottom: 15px;
-align-self: flex-start;
-}
-
-.form-row {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 10px;
-}
-
-.checkbox-group {
-display: flex;
-gap: 8px;
-align-items: flex-start;
-font-size: 0.8rem;
-}
-
-/* BANDEAU LIVRAISON OFFERTE DANS LE PANIER */
-#freeShippingNotice {
-flex-shrink: 0;
-}
-
-/* TOAST NOTIFICATION */
-.toast {
-position: fixed;
-bottom: 20px;
-right: 20px;
-background-color: var(--color-text);
-color: #ffffff;
-padding: 12px 20px;
-border-radius: 20px;
-font-size: 0.85rem;
-opacity: 0;
-transform: translateY(20px);
-transition: var(--transition);
-z-index: 2000;
-}
-
-.toast.show {
-opacity: 1;
-transform: translateY(0);
-}
-
-/* ==========================================================================
-RESPONSIVE (MOBILE & TABLETTE)
-========================================================================== */
-
-@media screen and (max-width: 992px) {
-.nav-links {
-display: none !important;
-position: absolute;
-top: 70px;
-left: 0;
-width: 100%;
-background-color: var(--color-surface);
-flex-direction: column;
-padding: 20px;
-border-bottom: 1px solid var(--color-border);
-box-shadow: 0 10px 15px rgba(0,0,0,0.08);
-gap: 15px;
-}
-
-.nav-links.active { display: flex !important; } 
-.mobile-menu-toggle { display: flex !important; } 
-.hero-title { font-size: 2rem; } 
-.about-grid, .product-detail-grid { grid-template-columns: 1fr; } 
-.cart-drawer-content { 
-width: 100% !important; 
-max-width: 100% !important; 
-padding: 15px 15px 35px 15px !important; 
-} 
-}
-
-/* Forçage de la visibilité, du texte et de la couleur des boutons de commande */
-#goToCheckoutBtn,
-#orderForm button[type="submit"] {
-background-color: var(--color-primary) !important;
-color: #ffffff !important;
-font-weight: 500 !important;
-display: block !important;
-visibility: visible !important;
-opacity: 1 !important;
-margin-bottom: 10px !important;
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Maju’Lyah - Papeterie Artisanale & Organisation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body>
+
+    <!-- ENTÊTE & NAVIGATION -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#accueil" class="brand-logo">Maju’Lyah</a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="#accueil" class="nav-item">Accueil</a>
+                <a href="#boutique" class="nav-item">Boutique</a>
+                <a href="#apropos" class="nav-item">À propos</a>
+                <a href="#contact" class="nav-item">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="cart-icon-btn" id="openCartBtn" aria-label="Voir mon panier" type="button">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+
+                <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Menu" type="button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION ACCUEIL / BANNIÈRE -->
+    <section id="accueil" class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="sub-subtitle">Artisanat & Douceur</span>
+            <h1 class="hero-title">Maju’Lyah</h1>
+            <p class="hero-description">Papeterie faite main, outils d'organisation et créations uniques pour embellir votre quotidien.</p>
+            <a href="#boutique" class="btn btn-primary">Découvrir la boutique</a>
+        </div>
+    </section>
+
+    <!-- INTRODUCTION -->
+    <section class="intro-section text-center">
+        <div class="container max-w-700">
+            <h2 class="section-title">Bienvenue chez Maju'Lyah !</h2>
+            <div class="title-underline"></div>
+            <p class="intro-text">
+                Des créations artisanales pensées pour organiser, noter et embellir le quotidien.<br><br>
+                <strong>Comment commander ?</strong> Ajoutez vos créations à votre panier et envoyez votre bon de commande.
+            </p>
+            <div id="freeShippingBanner" style="margin-top: 20px; padding: 12px; background: #e8f5e9; border: 1px dashed #4caf50; border-radius: 8px; color: #2e7d32; font-weight: 500; display: inline-block;">
+                🚚 Livraison offerte dès 35,00 € d'achat !
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTIONS BOUTIQUE -->
+    <section id="boutique" class="shop-section">
+        <div class="container">
+            <h2 class="section-title text-center">La Boutique</h2>
+            <div class="title-underline"></div>
+
+            <div class="category-filters">
+                <button class="filter-btn active" data-category="all">Tout voir</button>
+                <button class="filter-btn" data-category="carnets">Carnets</button>
+                <button class="filter-btn" data-category="stickers">Stickers</button>
+                <button class="filter-btn" data-category="courrier">Le Petit Courrier</button>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Les produits sont injectés dynamiquement via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- À PROPOS -->
+    <section id="apropos" class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-container">
+                    <img src="images/about.jpg" alt="Créations Maju'Lyah" class="about-img">
+                </div>
+                <div class="about-text-content">
+                    <h2 class="section-title">Derrière la marque</h2>
+                    <div class="title-underline left"></div>
+                    <p>Maju’Lyah est née d’une passion pour l’organisation, l’écriture et le papier. Chaque produit est conçu avec amour et soin dans mon atelier artisanal.</p>
+                    <p>Mon objectif est de vous proposer des pièces fonctionnelles, durables et élégantes qui vous accompagnent chaque jour.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact-section text-center">
+        <div class="container max-w-600">
+            <h2 class="section-title">Une question ?</h2>
+            <div class="title-underline"></div>
+            <p>N'hésitez pas à me contacter par e-mail pour toute question relative à votre commande ou à une création sur mesure.</p>
+            <a href="mailto:majulyah@gmail.com" class="contact-email-link">
+                ✉ majulyah@gmail.com
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Maju’Lyah</div>
+                <div class="footer-links">
+                    <a href="#accueil">Accueil</a>
+                    <a href="#boutique">Boutique</a>
+                    <a href="#apropos">À propos</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; Maju’Lyah - Tous droits réservés. Papeterie artisanale.
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALE DETAIL PRODUIT -->
+    <div class="modal" id="productModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-card">
+            <button class="modal-close" id="closeModalBtn">&times;</button>
+            <div class="product-detail-grid" id="modalContent">
+                <!-- Contenu injecté dynamiquement -->
+            </div>
+        </div>
+    </div>
+
+    <!-- DRAWER PANIER / COMMANDE -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-overlay" id="cartOverlay"></div>
+        <div class="cart-drawer-content">
+            <div class="cart-header">
+                <h3>Mon Bon de Commande</h3>
+                <button class="close-drawer-btn" id="closeCartBtn">&times;</button>
+            </div>
+
+            <!-- ÉTAPE 1 : PANIER -->
+            <div class="cart-step active" id="cartStep1">
+                <div id="freeShippingNotice" style="margin-bottom: 12px; padding: 10px; background: #e8f5e9; border: 1px solid #c8e6c9; border-radius: 6px; color: #2e7d32; font-size: 0.85rem; text-align: center;">
+                    <!-- Message dynamique livraison offerte -->
+                </div>
+
+                <div class="cart-items-list" id="cartItemsContainer">
+                    <!-- Articles ajoutés -->
+                </div>
+
+                <div class="cart-footer">
+                    <div class="cart-total-row">
+                        <span>Total :</span>
+                        <span id="cartTotalPrice">0,00 €</span>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-block" id="goToCheckoutBtn">
+                        Remplir mes coordonnées
+                    </button>
+                </div>
+            </div>
+
+            <!-- ÉTAPE 2 : FORMULAIRE -->
+            <div class="cart-step" id="cartStep2">
+                <button type="button" class="back-btn" id="backToCartBtn">&larr; Retour au panier</button>
+                <form id="orderForm" action="https://formspree.io/f/xvgokpqy" method="POST">
+                    <input type="hidden" name="Recapitulatif_Commande" id="hiddenOrderRecap">
+                    <input type="hidden" name="Total_Commande" id="hiddenOrderTotal">
+
+                    <div class="form-group">
+                        <label for="clientName">Nom et Prénom *</label>
+                        <input type="text" id="clientName" name="Nom_Client" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clientEmail">Adresse E-mail *</label>
+                        <input type="email" id="clientEmail" name="Email_Client" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clientPhone">Téléphone</label>
+                        <input type="tel" id="clientPhone" name="Telephone_Client" class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clientAddress">Adresse de livraison complète *</label>
+                        <textarea id="clientAddress" name="Adresse_Livraison" class="form-input" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clientNotes">Notes ou personnalisation</label>
+                        <textarea id="clientNotes" name="Notes_Commande" class="form-input" rows="2"></textarea>
+                    </div>
+
+                    <div class="cart-footer">
+                        <div class="cart-total-row">
+                            <span>Total estimé :</span>
+                            <span id="checkoutTotalPrice">0,00 €</span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Envoyer mon bon de commande
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION TOAST -->
+    <div class="toast" id="toast">Produit ajouté au panier !</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
