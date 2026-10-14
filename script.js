@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     updateCartUI();
-    updateVisitCount(); // Compteur de vues initialisé
+    updateVisitCount();
 });
 
 
@@ -709,7 +709,7 @@ COMPTEUR DE VUES
 ========================================================================== */
 
 function updateVisitCount() {
-    fetch('https://api.countapi.xyz/hit/majulyah-boutique-site/visits')
+    fetch('https://abacus.jasoncameron.dev/hit/majulyah-boutique-site/visits')
         .then(response => response.json())
         .then(data => {
             const countElement = document.getElementById('visitCount');
