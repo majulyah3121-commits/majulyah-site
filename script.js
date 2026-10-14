@@ -104,8 +104,8 @@ id: 9,
 name: "Planche de Stickers « Douceur d’Automne »",
 category: "Stickers",
 price: 3.50,
-image: "images/stickers-automne.jpg",
-description: "Apportez une touche cocooning à vos agendas et carnets ! 12 motifs chaleureux (citrouilles, cannelle, thé...) pour célébrer la saison.<br><br><strong>💛 Seulement 3,50 € — Faites le plein de réconfort !</strong>"
+image: "images/1791978392506.jpg",
+description: "Apportez une touche cocooning à vos agendas et carnets ! 12 motifs chaleureux pour célébrer la saison. Seulement 3,50 € — Faites le plein de réconfort !"
 }
 ];
 
