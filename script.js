@@ -111,20 +111,26 @@ description: "Apportez une touche cocooning à vos agendas et carnets ! 12 motif
 
 
 /* ==========================================================================
-ÉTAT
+ÉTAT (avec chargement et sauvegarde dans localStorage)
 ========================================================================== */
 
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('majulyah_cart')) || [];
 let selectedProductForModal = null;
 
-// Détection du retour après l'envoi de la commande Formspree
+// Gestion du retour Formspree ou chargement initial
 window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get("commande") === "envoyee") {
         cart = [];
+        localStorage.removeItem('majulyah_cart'); // On vide la mémoire après commande réussie
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 });
+
+// Fonction utilitaire pour sauvegarder le panier
+function saveCartToLocalStorage() {
+    localStorage.setItem('majulyah_cart', JSON.stringify(cart));
+}
 
 
 /* ==========================================================================
@@ -236,8 +242,15 @@ function renderProducts(filterCategory) {
         let stockInfoHtml = '';
 
         if (product.id === 6) {
-            if (product.stock > 0) {
-                stockInfoHtml = `<p style="font-size: 0.85rem; color: #666; margin: 5px 0;">Stock : ${product.stock} disponibles</p>`;
+            // Ajuster le stock affiché en tenant compte des articles déjà dans le panier
+            let qtyInCart = 0;
+            cart.forEach(item => {
+                if (item.id === 6) qtyInCart += item.quantity;
+            });
+            let currentStock = product.stock - qtyInCart;
+
+            if (currentStock > 0) {
+                stockInfoHtml = `<p style="font-size: 0.85rem; color: #666; margin: 5px 0;">Stock : ${currentStock} disponibles</p>`;
             } else {
                 stockInfoHtml = `<p style="font-size: 0.85rem; color: #d9534f; font-weight: bold; margin: 5px 0;">Rupture de stock</p>`;
                 buttonHtml = `<button type="button" class="btn-order-card disabled" disabled style="background-color: #e0e0e0; color: #888; border: none; cursor: not-allowed;">Épuisé</button>`;
@@ -282,9 +295,15 @@ function openProductModal(productId) {
         return;
     }
 
-    if (product.id === 6 && product.stock <= 0) {
-        alert("Désolé, cet article est en rupture de stock.");
-        return;
+    if (product.id === 6) {
+        let qtyInCart = 0;
+        cart.forEach(item => {
+            if (item.id === 6) qtyInCart += item.quantity;
+        });
+        if ((product.stock - qtyInCart) <= 0) {
+            alert("Désolé, cet article est en rupture de stock.");
+            return;
+        }
     }
 
     selectedProductForModal = product;
@@ -439,17 +458,20 @@ function addToCart(
 ) {
 
     if (product.id === 6) {
-        if (product.stock < quantity) {
-            alert(`Désolé, il ne reste que ${product.stock} exemplaire(s) du carnet intemporel en stock.`);
+        let qtyInCart = 0;
+        cart.forEach(item => {
+            if (item.id === 6) qtyInCart += item.quantity;
+        });
+
+        if (product.stock < (qtyInCart + quantity)) {
+            alert(`Désolé, il ne reste que ${product.stock - qtyInCart} exemplaire(s) disponible(s) du carnet intemporel en stock.`);
             return;
         }
-
-        product.stock -= quantity;
     }
 
     const colorKey = selectedColor || 'default';
-
-    const cartItemId = `${product.id}-${colorKey}`;
+    const variantKey = Array.isArray(selectedVariant) ? selectedVariant.sort().join('-') : (selectedVariant || 'default');
+    const cartItemId = `${product.id}-${colorKey}-${variantKey}`;
 
     const existingIndex = cart.findIndex(
         item => item.cartItemId === cartItemId
@@ -473,6 +495,7 @@ function addToCart(
         });
     }
 
+    saveCartToLocalStorage();
     updateCartUI();
 
     renderProducts(document.querySelector('.filter-btn.active')?.dataset.category || 'all');
@@ -596,25 +619,16 @@ function changeQty(index, delta) {
 
     const item = cart[index];
 
-    if (item.id === 6) {
-
+    if (item.id === 6 && delta > 0) {
         const product = products.find(p => p.id === 6);
+        let qtyInCart = 0;
+        cart.forEach((cartItem, idx) => {
+            if (cartItem.id === 6 && idx !== index) qtyInCart += cartItem.quantity;
+        });
 
-        if (product) {
-
-            if (delta > 0) {
-
-                if (product.stock < delta) {
-                    alert("Stock maximum atteint pour le carnet intemporel.");
-                    return;
-                }
-
-                product.stock -= delta;
-
-            } else {
-
-                product.stock += Math.abs(delta);
-            }
+        if (product && product.stock < (qtyInCart + item.quantity + delta)) {
+            alert("Stock maximum atteint pour le carnet intemporel.");
+            return;
         }
     }
 
@@ -624,6 +638,7 @@ function changeQty(index, delta) {
         cart.splice(index, 1);
     }
 
+    saveCartToLocalStorage();
     updateCartUI();
 
     renderProducts(document.querySelector('.filter-btn.active')?.dataset.category || 'all');
@@ -638,19 +653,9 @@ function removeCartItem(index) {
 
     if (!cart[index]) return;
 
-    const item = cart[index];
-
-    if (item.id === 6) {
-
-        const product = products.find(p => p.id === 6);
-
-        if (product) {
-            product.stock += item.quantity;
-        }
-    }
-
     cart.splice(index, 1);
 
+    saveCartToLocalStorage();
     updateCartUI();
 
     renderProducts(document.querySelector('.filter-btn.active')?.dataset.category || 'all');
