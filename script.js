@@ -117,6 +117,15 @@ description: "Apportez une touche cocooning à vos agendas et carnets ! 12 motif
 let cart = [];
 let selectedProductForModal = null;
 
+// Détection du retour après l'envoi de la commande Formspree
+window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("commande") === "envoyee") {
+        cart = [];
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+});
+
 
 /* ==========================================================================
 ÉLÉMENTS DU DOM
