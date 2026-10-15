@@ -120,9 +120,10 @@ let selectedProductForModal = null;
 // Gestion du retour Formspree ou chargement initial
 window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get("commande") === "envoyee") {
+    if (urlParams.get("commande") === "envoyee" || localStorage.getItem('clear_cart_pending') === 'true') {
         cart = [];
-        localStorage.removeItem('majulyah_cart'); // On vide la mémoire après commande réussie
+        localStorage.removeItem('majulyah_cart');
+        localStorage.removeItem('clear_cart_pending');
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 });
@@ -242,7 +243,6 @@ function renderProducts(filterCategory) {
         let stockInfoHtml = '';
 
         if (product.id === 6) {
-            // Ajuster le stock affiché en tenant compte des articles déjà dans le panier
             let qtyInCart = 0;
             cart.forEach(item => {
                 if (item.id === 6) qtyInCart += item.quantity;
@@ -704,6 +704,9 @@ function prepareOrderSummary() {
     if (hiddenOrderTotal) {
         hiddenOrderTotal.value = `${total.toFixed(2)} € ${isFreeShipping ? '(Livraison offerte)' : ''}`;
     }
+
+    // ASTUCE CLÉ : On indique au navigateur de vider le panier dès que le formulaire part vers Formspree
+    localStorage.setItem('clear_cart_pending', 'true');
 }
 
 
