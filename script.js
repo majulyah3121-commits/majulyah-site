@@ -862,7 +862,7 @@ function setupEventListeners() {
                     alert("Veuillez choisir une couleur.");
                     return;
                 }
-            } 
+            }
             else if (selectedProductForModal.variants && selectedProductForModal.variants.length > 0) {
                 const select = document.getElementById('dynamicVariantSelect');
                 if (select) {
@@ -927,7 +927,7 @@ function setupEventListeners() {
         });
     }
 
-    /* MODIFICATION : envoi Formspree sans quitter le site.
+    /* Envoi Formspree sans quitter le site.
        Le panier est vidé uniquement si Formspree confirme l'envoi. */
     if (orderForm) {
         orderForm.addEventListener('submit', async (e) => {
@@ -954,6 +954,7 @@ function setupEventListeners() {
             }
 
             if (formStatusMessage) {
+                formStatusMessage.style.display = 'block';
                 formStatusMessage.textContent = "Envoi de votre commande en cours...";
             }
 
@@ -981,17 +982,42 @@ function setupEventListeners() {
                     document.querySelector('.filter-btn.active')?.dataset.category || 'all'
                 );
 
+                // Réinitialiser les champs pour la prochaine commande
+                orderForm.reset();
+
+                if (hiddenOrderSummary) {
+                    hiddenOrderSummary.value = '';
+                }
+
+                if (hiddenOrderTotal) {
+                    hiddenOrderTotal.value = '';
+                }
+
+                // Afficher la confirmation pendant 5 secondes
                 if (formStatusMessage) {
+                    formStatusMessage.style.display = 'block';
                     formStatusMessage.textContent =
                         "Votre commande a bien été envoyée. Merci pour votre confiance !";
+
+                    setTimeout(() => {
+                        formStatusMessage.textContent = '';
+                        formStatusMessage.style.display = 'none';
+                    }, 5000);
                 }
 
                 showToast("Commande envoyée avec succès !");
+
+                // Revenir à l'étape du panier pour une prochaine commande
+                if (cartStep1 && cartStep2) {
+                    cartStep1.style.display = 'block';
+                    cartStep2.style.display = 'none';
+                }
 
             } catch (error) {
                 console.error("Erreur lors de l'envoi de la commande :", error);
 
                 if (formStatusMessage) {
+                    formStatusMessage.style.display = 'block';
                     formStatusMessage.textContent =
                         "L'envoi a échoué. Votre panier a été conservé. Vérifie ta connexion puis réessaie.";
                 }
