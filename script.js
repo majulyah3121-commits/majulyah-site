@@ -1,3 +1,4 @@
+
 /* ==========================================================================
 MAJU'LYAH - BASE DE DONNÉES DES PRODUITS
 ========================================================================== */
@@ -704,9 +705,6 @@ function prepareOrderSummary() {
     if (hiddenOrderTotal) {
         hiddenOrderTotal.value = `${total.toFixed(2)} € ${isFreeShipping ? '(Livraison offerte)' : ''}`;
     }
-
-    // ASTUCE CLÉ : On indique au navigateur de vider le panier dès que le formulaire part vers Formspree
-    localStorage.setItem('clear_cart_pending', 'true');
 }
 
 
@@ -811,7 +809,7 @@ function initLaunchRibbon() {
 
 
 /* ==========================================================================
-ÉCOUTEURS D'ÉVÉNEMENTS (EVENT LISTENERS)
+ÉCOUTEURS D'ÉVÉNÉMENTS (EVENT LISTENERS)
 ========================================================================== */
 
 function setupEventListeners() {
@@ -929,9 +927,81 @@ function setupEventListeners() {
         });
     }
 
+    /* MODIFICATION : envoi Formspree sans quitter le site.
+       Le panier est vidé uniquement si Formspree confirme l'envoi. */
     if (orderForm) {
-        orderForm.addEventListener('submit', (e) => {
+        orderForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!orderForm.reportValidity()) return;
+
+            if (cart.length === 0) {
+                if (formStatusMessage) {
+                    formStatusMessage.textContent = "Votre panier est vide.";
+                }
+                return;
+            }
+
             prepareOrderSummary();
+
+            const originalButtonText = submitOrderBtn
+                ? submitOrderBtn.textContent
+                : '';
+
+            if (submitOrderBtn) {
+                submitOrderBtn.disabled = true;
+                submitOrderBtn.textContent = "Envoi en cours...";
+            }
+
+            if (formStatusMessage) {
+                formStatusMessage.textContent = "Envoi de votre commande en cours...";
+            }
+
+            try {
+                const response = await fetch(orderForm.action, {
+                    method: 'POST',
+                    body: new FormData(orderForm),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error("L'envoi de la commande a échoué.");
+                }
+
+                // Confirmation reçue : vider le panier
+                cart = [];
+                localStorage.removeItem('majulyah_cart');
+                localStorage.removeItem('clear_cart_pending');
+
+                updateCartUI();
+
+                renderProducts(
+                    document.querySelector('.filter-btn.active')?.dataset.category || 'all'
+                );
+
+                if (formStatusMessage) {
+                    formStatusMessage.textContent =
+                        "Votre commande a bien été envoyée. Merci pour votre confiance !";
+                }
+
+                showToast("Commande envoyée avec succès !");
+
+            } catch (error) {
+                console.error("Erreur lors de l'envoi de la commande :", error);
+
+                if (formStatusMessage) {
+                    formStatusMessage.textContent =
+                        "L'envoi a échoué. Votre panier a été conservé. Vérifie ta connexion puis réessaie.";
+                }
+
+            } finally {
+                if (submitOrderBtn) {
+                    submitOrderBtn.disabled = false;
+                    submitOrderBtn.textContent = originalButtonText;
+                }
+            }
         });
     }
 
