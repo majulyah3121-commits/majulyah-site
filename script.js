@@ -112,8 +112,7 @@ category: "Stickers",
 price: 3.50,
 image: "images/1791978392506.jpg",
 description: "Apportez une touche cocooning à vos agendas et carnets ! 12 motifs chaleureux pour célébrer la saison. Seulement 3,50 € — Faites le plein de réconfort !"
-}
-];
+},
 
 {
 id: 10,
@@ -1078,4 +1077,4 @@ function setupEventListeners() {
             navLinks.classList.toggle('active');
         });
     }
-            }
+}
