@@ -120,7 +120,7 @@ id: 10,
 name: "Planche de Stickers « Douceur d’Hiver »",
 category: "Stickers",
 price: 3.50,
-image: "images/1791978392506.jpg",
+image: "images/1792309551278.jpg",
 description: "Apportez une touche cocooning à vos agendas et carnets ! 12 motifs chaleureux pour célébrer la saison en douceur. Seulement 3,50 € — Faites le plein de réconfort !"
 }
 ];
